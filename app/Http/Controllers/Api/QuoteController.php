@@ -44,4 +44,18 @@ class QuoteController extends Controller
 
         return response()->json($quotes);
     }
+
+    /**
+     * Show quote detail.
+     *
+     * @param Quote $quote
+     *
+     * @return JsonResponse
+     */
+    public function show(Quote $quote): JsonResponse
+    {
+        $quote->load('category');
+
+        return response()->json($quote);
+    }
 }

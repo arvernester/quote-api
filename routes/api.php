@@ -15,4 +15,9 @@
 Route::group(['namespace' => 'Api', 'middleware' => 'cors'], function () {
     Route::get('quote/random', 'QuoteController@random');
     Route::get('quote/latest', 'QuoteController@latest');
+    Route::get('quote/{quote}', 'QuoteController@show');
+
+    Route::get('category', 'CategoryController@index');
+    Route::get('category/random', 'CategoryController@random');
+    Route::get('category/{category}', 'CategoryController@show');
 });
