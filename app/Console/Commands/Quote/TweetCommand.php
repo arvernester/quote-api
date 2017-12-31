@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Quote;
 
 use Illuminate\Console\Command;
 use App\Quote;
@@ -12,14 +12,14 @@ class TweetCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'twitter:tweet';
+    protected $signature = 'quote:tweet';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Auto tweet';
+    protected $description = 'Auto tweet random quote as daily quote';
 
     /**
      * Create a new command instance.

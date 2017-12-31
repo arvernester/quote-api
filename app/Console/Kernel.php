@@ -5,7 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Quote\ImportCommand;
-use App\Console\Commands\TweetCommand;
+use App\Console\Commands\Quote\TweetCommand;
 
 class Kernel extends ConsoleKernel
 {
