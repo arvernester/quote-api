@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "03a3fdcfeb4c5273326e6a68e39de05b",
-    "content-hash": "305fe86e85a83136d32117078229aa91",
+    "hash": "9906e80a37bae31b010cac447a434d42",
+    "content-hash": "d77381501746709f2e822d575e7b30f6",
     "packages": [
+        {
+            "name": "dg/twitter-php",
+            "version": "v3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/twitter-php.git",
+                "reference": "dd872ad12121ff919b358989e61f7f08ba6cc7a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/dd872ad12121ff919b358989e61f7f08ba6cc7a8",
+                "reference": "dd872ad12121ff919b358989e61f7f08ba6cc7a8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                }
+            ],
+            "description": "Small and easy Twitter library for PHP",
+            "homepage": "https://github.com/dg/twitter-php",
+            "keywords": [
+                "oauth",
+                "twitter"
+            ],
+            "time": "2016-08-15 16:46:22"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
