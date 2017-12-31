@@ -7,6 +7,7 @@ use Unirest\Request as Unirest;
 use Illuminate\Support\Facades\Log;
 use App\Category;
 use App\Quote;
+use Illuminate\Support\Facades\DB;
 
 class ImportCommand extends Command
 {
@@ -39,25 +40,33 @@ class ImportCommand extends Command
      */
     public function handle()
     {
-        $quote = Unirest::get(config('services.quote.url'), [
+        $response = Unirest::get(config('services.quote.url'), [
             'X-Mashape-Key' => config('services.quote.key'),
         ]);
 
-        if ($quote->code != 200) {
-            Log::error($quote->body->message);
+        if ($response->code != 200) {
+            Log::error($response->body->message);
         }
 
-        $category = Category::firstOrCreate([
-            'name' => $quote->body->category,
-        ]);
+        DB::transaction(function () use ($response, &$quote) {
+            $category = Category::firstOrCreate([
+                'name' => $response->body->category,
+            ]);
 
-        $quote = Quote::create([
-            'category_id' => $category->id,
-            'user_id' => null,
-            'text' => $quote->body->quote,
-            'author' => $quote->body->author,
-            'source' => config('services.quote.url'),
-        ]);
+            $quote = Quote::whereText($response->body->quote)
+                ->with('category')
+                ->first();
+
+            if (empty($quote)) {
+                $quote = Quote::create([
+                    'category_id' => $category->id,
+                    'user_id' => null,
+                    'text' => $response->body->quote,
+                    'author' => $response->body->author,
+                    'source' => config('services.quote.url'),
+                ]);
+            }
+        });
 
         return response()->json($quote);
     }
