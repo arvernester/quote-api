@@ -55,7 +55,7 @@ class ImportCommand extends Command
             ->with('category')
             ->first();
 
-        if (empty($quote)) {
+        if (empty($existsQuote)) {
             DB::transaction(function () use ($response, &$quote) {
                 $category = Category::firstOrCreate([
                     'name' => $response->body->category,

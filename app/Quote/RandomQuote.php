@@ -20,9 +20,9 @@ class RandomQuote implements QuoteContract
         if ($response->code == 200) {
             Log::debug($response->raw_body);
 
-            $quote = Quote::whereText($response->body->quote)->first();
+            $existsQuote = Quote::whereText($response->body->quote)->first();
 
-            if (empty($quote)) {
+            if (empty($existsQuote)) {
                 DB::transaction(function () use ($url, $response, &$quote) {
                     $category = Category::firstOrCreate([
                         'name' => ucwords($response->body->category),
@@ -40,6 +40,6 @@ class RandomQuote implements QuoteContract
 
         $quote->load('category');
 
-        return $quote;
+        return $existsQuote ?? $quote;
     }
 }
