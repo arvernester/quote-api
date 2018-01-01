@@ -45,8 +45,11 @@ class ImportCommand extends Command
         ]);
 
         if ($response->code != 200) {
-            Log::error($response->body->message);
+            Log::error($response->raw_body);
         }
+
+        // log to debug
+        Log::debug($response->raw_body);
 
         DB::transaction(function () use ($response, &$quote) {
             $category = Category::firstOrCreate([
