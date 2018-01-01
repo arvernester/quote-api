@@ -51,26 +51,25 @@ class ImportCommand extends Command
         // log to debug
         Log::debug($response->raw_body);
 
-        DB::transaction(function () use ($response, &$quote) {
-            $category = Category::firstOrCreate([
-                'name' => $response->body->category,
-            ]);
+        $existsQuote = Quote::whereText($response->body->quote)
+            ->with('category')
+            ->first();
 
-            $quote = Quote::whereText($response->body->quote)
-                ->with('category')
-                ->first();
+        if (empty($quote)) {
+            DB::transaction(function () use ($response, &$quote) {
+                $category = Category::firstOrCreate([
+                    'name' => $response->body->category,
+                ]);
 
-            if (empty($quote)) {
                 $quote = Quote::create([
                     'category_id' => $category->id,
-                    'user_id' => null,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
                     'source' => config('services.quote.url'),
                 ]);
-            }
-        });
+            });
+        }
 
-        return response()->json($quote);
+        return response()->json($existsQuote ?? $quote);
     }
 }
