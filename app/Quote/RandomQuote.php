@@ -7,6 +7,7 @@ use Unirest\Request;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Quote;
+use Illuminate\Support\Facades\Log;
 
 class RandomQuote implements QuoteContract
 {
@@ -16,21 +17,25 @@ class RandomQuote implements QuoteContract
             'X-MASHAPE-KEY' => config('services.quote.key'),
         ]);
 
-        $quote = Quote::whereText($response->body->quote)->first();
+        if ($response->code == 200) {
+            Log::debug($response->raw_body);
 
-        if (empty($quote)) {
-            DB::transaction(function () use ($url, $response, &$quote) {
-                $category = Category::firstOrCreate([
-                    'name' => ucwords($response->body->category),
-                ]);
+            $quote = Quote::whereText($response->body->quote)->first();
 
-                $quote = Quote::create([
-                    'category_id' => $category->id,
-                    'text' => $response->body->quote,
-                    'author' => $response->body->author,
-                    'source' => $url,
-                ]);
-            });
+            if (empty($quote)) {
+                DB::transaction(function () use ($url, $response, &$quote) {
+                    $category = Category::firstOrCreate([
+                        'name' => ucwords($response->body->category),
+                    ]);
+
+                    $quote = Quote::create([
+                        'category_id' => $category->id,
+                        'text' => $response->body->quote,
+                        'author' => $response->body->author,
+                        'source' => $url,
+                    ]);
+                });
+            }
         }
 
         $quote->load('category');
