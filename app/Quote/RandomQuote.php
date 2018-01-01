@@ -22,6 +22,14 @@ class RandomQuote implements QuoteContract
 
             $existsQuote = Quote::whereText($response->body->quote)->first();
 
+            // inform quote has been added before
+            if (!empty($existsQuote)) {
+                Log::info('Quote is already exists.', [
+                    'text' => $existsQuote->text,
+                    'author' => $existsQuote->author,
+                ]);
+            }
+
             if (empty($existsQuote)) {
                 DB::transaction(function () use ($url, $response, &$quote) {
                     $category = Category::firstOrCreate([
