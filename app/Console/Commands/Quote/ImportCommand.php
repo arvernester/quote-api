@@ -55,6 +55,13 @@ class ImportCommand extends Command
             ->with('category')
             ->first();
 
+        if (!empty($existsQuote)) {
+            Log::info('Quote is already exists.', [
+                'text' => $existsQuote->text,
+                'author' => $existsQuote->author,
+            ]);
+        }
+
         if (empty($existsQuote)) {
             DB::transaction(function () use ($response, &$quote) {
                 $category = Category::firstOrCreate([
