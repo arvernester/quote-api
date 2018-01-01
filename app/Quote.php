@@ -27,6 +27,7 @@ class Quote extends Model
         'status',
         'user_id',
         'category_id',
+        'deleted_at',
     ];
 
     public function category()
