@@ -23,7 +23,6 @@ class Quote extends Model
     ];
 
     protected $hidden = [
-        'source',
         'status',
         'user_id',
         'category_id',

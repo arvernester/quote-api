@@ -36,6 +36,7 @@ return [
 
     'quote' => [
         'url' => env('QUOTE_URL'),
+        'vendor' => 'random',
         'key' => env('QUOTE_KEY'),
     ],
 ];
