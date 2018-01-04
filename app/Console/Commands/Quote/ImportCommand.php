@@ -40,7 +40,7 @@ class ImportCommand extends Command
      */
     public function handle()
     {
-        $response = Unirest::get(config('services.quote.url'), [
+        $response = Unirest::get($url = config('services.quote.url'), [
             'X-Mashape-Key' => config('services.quote.key'),
         ]);
 
@@ -56,7 +56,7 @@ class ImportCommand extends Command
             ->first();
 
         if (!empty($existsQuote)) {
-            Log::info('Quote is already exists.', [
+            Log::info(sprintf('Quote from %s is already exists.', $url), [
                 'text' => $existsQuote->text,
                 'author' => $existsQuote->author,
             ]);
@@ -72,7 +72,7 @@ class ImportCommand extends Command
                     'category_id' => $category->id,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
-                    'source' => config('services.quote.url'),
+                    'source' => $url,
                 ]);
             });
         }
