@@ -20,34 +20,36 @@ class RandomQuote implements QuoteContract
         if ($response->code == 200) {
             Log::debug($response->raw_body);
 
-            $existsQuote = Quote::whereText($response->body->quote)->first();
+            $existsQuote = Quote::whereText($response->body->quote)
+                ->with('category')
+                ->first();
 
             // inform quote has been added before
             if (!empty($existsQuote)) {
-                Log::info('Quote is already exists.', [
+                Log::info(sprintf('Quote from %s is already exists.', $url), [
                     'text' => $existsQuote->text,
                     'author' => $existsQuote->author,
                 ]);
+
+                return $existsQuote;
             }
 
-            if (empty($existsQuote)) {
-                DB::transaction(function () use ($url, $response, &$quote) {
-                    $category = Category::firstOrCreate([
-                        'name' => ucwords($response->body->category),
-                    ]);
+            DB::transaction(function () use ($url, $response, &$quote) {
+                $category = Category::firstOrCreate([
+                    'name' => ucwords($response->body->category),
+                ]);
 
-                    $quote = Quote::create([
-                        'category_id' => $category->id,
-                        'text' => $response->body->quote,
-                        'author' => $response->body->author,
-                        'source' => $url,
-                    ]);
-                });
-            }
+                $quote = Quote::create([
+                    'category_id' => $category->id,
+                    'text' => $response->body->quote,
+                    'author' => $response->body->author,
+                    'source' => $url,
+                ]);
+            });
         }
 
         $quote->load('category');
 
-        return $existsQuote ?? $quote;
+        return $quote;
     }
 }
