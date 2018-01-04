@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $quote = \App\Quote::inRandomOrder()->first();
+
+    return view('welcome', compact('quote'));
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {

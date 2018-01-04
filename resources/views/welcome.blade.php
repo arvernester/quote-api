@@ -62,6 +62,11 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .quote {
+                margin-bottom:50px;
+                font-size: 1.5em;
+            }
         </style>
     </head>
     <body>
@@ -79,15 +84,22 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{ config('app.name') }}
                 </div>
+                
+                @if (! empty($quote))
+                <div class="quote">
+                    <blockquote>"{{ $quote->text }}"</blockquote>
+                    <small>
+                        <strong>{{ $quote->author }}</strong>
+                    </small>
+                </div>
+                @endif
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://market.mashape.com/arvernester/kutipan">Documentation</a>
+                    <a href="https://www.laravel.web.id">Tutorial Blog</a>
+                    <a href="https://github.com/arvernester/quote-api">GitHub</a>
                 </div>
             </div>
         </div>
