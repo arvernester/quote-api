@@ -5,21 +5,21 @@ namespace App\Console\Commands\Quote;
 use Illuminate\Console\Command;
 use App\Contracts\Quote;
 
-class ImportRandomCommand extends Command
+class ImportFamousCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'quote:import:random';
+    protected $signature = 'quote:import:famous';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import random quote from https://market.mashape.com/ishanjain28/random-quotes';
+    protected $description = 'Import famous quote from https://market.mashape.com/andruxnet/random-famous-quotes';
 
     /**
      * Quote contract.
@@ -46,6 +46,6 @@ class ImportRandomCommand extends Command
     public function handle()
     {
         $this->quote->import();
-        $this->line('Random quote has been imported.');
+        $this->line('Famous quote has been imported.');
     }
 }
