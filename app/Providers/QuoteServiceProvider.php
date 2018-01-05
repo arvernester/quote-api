@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Quote\RandomQuote;
-use App\Contracts\Quote as QuoteContract;
+use App\Contracts\Quote;
+use App\Console\Commands\Quote\ImportRandomCommand;
+use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Quote\FamousQuote;
 
 class QuoteServiceProvider extends ServiceProvider
@@ -21,18 +23,16 @@ class QuoteServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $vendor = config('services.quote.vendor');
+        $this->app->when(ImportRandomCommand::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new RandomQuote();
+            });
 
-        $implements = [
-            'random' => RandomQuote::class,
-            'famous' => FamousQuote::class,
-        ];
-
-        if (array_key_exists($vendor, $implements)) {
-            $this->app->bind(
-                QuoteContract::class,
-                $implements[$vendor]
-            );
-        }
+        $this->app->when(ImportFamousCommand::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new FamousQuote();
+            });
     }
 }
