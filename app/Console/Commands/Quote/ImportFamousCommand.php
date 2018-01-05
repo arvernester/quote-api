@@ -46,6 +46,6 @@ class ImportFamousCommand extends Command
     public function handle()
     {
         $this->quote->import();
-        $this->line('Famous quote has been imported.');
+        // $this->line('Famous quote has been imported.');
     }
 }

@@ -46,6 +46,6 @@ class ImportRandomCommand extends Command
     public function handle()
     {
         $this->quote->import();
-        $this->line('Random quote has been imported.');
+        // $this->line('Random quote has been imported.');
     }
 }
