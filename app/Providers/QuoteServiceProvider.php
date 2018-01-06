@@ -8,6 +8,8 @@ use App\Contracts\Quote;
 use App\Console\Commands\Quote\ImportRandomCommand;
 use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Quote\FamousQuote;
+use App\Console\Commands\Quote\ImportSumitgohilCommand;
+use App\Quote\SumitgohilQuote;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,13 @@ class QuoteServiceProvider extends ServiceProvider
             ->needs(Quote::class)
             ->give(function () {
                 return new FamousQuote();
+            });
+
+        // Sumitgohil provider
+        $this->app->when(ImportSumitgohilCommand::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new SumitgohilQuote();
             });
     }
 }

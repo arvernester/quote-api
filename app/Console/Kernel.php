@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Quote\TweetCommand;
 use App\Console\Commands\Quote\ImportRandomCommand;
 use App\Console\Commands\Quote\ImportFamousCommand;
+use App\Console\Commands\Quote\ImportSumitgohilCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         TweetCommand::class,
         ImportRandomCommand::class,
         ImportFamousCommand::class,
+        ImportSumitgohilCommand::class,
     ];
 
     /**
