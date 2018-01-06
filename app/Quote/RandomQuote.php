@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class RandomQuote implements QuoteContract
 {
-    public function import()
+    /**
+     * Import random quote from API.
+     */
+    public function import(): ? Quote
     {
         $response = Request::get($url = 'https://quotes.p.mashape.com/', [
             'X-MASHAPE-KEY' => config('services.quote.key'),
@@ -48,8 +51,6 @@ class RandomQuote implements QuoteContract
             });
         }
 
-        $quote->load('category');
-
-        return $quote;
+        return $quote ?? null;
     }
 }
