@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Sanitize email input.
+     *
+     * @param string $email
+     */
+    public function setEmailAttribute(string $email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
 }

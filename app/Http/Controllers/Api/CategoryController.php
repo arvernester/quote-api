@@ -15,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(Category::orderBy('name')->get());
+        $categories = Category::orderBy('name')
+            ->withCount('quotes')
+            ->get();
+
+        return response()->json($categories);
     }
 
     /**

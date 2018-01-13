@@ -71,6 +71,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <a href="{{ route('quote/index') }}"></a>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth

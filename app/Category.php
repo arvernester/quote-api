@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -10,7 +11,12 @@ class Category extends Model
         'name',
     ];
 
-    public function quotes()
+    /**
+     * Category has many quotes.
+     *
+     * @return HasMany
+     */
+    public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class);
     }

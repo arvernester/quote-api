@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Quote extends Model
 {
@@ -29,12 +30,36 @@ class Quote extends Model
         'deleted_at',
     ];
 
-    public function category()
+    /**
+     * Sanitize text input.
+     *
+     * @param string $text
+     */
+    public function setTextAttribute(string $text)
+    {
+        if (!ends_with($text, '.')) {
+            $text .= '.';
+        }
+
+        $this->attributes['text'] = ucfirst($text);
+    }
+
+    /**
+     * Quote belongs to Category.
+     *
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    /**
+     * Quote belongs to User.
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
