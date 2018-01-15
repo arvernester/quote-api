@@ -27,4 +27,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'cors', 'prefix' => 'api'], 
     Route::get('category', 'CategoryController@index');
     Route::get('category/random', 'CategoryController@random');
     Route::get('category/{category}', 'CategoryController@show');
+
+    Route::get('language', 'LanguageController@index');
 });

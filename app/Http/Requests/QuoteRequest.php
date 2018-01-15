@@ -26,6 +26,7 @@ class QuoteRequest extends FormRequest
     {
         $rules = [
             'category' => 'required|integer|exists:categories,id',
+            'language' => 'required|integer|exists:languages,id',
             'text' => 'required|max:5000',
         ];
 

@@ -91,6 +91,7 @@ class QuoteController extends Controller
         $quote = Quote::create([
             'user_id' => Auth::id(),
             'category_id' => $request->category,
+            'language_id' => $request->language,
             'text' => $request->text,
             'author' => $request->author ?? 'Anonymous',
         ]);

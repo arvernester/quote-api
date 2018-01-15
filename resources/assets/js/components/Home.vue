@@ -2,25 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-          <div class="panel-heading">Quote of the Day</div>
-          <div class="panel-body">
-            <blockquote>
-              <p>{{ quote.text }}</p>
-              <strong>{{ quote.author }}</strong>
-            </blockquote>
+        <blockquote class="quote-card red-card">
+          <p>{{ quote.text }}</p>
+          <cite>{{ quote.author }}</cite>
+        </blockquote>
 
-            <div class="actions">
-              <button @click="random" class="btn btn-primary">
-                <i class="fa fa-refresh fa-fw"></i> Refresh
-              </button>
-              <button class="btn btn-default copy" :data-clipboard-text="quote.text + ' ~~ ' + quote.author">
-                <i class="fa fa-copy fw-fw"></i> Copy
-              </button>
-            </div>
-
-          </div>
-        </div>
+        <button @click="random" class="btn btn-danger">Refresh</button>
+        <button class="btn btn-default btn-copy" :data-clipboard-text="quote.text + ' ~~ ' + quote.author">Copy</button>
       </div>
     </div>
   </div>
@@ -29,7 +17,7 @@
 <script>
   import Clipboard from 'clipboard'
 
-  const clipboard = new Clipboard('.copy')
+  const clipboard = new Clipboard('.btn-copy')
 
   export default {
     name: 'Home',

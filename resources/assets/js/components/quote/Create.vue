@@ -25,6 +25,19 @@
                 </span>
               </div>
 
+              <div :class="['form-group', errors.language ? 'has-error': '']">
+                <label for="text">Language</label>
+                <select v-model="quote.language" class="form-control">
+                  <option value="">Select Language</option>
+                  <option v-for="language in languages" :value="language.id">
+                    {{ language.name }} - {{ language.native_name }}
+                  </option>
+                </select>
+                <span v-if="errors.language" class="text-danger">
+                  {{ errors.language[0] }}
+                </span>
+              </div>
+
               <div :class="['form-group', errors.text ? 'has-error': '']">
                 <label for="text">Text</label>
                 <textarea v-model="quote.text" class="form-control"></textarea>
@@ -73,8 +86,10 @@
         loading: false,
         errors: [],
         categories: [],
+        languages: [],
         quote: {
           category: '',
+          language: '',
           text: '',
           author: '',
           anonymous: false
@@ -84,6 +99,7 @@
 
     mounted () {
       this.loadCategory()
+      this.loadLanguage()
     },
 
     methods: {
@@ -92,6 +108,14 @@
           .then(response => {
             this.categories = response.data
           })
+      },
+
+      loadLanguage () {
+        axios.get('/api/language')
+          .then(response => {
+            this.languages = response.data
+          })
+          .catch(e => console.error(e))
       },
 
       store(e) {
