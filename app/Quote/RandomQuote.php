@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Quote;
 use Illuminate\Support\Facades\Log;
+use App\Language;
 
 class RandomQuote implements QuoteContract
 {
@@ -42,8 +43,11 @@ class RandomQuote implements QuoteContract
                     'name' => ucwords($response->body->category),
                 ]);
 
+                $language = Language::whereCode('eng')->first();
+
                 $quote = Quote::create([
                     'category_id' => $category->id,
+                    'language_id' => $language->id ?? null,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
                     'source' => $url,

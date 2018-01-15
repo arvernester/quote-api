@@ -8,6 +8,7 @@ use App\Console\Commands\Quote\TweetCommand;
 use App\Console\Commands\Quote\ImportRandomCommand;
 use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Console\Commands\Quote\ImportSumitgohilCommand;
+use App\Console\Commands\ImportCountry;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         ImportRandomCommand::class,
         ImportFamousCommand::class,
         ImportSumitgohilCommand::class,
+        ImportCountry::class,
     ];
 
     /**

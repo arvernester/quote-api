@@ -13,6 +13,7 @@ class Quote extends Model
     protected $fillable = [
         'category_id',
         'user_id',
+        'language_id',
         'text',
         'author',
         'source',
@@ -26,6 +27,7 @@ class Quote extends Model
     protected $hidden = [
         'status',
         'user_id',
+        'language_id',
         'category_id',
         'deleted_at',
     ];
@@ -62,5 +64,15 @@ class Quote extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Quote belongs to language.
+     *
+     * @return BelongsTo
+     */
+    public function language(): BelongsTo
+    {
+        return $this->belongsTo(Language::class);
     }
 }

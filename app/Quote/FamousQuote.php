@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Quote as QuoteModel;
 use App\Category;
 use Illuminate\Support\Facades\DB;
+use App\Language;
 
 class FamousQuote implements Quote
 {
@@ -48,8 +49,11 @@ class FamousQuote implements Quote
                     'name' => $response->body->category,
                 ]);
 
+                $language = Language::whereCode('eng')->first();
+
                 $quote = QuoteModel::create([
                     'category_id' => $category->id,
+                    'language_id' => $language->id ?? null,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
                     'source' => $url,

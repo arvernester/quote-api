@@ -20,7 +20,7 @@ class QuoteController extends Controller
     public function random(): JsonResponse
     {
         $quote = Quote::inRandomOrder()
-            ->with('category')
+            ->with('category', 'language')
             ->first();
 
         return response()->json($quote);
@@ -40,8 +40,8 @@ class QuoteController extends Controller
         ]);
 
         $quotes = Quote::orderBy('created_at', 'DESC')
-            ->with('category')
-            ->take($request->limit ?? 10)
+            ->with('category', 'language')
+            ->take($request->limit ?? 20)
             ->get();
 
         return response()->json($quotes);
