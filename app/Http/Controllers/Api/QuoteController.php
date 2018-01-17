@@ -9,6 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuoteRequest;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class QuoteController extends Controller
 {
@@ -99,5 +101,57 @@ class QuoteController extends Controller
         $quote->load('category');
 
         return response()->json($quote);
+    }
+
+    /**
+     * Get single quote of the day from randon category.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function quoteOfTheDay(Request $request): JsonResponse
+    {
+        $tommorow = Carbon::now()->addDay(1);
+        $quote = Cache::remember('quote.oftheday', $tommorow, function () use ($request) {
+            return Quote::whereHas('category', function ($category) use ($request) {
+                return $category->whereName($request->category);
+            })
+                ->inRandomOrder()
+                ->with('category', 'language')
+                ->take(1)
+                ->first();
+        });
+
+        return response()->json($quote);
+    }
+
+    /**
+     * Get quote where author has picture.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function author(Request $request): JsonResponse
+    {
+        $quotes = Quote::orderBy('created_at')
+            ->whereHas('author', function ($author) {
+                return $author->where('image_path', '!=', null);
+            })
+            ->take($request->limit ?? 5)
+            ->get();
+
+        return response()->json($quotes);
+    }
+
+    public function category(Request $request): JsonResponse
+    {
+        $quotes = Quote::inRandomOrder()
+            ->take(6)
+            ->whereRaw('CHAR_LENGTH(text) <= 150')
+            ->paginate($request->limit ?? 6);
+
+        return response()->json($quotes);
     }
 }

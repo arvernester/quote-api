@@ -9,6 +9,7 @@ use App\Quote as QuoteModel;
 use App\Category;
 use Illuminate\Support\Facades\DB;
 use App\Language;
+use App\Author;
 
 class FamousQuote implements Quote
 {
@@ -51,9 +52,14 @@ class FamousQuote implements Quote
 
                 $language = Language::whereCode('eng')->first();
 
+                $author = Author::firstOrCreate([
+                    'name' => $response->body->author,
+                ]);
+
                 $quote = QuoteModel::create([
                     'category_id' => $category->id,
                     'language_id' => $language->id ?? null,
+                    'author_id' => $author->id,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
                     'source' => $url,

@@ -9,6 +9,7 @@ use App\Category;
 use App\Quote;
 use Illuminate\Support\Facades\Log;
 use App\Language;
+use App\Author;
 
 class RandomQuote implements QuoteContract
 {
@@ -45,9 +46,14 @@ class RandomQuote implements QuoteContract
 
                 $language = Language::whereCode('eng')->first();
 
+                $author = Author::firstOrCreate([
+                    'name' => $response->body->author,
+                ]);
+
                 $quote = Quote::create([
                     'category_id' => $category->id,
                     'language_id' => $language->id ?? null,
+                    'author_id' => $author->id,
                     'text' => $response->body->quote,
                     'author' => $response->body->author,
                     'source' => $url,

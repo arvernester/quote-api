@@ -14,12 +14,26 @@
 Route::get('/', 'PageController');
 
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('admin', '/admin/dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('dashboard', 'DashboardController')->name('admin.dashboard');
+
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('banner', 'BannerController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('author', 'AuthorController');
+        Route::resource('quote', 'QuoteController');
+    });
+});
 
 Route::group(['namespace' => 'Api', 'middleware' => 'cors', 'prefix' => 'api'], function () {
     Route::get('quote', 'QuoteController@index');
     Route::get('quote/random', 'QuoteController@random');
+    Route::get('quote/of-the-day', 'QuoteController@quoteOfTheDay');
+    Route::get('quote/author', 'QuoteController@author');
+    Route::get('quote/category', 'QuoteController@category');
     Route::get('quote/latest', 'QuoteController@latest');
     Route::get('quote/{quote}', 'QuoteController@show');
     Route::post('quote', 'QuoteController@store');
@@ -29,4 +43,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'cors', 'prefix' => 'api'], 
     Route::get('category/{category}', 'CategoryController@show');
 
     Route::get('language', 'LanguageController@index');
+
+    Route::get('banner/latest', 'BannerController@latest');
 });

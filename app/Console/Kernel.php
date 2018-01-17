@@ -9,6 +9,7 @@ use App\Console\Commands\Quote\ImportRandomCommand;
 use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Console\Commands\ImportCountry;
+use App\Console\Commands\MigrateAuthor;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
         ImportFamousCommand::class,
         ImportSumitgohilCommand::class,
         ImportCountry::class,
+        MigrateAuthor::class,
     ];
 
     /**

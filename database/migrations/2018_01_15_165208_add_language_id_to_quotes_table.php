@@ -19,6 +19,10 @@ class AddLanguageIdToQuotesTable extends Migration
                 ->nullable()
                 ->default($language->id ?? null)
                 ->after('user_id');
+
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages');
         });
     }
 

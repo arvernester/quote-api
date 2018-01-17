@@ -14,6 +14,7 @@ class Quote extends Model
         'category_id',
         'user_id',
         'language_id',
+        'author_id',
         'text',
         'author',
         'source',
@@ -28,6 +29,7 @@ class Quote extends Model
         'status',
         'user_id',
         'language_id',
+        'author_id',
         'category_id',
         'deleted_at',
     ];
@@ -74,5 +76,15 @@ class Quote extends Model
     public function language(): BelongsTo
     {
         return $this->belongsTo(Language::class);
+    }
+
+    /**
+     * Quote belongs to Author.
+     *
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class);
     }
 }

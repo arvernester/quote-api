@@ -59,7 +59,12 @@ const router = new VueRouter({routes});
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('home-banner', load('home/Banner'))
+Vue.component('home-slider', load('home/Slider'))
+Vue.component('home-category', load('home/Category'))
+Vue.component('home-event', load('home/Event'))
+Vue.component('home-gallery', load('home/Gallery'))
+Vue.component('home-contact', load('home/Contact'))
 
 const app = new Vue({
     router

@@ -9,6 +9,7 @@ use App\Quote;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Language;
+use App\Author;
 
 class SumitgohilQuote implements QuoteContract
 {
@@ -69,9 +70,14 @@ class SumitgohilQuote implements QuoteContract
 
             $language = Language::whereCode('eng')->first();
 
+            $author = Author::firstOrCreate([
+                'name' => $body->author_name,
+            ]);
+
             $quote = Quote::create([
                 'category_id' => $category->id,
                 'language_id' => $language->id ?? null,
+                'author_id' => $author->id,
                 'text' => $decodedQuote,
                 'author' => $body->author_name,
                 'source' => $url,
