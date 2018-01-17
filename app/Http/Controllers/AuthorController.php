@@ -24,9 +24,12 @@ class AuthorController extends Controller
     public function index(Request $request): View
     {
         $authors = Author::orderBy('name')
+            ->when($request->keyword, function ($query) use ($request) {
+                return $query->where('name', 'LIKE', '%'.$request->keyword.'%');
+            })
             ->paginate($request->limit ?? 20);
 
-        $authors->appends($request->only('limit'));
+        $authors->appends($request->only('limit', 'keyword'));
 
         return view('author.index', compact('authors'))
             ->withTitle('Author');
