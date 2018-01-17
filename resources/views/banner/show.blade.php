@@ -25,6 +25,13 @@
                         {{ $banner->description }}
                     </p>
                 </div>
+
+                <div class="form-group">
+                    <label for="path">Image Path</label>
+                    <p class="form-control-static">
+                        {{ $banner->path }}
+                    </p>
+                </div>
                 
                 <div class="form-group">
                     <label for="status">Status</label>
