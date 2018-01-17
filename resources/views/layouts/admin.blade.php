@@ -155,7 +155,7 @@
             </li>
             <li class="{{ request()->routeIs('admin.author.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.author.index') }}">
-                    <em class="fa fa-users">&nbsp;</em> Authors
+                    <em class="fa fa-users">&nbsp;</em> Author
                 </a>
             </li>
             <li class="parent {{ request()->routeIs('admin.quote.*') ? 'active' : '' }}">
