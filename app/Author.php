@@ -12,6 +12,10 @@ class Author extends Model
         'image_path',
     ];
 
+    protected $hidden = [
+        'image_path',
+    ];
+
     /**
      * Author has many quotes.
      *

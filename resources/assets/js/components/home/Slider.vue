@@ -7,7 +7,7 @@
             <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
               <article class="os-animation" data-os-animation="fadeInDown" data-os-animation-delay="0.3s">
                 <h3>{{ quote.text }}</h3>
-                <span class="lighted">{{ quote.author }}</span>
+                <span class="lighted">{{ quote.author.name }}</span>
               </article>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">

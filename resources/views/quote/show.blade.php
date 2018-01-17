@@ -25,7 +25,9 @@
                     <div class="form-group">
                         <label for="author">Author</label>
                         <p class="form-control-static">
-                            {{ $quote->author->name ?? 'Unknown' }} 
+                            <a href="{{ route('admin.author.show', $quote->author) }}">
+                                {{ $quote->author->name }} 
+                            </a>
                         </p>
                     </div>
 

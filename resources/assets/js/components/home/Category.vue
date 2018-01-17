@@ -13,7 +13,7 @@
             <article v-for="(quote, index) in quotes.data" class="os-animation" data-os-animation="fadeInDown" data-os-animation-delay="0.5s">
               <!-- <h4>you are alive</h4> -->
               <p class="innerp">{{ quote.text }}</p>
-              <span class="naming">{{ quote.author }}</span>
+              <span class="naming">{{ quote.author.name }}</span>
             </article>
           </div>
           <div>

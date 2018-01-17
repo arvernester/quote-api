@@ -17,16 +17,7 @@ class QuoteController extends Controller
      */
     public function index(Request $request): View
     {
-        $quotes = Quote::select(
-            'id',
-            'language_id',
-            'category_id',
-            'author_id',
-            'text',
-            'created_at',
-            'updated_at'
-        )
-            ->orderBy('created_at', 'DESC')
+        $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
             ->paginate($request->limit ?? 20);
 

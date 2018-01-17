@@ -11,6 +11,8 @@ use App\Http\Requests\QuoteRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use App\Author;
 
 class QuoteController extends Controller
 {
@@ -22,7 +24,7 @@ class QuoteController extends Controller
     public function random(): JsonResponse
     {
         $quote = Quote::inRandomOrder()
-            ->with('category', 'language')
+            ->with('author', 'category', 'language')
             ->first();
 
         return response()->json($quote);
@@ -42,7 +44,7 @@ class QuoteController extends Controller
         ]);
 
         $quotes = Quote::orderBy('created_at', 'DESC')
-            ->with('category', 'language')
+            ->with('author', 'category', 'language')
             ->take($request->limit ?? 20)
             ->get();
 
@@ -58,7 +60,7 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote): JsonResponse
     {
-        $quote->load('category');
+        $quote->load('author', 'language', 'category');
 
         return response()->json($quote);
     }
@@ -72,9 +74,13 @@ class QuoteController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $this->validate($request, [
+            'limit' => 'integer|max:30',
+        ]);
+
         $quotes = Quote::orderBy('created_at', 'DESC')
-            ->with('category')
-            ->paginate($request->get('limit', 30));
+            ->with('author', 'category', 'language')
+            ->paginate($request->limit ?? 30);
 
         $quotes->appends($request->only('limit'));
 
@@ -90,15 +96,21 @@ class QuoteController extends Controller
      */
     public function store(QuoteRequest $request): JsonResponse
     {
-        $quote = Quote::create([
-            'user_id' => Auth::id(),
-            'category_id' => $request->category,
-            'language_id' => $request->language,
-            'text' => $request->text,
-            'author' => $request->author ?? 'Anonymous',
-        ]);
+        DB::transaction(function () use (&$quote, $request) {
+            $author = Author::firstOrCreate([
+                'name' => $request->author ?? 'Anonymous',
+            ]);
 
-        $quote->load('category');
+            $quote = Quote::create([
+                'user_id' => Auth::id(),
+                'category_id' => $request->category,
+                'language_id' => $request->language,
+                'author_id' => $author->id,
+                'text' => $request->text,
+            ]);
+        });
+
+        $quote->load('author', 'category');
 
         return response()->json($quote);
     }
@@ -118,7 +130,7 @@ class QuoteController extends Controller
                 return $category->whereName($request->category);
             })
                 ->inRandomOrder()
-                ->with('category', 'language')
+                ->with('author', 'category', 'language')
                 ->take(1)
                 ->first();
         });
@@ -139,15 +151,24 @@ class QuoteController extends Controller
             ->whereHas('author', function ($author) {
                 return $author->where('image_path', '!=', null);
             })
+            ->with('author', 'category', 'language')
             ->take($request->limit ?? 5)
             ->get();
 
         return response()->json($quotes);
     }
 
+    /**
+     * Show categorized quotes.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function category(Request $request): JsonResponse
     {
         $quotes = Quote::inRandomOrder()
+            ->with('author', 'category', 'language')
             ->take(6)
             ->whereRaw('CHAR_LENGTH(text) <= 150')
             ->paginate($request->limit ?? 6);
