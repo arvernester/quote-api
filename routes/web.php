@@ -23,7 +23,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::group(['as' => 'admin.'], function () {
         Route::resource('banner', 'BannerController');
         Route::resource('category', 'CategoryController');
+
+        Route::delete('author/{author}/image', 'AuthorController@removePicture')->name('author.removePicture');
         Route::resource('author', 'AuthorController');
+
         Route::resource('quote', 'QuoteController');
     });
 });

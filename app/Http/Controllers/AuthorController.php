@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AuthorController extends Controller
 {
@@ -107,7 +108,7 @@ class AuthorController extends Controller
         }
 
         return redirect()
-            ->route('admin.author.index')
+            ->route('admin.author.show', $author)
             ->withSuccess('Author has been updated.');
     }
 
@@ -120,5 +121,26 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
+    }
+
+    /**
+     * Remove picture from storage.
+     *
+     * @param Author $author
+     *
+     * @return RedirectResponse
+     */
+    public function removePicture(Author $author): RedirectResponse
+    {
+        DB::transaction(function () use ($author) {
+            Storage::delete($author->image_path);
+
+            $author->image_path = null;
+            $author->save();
+        });
+
+        return redirect()
+            ->back()
+            ->withSuccess('Picture has been deleted.');
     }
 }

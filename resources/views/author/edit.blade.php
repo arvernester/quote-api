@@ -23,7 +23,7 @@
                     </div>
 
                     <button class="btn btn-primary" type="submit">Update</button>
-                    <a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
+                    <a href="{{ url()->previous() ?? route('admin.author.index') }}" class="btn btn-default">Back</a>
             </form>
             </div>
         </div>
