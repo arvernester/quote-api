@@ -9,7 +9,7 @@
 
             <fieldset>
                 <div class="form-group {{ !$errors->has('email') ?: 'has-error' }}">
-                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{ old('email') }}">
                 </div>
                 <div class="form-group {{ !$errors->has('password') ?: 'has-error' }}">
                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
