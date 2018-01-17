@@ -49,13 +49,13 @@ class SumitgohilQuote implements QuoteContract
         ));
 
         $existsQuote = Quote::whereText($decodedQuote)
-            ->whereAuthor($body->author_name)
+            ->with('author', 'category')
             ->first();
 
         if (!empty($existsQuote)) {
             Log::info(sprintf('Quote from %s is already exists', $url), [
                 'text' => $decodedQuote,
-                'author' => $body->author_name,
+                'author' => $existsQuote->author->name,
             ]);
 
             return $existsQuote;

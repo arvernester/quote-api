@@ -34,13 +34,13 @@ class FamousQuote implements Quote
         Log::debug($response->raw_body);
 
         $existsQuote = QuoteModel::whereText($response->body->quote)
-            ->with('category')
+            ->with('author', 'category')
             ->first();
 
         if (!empty($existsQuote)) {
             Log::info(sprintf('Quote from %s is already exists.', $url), [
                 'text' => $existsQuote->text,
-                'author' => $existsQuote->author,
+                'author' => $existsQuote->author->name,
             ]);
         }
 
