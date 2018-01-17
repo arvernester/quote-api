@@ -7,6 +7,7 @@ use App\Banner;
 use Illuminate\View\View;
 use App\Http\Requests\BannerRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 
 class BannerController extends Controller
 {
@@ -48,7 +49,8 @@ class BannerController extends Controller
     {
         $image = $request->file('image');
         if ($image->isValid()) {
-            $path = $image->store('public/banner');
+            $directory = sprintf('public/banner/%s', Carbon::now()->format('Y/m'));
+            $path = $image->store($directory);
             $request->merge(['path' => $path]);
         }
 
