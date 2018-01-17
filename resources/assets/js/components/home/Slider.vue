@@ -1,5 +1,5 @@
 <template>
-  <div v-if="quotes" id="slidenew">
+  <div v-if="quotes.length >= 1" id="slidenew">
     <ul class="slider">
       <li v-for="(quote, index) in quotes">
         <div class="container">
