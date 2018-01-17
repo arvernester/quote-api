@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Author;
+use App\Http\Requests\AuthorRequest;
+use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -66,8 +71,10 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Author $author): View
     {
+        return view('author.edit', compact('author'))
+            ->withTitle('Edit Author');
     }
 
     /**
@@ -78,8 +85,30 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AuthorRequest $request, Author $author): RedirectResponse
     {
+        $picture = $request->file('picture');
+        if ($picture->isValid()) {
+            $directory = sprintf('public/author/%s', Carbon::now()->format('Y/m'));
+            $filename = sprintf('%s.%s', str_slug($author->name), $picture->getClientOriginalExtension());
+            $path = $picture->storeAs($directory, $filename);
+
+            // crop and resize image
+            $image = Image::make(url(Storage::url($path)));
+            $image->fit(500)
+                ->save(sprintf(
+                    '%s/%s',
+                    storage_path('app/'.$directory),
+                    $filename
+                ));
+
+            $author->fill(['image_path' => $path]);
+            $author->save();
+        }
+
+        return redirect()
+            ->route('admin.author.index')
+            ->withSuccess('Author has been updated.');
     }
 
     /**

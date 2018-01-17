@@ -1,7 +1,7 @@
 <template>
-  <div v-if="quotes.data" id="slidenew">
+  <div v-if="quotes" id="slidenew">
     <ul class="slider">
-      <li v-for="(quote, index) in quotes.data">
+      <li v-for="(quote, index) in quotes">
         <div class="container">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
@@ -11,7 +11,7 @@
               </article>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
-              <img src="/img/slide1.jpg" alt="" class="os-animation" data-os-animation="fadeInRight" data-os-animation-delay="0.4s">
+              <img :src="quote.author.full_image_path" alt="" class="os-animation" data-os-animation="fadeInRight" data-os-animation-delay="0.4s">
             </div>
           </div>
         </div>
