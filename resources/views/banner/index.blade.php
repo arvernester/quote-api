@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('layouts.partials.flash')
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default ">

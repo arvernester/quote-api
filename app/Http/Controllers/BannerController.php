@@ -105,7 +105,7 @@ class BannerController extends Controller
 
         return redirect()
             ->route('admin.banner.index')
-            ->withSucces('Banner has been updated.');
+            ->withSuccess('Banner has been updated.');
     }
 
     /**
