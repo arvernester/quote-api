@@ -40,6 +40,8 @@ class MigrateAuthor extends Command
         $quotes = Quote::orderBy('author', 'ASC')
             ->get();
 
+        $bar = $this->output->createProgressBar($quotes->count());
+
         foreach ($quotes as $quote) {
             $author = Author::firstOrCreate([
                 'name' => $quote->author,
@@ -47,8 +49,12 @@ class MigrateAuthor extends Command
 
             $quote->fill(['author_id' => $author->id]);
             $quote->save();
+
+            $bar->advance();
         }
 
-        $this->info(sprintf('Total %s authors has been migrated to new table.', $quotes->count()));
+        $bar->finish();
+
+        $this->info(sprintf(PHP_EOL.'Total %s authors has been migrated to new table.', $quotes->count()));
     }
 }
