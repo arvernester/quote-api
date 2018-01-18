@@ -66,6 +66,8 @@ return [
 
     'timezone' => 'Asia/Jakarta',
 
+    'date_format' => 'Y-m-d H:i',
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
