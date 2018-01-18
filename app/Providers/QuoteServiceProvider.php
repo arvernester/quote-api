@@ -12,6 +12,7 @@ use App\Quote\Ondesign;
 use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Quote\SumitgohilQuote;
 use App\Console\Commands\Quote\ImportOndesign;
+use App\Quote\OndesignQuote;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -50,7 +51,7 @@ class QuoteServiceProvider extends ServiceProvider
         $this->app->when(ImportOndesign::class)
             ->needs(Quote::class)
             ->give(function () {
-                return new Ondesign();
+                return new OndesignQuote();
             });
     }
 }

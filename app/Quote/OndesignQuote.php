@@ -11,7 +11,7 @@ use App\Author;
 use App\Category;
 use App\Language;
 
-class Ondesign implements QuoteContract
+class OndesignQuote implements QuoteContract
 {
     /**
      * Import quote from http://quotesondesign.com.
