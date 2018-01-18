@@ -11,7 +11,6 @@
                             <th>Code</th>
                             <th>Name</th>
                             <th>Native Name</th>
-                            <th>Created</th>
                             <th>Updated</th>
                         </tr>
                     </thead>
@@ -22,7 +21,6 @@
                             <td>{{ $country->code }}</td>
                             <td>{{ $country->name }}</td>
                             <td>{{ $country->native_name }}</td>
-                            <td>{{ $country->created_at }}</td>
                             <td>{{ $country->updated_at }}</td>
                         </tr>
                         @endforeach
