@@ -79,7 +79,6 @@ class SumitgohilQuote implements QuoteContract
                 'language_id' => $language->id ?? null,
                 'author_id' => $author->id,
                 'text' => $decodedQuote,
-                'author' => $body->author_name,
                 'source' => $url,
             ]);
         });

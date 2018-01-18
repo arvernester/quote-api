@@ -55,7 +55,6 @@ class RandomQuote implements QuoteContract
                     'language_id' => $language->id ?? null,
                     'author_id' => $author->id,
                     'text' => $response->body->quote,
-                    'author' => $response->body->author,
                     'source' => $url,
                 ]);
             });
