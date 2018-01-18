@@ -43,7 +43,11 @@
                         @foreach ($categories as $category)
                         <tr>
                             <td>{{ $category->name }}</td>
-                            <td>{{ number_format($category->quotes_count, 0) }}</td>
+                            <td>
+                                <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
+                                    {{ number_format($category->quotes_count, 0) }}
+                                </a>
+                            </td>
                             <td>{{ $category->created_at }}</td>
                             <td>{{ $category->updated_at }}</td>
                             <td>

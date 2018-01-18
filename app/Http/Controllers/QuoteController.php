@@ -19,9 +19,18 @@ class QuoteController extends Controller
     {
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
+            ->when($request->category, function ($query) use ($request) {
+                return $query->whereCategoryId($request->category);
+            })
+            ->when($request->keyword, function ($query) use ($request) {
+                return $query->where('text', 'LIKE', '%'.$request->keyword.'%')
+                    ->orWherehas('author', function ($author) use ($request) {
+                        return $author->where('name', 'LIKE', '%'.$request->keyword.'%');
+                    });
+            })
             ->paginate($request->limit ?? 20);
 
-        $quotes->appends($request->only('limit'));
+        $quotes->appends($request->only('limit', 'category', 'keyword'));
 
         return view('quote.index', compact('quotes'))
             ->withTitle('Quotes');
