@@ -10,6 +10,7 @@ use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Console\Commands\ImportCountry;
 use App\Console\Commands\MigrateAuthor;
+use App\Console\Commands\BackupDatabase;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         ImportSumitgohilCommand::class,
         ImportCountry::class,
         MigrateAuthor::class,
+        BackupDatabase::class,
     ];
 
     /**
