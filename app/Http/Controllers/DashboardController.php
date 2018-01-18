@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use App\Quote;
 use App\Category;
 use App\Author;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -22,6 +23,7 @@ class DashboardController extends Controller
                     'quote' => Quote::count(),
                     'category' => Category::count(),
                     'author' => Author::count(),
+                    'user' => User::count(),
                 ],
                 'latestQuotes' => $latestQuotes,
             ])
