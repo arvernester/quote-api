@@ -173,6 +173,26 @@
                     </li>
                 </ul>
             </li>
+            <li class="parent">
+                <a data-toggle="collapse" href="#misc">
+                    <em class="fa fa-snowflake-o">&nbsp;</em> Miscellaneous
+                    <span data-toggle="collapse" href="#misc" class="icon pull-right">
+                        <em class="fa fa-plus"></em>
+                    </span>
+                </a>
+                <ul class="children collapse" id="misc">
+                    <li>
+                        <a href="{{ route('admin.country.index') }}">
+                            <span class="fa fa-globe">&nbsp;</span> Country
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.language.index') }}">
+                            <span class="fa fa-language">&nbsp;</span> Language
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <a href="{{ route('logout') }}">
                     <em class="fa fa-power-off">&nbsp;</em> Logout</a>

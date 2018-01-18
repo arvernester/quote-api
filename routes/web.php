@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::resource('author', 'AuthorController');
 
         Route::resource('quote', 'QuoteController');
+
+        Route::resource('country', 'CountryController');
+        Route::resource('language', 'LanguageController');
     });
 });
 
