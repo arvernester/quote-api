@@ -46,7 +46,7 @@ class TweetCommand extends Command
         $quote = Quote::inRandomOrder()->first();
 
         if (!empty($quote)) {
-            $twitter->send(sprintf('%s  ~~ %s. #DailyQuote', $quote->text, $quote->author));
+            $twitter->send(sprintf('%s  ~~ %s. #DailyQuote', $quote->text, $quote->author->name));
         }
     }
 }
