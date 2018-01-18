@@ -8,8 +8,10 @@ use App\Contracts\Quote;
 use App\Console\Commands\Quote\ImportRandomCommand;
 use App\Console\Commands\Quote\ImportFamousCommand;
 use App\Quote\FamousQuote;
+use App\Quote\Ondesign;
 use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Quote\SumitgohilQuote;
+use App\Console\Commands\Quote\ImportOndesign;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,13 @@ class QuoteServiceProvider extends ServiceProvider
             ->needs(Quote::class)
             ->give(function () {
                 return new SumitgohilQuote();
+            });
+
+        // Ondesign provider
+        $this->app->when(ImportOndesign::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new Ondesign();
             });
     }
 }
