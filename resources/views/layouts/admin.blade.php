@@ -182,6 +182,11 @@
                 </a>
                 <ul class="children collapse" id="misc">
                     <li>
+                        <a href="{{ route('admin.user.index') }}">
+                            <span class="fa fa-users">&nbsp;</span> Users
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.country.index') }}">
                             <span class="fa fa-globe">&nbsp;</span> Country
                         </a>
