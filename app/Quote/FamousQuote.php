@@ -26,44 +26,42 @@ class FamousQuote implements Quote
             'X-Mashape-Key' => config('services.quote.key'),
         ]);
 
-        if ($response->code != 200) {
-            Log::error($response->raw_body);
-        }
+        if ($response->code == 200) {
+            // log to debug
+            Log::debug($response->raw_body);
 
-        // log to debug
-        Log::debug($response->raw_body);
+            $existsQuote = QuoteModel::whereText($response->body->quote)
+                ->with('author', 'category')
+                ->first();
 
-        $existsQuote = QuoteModel::whereText($response->body->quote)
-            ->with('author', 'category')
-            ->first();
-
-        if (!empty($existsQuote)) {
-            Log::info(sprintf('Quote from %s is already exists.', $url), [
-                'text' => $existsQuote->text,
-                'author' => $existsQuote->author->name,
-            ]);
-        }
-
-        if (empty($existsQuote)) {
-            DB::transaction(function () use ($url, $response, &$quote) {
-                $category = Category::firstOrCreate([
-                    'name' => $response->body->category,
+            if (!empty($existsQuote)) {
+                Log::info(sprintf('Quote from %s is already exists.', $url), [
+                    'text' => $existsQuote->text,
+                    'author' => $existsQuote->author->name,
                 ]);
+            }
 
-                $language = Language::whereCode('eng')->first();
+            if (empty($existsQuote)) {
+                DB::transaction(function () use ($url, $response, &$quote) {
+                    $category = Category::firstOrCreate([
+                        'name' => $response->body->category,
+                    ]);
 
-                $author = Author::firstOrCreate([
-                    'name' => $response->body->author,
-                ]);
+                    $language = Language::whereCode('eng')->first();
 
-                $quote = QuoteModel::create([
-                    'category_id' => $category->id,
-                    'language_id' => $language->id ?? null,
-                    'author_id' => $author->id,
-                    'text' => $response->body->quote,
-                    'source' => $url,
-                ]);
-            });
+                    $author = Author::firstOrCreate([
+                        'name' => $response->body->author,
+                    ]);
+
+                    $quote = QuoteModel::create([
+                        'category_id' => $category->id,
+                        'language_id' => $language->id ?? null,
+                        'author_id' => $author->id,
+                        'text' => $response->body->quote,
+                        'source' => $url,
+                    ]);
+                });
+            }
         }
 
         return $existsQuote ?? $quote;
