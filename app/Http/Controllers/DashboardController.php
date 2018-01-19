@@ -17,6 +17,11 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
+        $latestAuthors = Author::orderBy('created_at', 'DESC')
+            ->with('latestQuote')
+            ->take(20)
+            ->get();
+
         return view('dashboard')
             ->with([
                 'total' => [
@@ -26,6 +31,7 @@ class DashboardController extends Controller
                     'user' => User::count(),
                 ],
                 'latestQuotes' => $latestQuotes,
+                'latestAuthors' => $latestAuthors,
             ])
             ->withTitle('Dashboard');
     }
