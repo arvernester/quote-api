@@ -12,7 +12,7 @@
                     <a href="#">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
-                    <a href="#">
+                    <a href="https://twitter.com/kutip_org">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                     <a href="#">
