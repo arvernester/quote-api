@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Quote;
+use App\Category;
+use App\Author;
+use App\Language;
+use App\Http\Requests\QuoteRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class QuoteController extends Controller
 {
@@ -22,6 +29,9 @@ class QuoteController extends Controller
             ->when($request->category, function ($query) use ($request) {
                 return $query->whereCategoryId($request->category);
             })
+            ->when($request->user, function ($query) use ($request) {
+                return $query->whereUserId($request->user);
+            })
             ->when($request->keyword, function ($query) use ($request) {
                 return $query->where('text', 'LIKE', '%'.$request->keyword.'%')
                     ->orWherehas('author', function ($author) use ($request) {
@@ -30,7 +40,7 @@ class QuoteController extends Controller
             })
             ->paginate($request->limit ?? 20);
 
-        $quotes->appends($request->only('limit', 'category', 'keyword'));
+        $quotes->appends($request->only('limit', 'category', 'keyword', 'user'));
 
         return view('quote.index', compact('quotes'))
             ->withTitle('Quotes');
@@ -39,21 +49,44 @@ class QuoteController extends Controller
     /**
      * Show the form for creating a new quote.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
+        $categories = Category::dropdown();
+        $languages = Language::dropdown();
+
+        return view('quote.create', compact('categories', 'languages'))
+            ->withTitle('Add Quote');
     }
 
     /**
      * Store a newly created quote in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param QuoteRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(QuoteRequest $request): RedirectResponse
     {
+        DB::transaction(function () use (&$quote, $request) {
+            $author = Author::firstOrCreate([
+                'name' => $request->author ?? 'Anonymous',
+            ]);
+
+            $request->merge([
+                'author_id' => $author->id,
+                'category_id' => $request->category,
+                'language_id' => $request->language,
+                'user_id' => Auth::id(),
+            ]);
+
+            $quote = Quote::create($request->all());
+        });
+
+        return redirect()
+            ->route('admin.quote.show', $quote)
+            ->withSuccess('Quote has been created successfully.');
     }
 
     /**

@@ -16,7 +16,6 @@ class Quote extends Model
         'language_id',
         'author_id',
         'text',
-        'author',
         'source',
         'status',
     ];

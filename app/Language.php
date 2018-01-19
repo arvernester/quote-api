@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\FormatDate;
+use Illuminate\Support\Collection;
 
 class Language extends Model
 {
@@ -39,5 +40,16 @@ class Language extends Model
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class);
+    }
+
+    /**
+     * Generate language for option HTML.
+     *
+     * @return Collection|null
+     */
+    public static function dropdown(): ? Collection
+    {
+        return self::orderBy('name')
+            ->pluck('name', 'id');
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Author extends Model
 {
@@ -43,5 +44,11 @@ class Author extends Model
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class);
+    }
+
+    public function latestQuote(): HasOne
+    {
+        return $this->hasOne(Quote::class)
+            ->orderBy('created_at', 'DESC');
     }
 }

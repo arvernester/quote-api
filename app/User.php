@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,15 @@ class User extends Authenticatable
     public function setEmailAttribute(string $email)
     {
         $this->attributes['email'] = strtolower($email);
+    }
+
+    /**
+     * User has many Quote.
+     *
+     * @return HasMany
+     */
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class);
     }
 }

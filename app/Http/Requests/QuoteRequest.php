@@ -27,12 +27,9 @@ class QuoteRequest extends FormRequest
         $rules = [
             'category' => 'required|integer|exists:categories,id',
             'language' => 'required|integer|exists:languages,id',
+            'author' => 'max:100',
             'text' => 'required|max:5000',
         ];
-
-        if ($request->anonymous == false) {
-            $rules['author'] = 'required|max:100';
-        }
 
         return $rules;
     }
