@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\User;
+use App\Quote;
 
 class UserController extends Controller
 {
@@ -49,12 +50,20 @@ class UserController extends Controller
     /**
      * Display the specified user.
      *
-     * @param int $id
+     * @param User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($id)
+    public function show(User $user): View
     {
+        // get latest quotes from user
+        $quotes = Quote::whereUserId($user->id)
+            ->orderBy('created_at', 'DESC')
+            ->take(10)
+            ->get();
+
+        return view('user.show', compact('user', 'quotes'))
+            ->withTitle('User Detail');
     }
 
     /**
