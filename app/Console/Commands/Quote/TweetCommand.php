@@ -46,7 +46,13 @@ class TweetCommand extends Command
         $quote = Quote::inRandomOrder()->first();
 
         if (!empty($quote)) {
-            $twitter->send(sprintf('%s  ~~ %s. #DailyQuote', $quote->text, $quote->author->name));
+            if (env('TWITTER_HASHTAG')) {
+                $hashtags = [];
+                foreach (explode(',', env('TWITTER_HASHTAG')) as $tag) {
+                    $hashtags[] = '#'.$tag;
+                }
+            }
+            $twitter->send(sprintf('%s  ~~ %s. %s', $quote->text, $quote->author->name, implode(' ', $hashtags) ?? '#Quote'));
         }
     }
 }
