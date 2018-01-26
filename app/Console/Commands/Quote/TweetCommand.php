@@ -4,6 +4,8 @@ namespace App\Console\Commands\Quote;
 
 use Illuminate\Console\Command;
 use App\Quote;
+use Illuminate\Support\Facades\DB;
+use App\Language;
 
 class TweetCommand extends Command
 {
@@ -12,7 +14,7 @@ class TweetCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'quote:tweet';
+    protected $signature = 'quote:tweet {--lang=}';
 
     /**
      * The console command description.
@@ -43,7 +45,22 @@ class TweetCommand extends Command
             env('TWITTER_TOKEN_SECRET')
         );
 
-        $quote = Quote::inRandomOrder()->first();
+        DB::transaction(function () use (&$quote) {
+            $lang = $this->option('lang');
+
+            if (Language::whereCode($lang)->count() <= 0) {
+                $this->error(sprintf('Language "%s" is not exists.', $lang));
+                exit;
+            }
+
+            $quote = Quote::inRandomOrder()
+                ->when($lang, function ($query) use ($lang) {
+                    return $query->whereHas('language', function ($language) use ($lang) {
+                        return $language->whereCode($lang);
+                    });
+                })
+                ->first();
+        });
 
         if (!empty($quote)) {
             if (env('TWITTER_HASHTAG')) {
