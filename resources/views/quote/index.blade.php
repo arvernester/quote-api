@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Motivational and inspirational quotes
-                    <ul class="pull-right panel-settings panel-button-tab-right">
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">&nbsp;
+                <ul class="pull-right panel-settings panel-button-tab-right">
                     <li class="dropdown">
                         <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
                             <em class="fa fa-cogs"></em>
@@ -37,8 +37,9 @@
                 <span class="pull-right clickable panel-toggle panel-button-tab-left">
                     <em class="fa fa-toggle-up"></em>
                 </span>
-                </div>
-                <div class="panel-body">
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -80,8 +81,9 @@
                     </table>
                 </div>
             </div>
-
-            {{ $quotes->links() }}
         </div>
+
+        {{ $quotes->links() }}
     </div>
+</div>
 @endsection
