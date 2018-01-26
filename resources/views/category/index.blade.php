@@ -28,43 +28,45 @@
                 </span>
             </div>
             <div class="panel-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Total Quote</td>
-                            <td>Created</td>
-                            <td>Updated</td>
-                            <td>Actions</td>
-                        </tr>
-                    </thead>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Total Quote</td>
+                                <td>Created</td>
+                                <td>Updated</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        @foreach ($categories as $category)
-                        <tr>
-                            <td>{{ $category->name }}</td>
-                            <td>
-                                <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
-                                    {{ number_format($category->quotes_count, 0) }}
-                                </a>
-                            </td>
-                            <td>{{ $category->created_at }}</td>
-                            <td>{{ $category->updated_at }}</td>
-                            <td>
-                                <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
-                                    <i class="fa fa-eye fa-fw"></i>
-                                </a>
-                                <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
-                                    <i class="fa fa-edit fa-fw"></i>
-                                </a>
-                                <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
-                                    <i class="fa fa-trash fa-fw"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        <tbody>
+                            @foreach ($categories as $category)
+                            <tr>
+                                <td>{{ $category->name }}</td>
+                                <td>
+                                    <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
+                                        {{ number_format($category->quotes_count, 0) }}
+                                    </a>
+                                </td>
+                                <td>{{ $category->created_at }}</td>
+                                <td>{{ $category->updated_at }}</td>
+                                <td>
+                                    <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
+                                        <i class="fa fa-eye fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
+                                        <i class="fa fa-trash fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
