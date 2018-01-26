@@ -10,7 +10,9 @@
             <div class="panel panel-teal panel-widget border-right">
                 <div class="row no-padding">
                     <em class="fa fa-xl fa-quote-right color-blue"></em>
-                    <div class="large">{{ number_format($total['quote'], 0) }}</div>
+                    <div class="large">
+                        {!! Numbers\Number::n($total['quote'])->round(3)->getSuffixNotation() !!}
+                    </div>
                     <div class="text-muted">Quotes</div>
                 </div>
             </div>
@@ -28,7 +30,9 @@
             <div class="panel panel-orange panel-widget border-right">
                 <div class="row no-padding">
                     <em class="fa fa-xl fa-user color-teal"></em>
-                    <div class="large">{{ number_format($total['author']) }}</div>
+                    <div class="large">
+                        {!! Numbers\Number::n($total['author'])->round(2)->getSuffixNotation() !!}
+                    </div>
                     <div class="text-muted">Authors</div>
                 </div>
             </div>
