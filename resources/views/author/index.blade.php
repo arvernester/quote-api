@@ -13,6 +13,7 @@
                         <thead>
                             <tr>
                                 <th>Author Name</th>
+                                <th>Total Quotes</th>
                                 <th>Has Picture</th>
                                 <th>Created</th>
                                 <th>Updated</th>
@@ -24,6 +25,7 @@
                             @foreach ($authors as $author)
                             <tr>
                                 <td>{{ $author->name }}</td>
+                                <td class="text-right">{{ number_format($author->quotes->count()) }}</td>
                                 <td>{{ $author->image_path ? 'Yes' : 'No' }}</td>
                                 <td>{{ $author->created_at }}</td>
                                 <td>{{ $author->updated_at }}</td>

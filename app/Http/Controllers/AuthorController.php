@@ -64,6 +64,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author): View
     {
+        $author->load('quotes', 'quotes.category', 'quotes.language');
+
         return view('author.show', compact('author'))
             ->withTitle('Author Detail');
     }

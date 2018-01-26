@@ -1,4 +1,8 @@
-@extends('layouts.admin') @section('content') @include('layouts.partials.flash')
+@extends('layouts.admin')
+
+@section('content')
+
+@include('layouts.partials.flash')
 
 <div class="panel panel-container">
     <div class="row">
@@ -45,7 +49,7 @@
     <div class="col-md-6">
         <div class="panel panel-default ">
             <div class="panel-heading">
-                Latest Added Quotes
+                Latest Quotes
                 <ul class="pull-right panel-settings panel-button-tab-right">
                     <li class="dropdown">
                         <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
