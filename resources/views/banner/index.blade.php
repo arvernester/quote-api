@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
 @include('layouts.partials.flash')
 
 <div class="row">
@@ -30,39 +31,41 @@
                 </span>
             </div>
             <div class="panel-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Created</th>
-                            <th>Updated</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($banners as $banner)
-                        <tr class="{{ $banner->is_active ? '' : 'warning' }}">
-                            <td>{{ $banner->title }}</td>
-                            <td>{{ $banner->description }}</td>
-                            <td>{{ $banner->created_at }}</td>
-                            <td>{{ $banner->updated_at }}</td>
-                            <td>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($banners as $banner)
+                            <tr class="{{ $banner->is_active ? '' : 'warning' }}">
+                                <td>{{ $banner->title }}</td>
+                                <td>{{ $banner->description }}</td>
+                                <td>{{ $banner->created_at }}</td>
+                                <td>{{ $banner->updated_at }}</td>
+                                <td>
 
-                                <a href="{{ route('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
-                                    <i class="fa fa-eye fa-fw"></i>
-                                </a>
-                                <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
-                                    <i class="fa fa-edit fa-fw"></i>
-                                </a>
-                                <a href="{{ route('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
-                                    <i class="fa fa-trash fa-fw"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                    <a href="{{ route('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
+                                        <i class="fa fa-eye fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
+                                        <i class="fa fa-trash fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
