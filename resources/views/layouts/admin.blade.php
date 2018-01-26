@@ -16,7 +16,7 @@
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!--[if lt IE 9]>
-	<script src="{{ asset('lumino/js/html5shiv.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="{{ asset('lumino/js/respond.min.js') }}"></script>
 	<![endif]-->
 </head>
@@ -238,6 +238,7 @@
 
     <script src="{{ asset('lumino/js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ asset('lumino/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('lumino/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('lumino/js/custom.js') }}"></script>
 
     @stack('js')
