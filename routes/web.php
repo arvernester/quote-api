@@ -33,6 +33,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::resource('language', 'LanguageController');
 
         Route::resource('user', 'UserController');
+
+        Route::post('notification/read', 'NotificationController@read');
     });
 });
 

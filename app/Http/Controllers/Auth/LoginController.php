@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\GeneralNotification;
 
 class LoginController extends Controller
 {
@@ -52,6 +53,13 @@ class LoginController extends Controller
      */
     public function authenticated()
     {
+        $user = Auth::user();
+        $user->notify(new GeneralNotification(
+            'Logged in into admin system.',
+            '',
+            'fa-unlock-alt'
+        ));
+
         Session::flash('success', sprintf('Welcome to dashboard panel, %s!', Auth::user()->name));
     }
 }

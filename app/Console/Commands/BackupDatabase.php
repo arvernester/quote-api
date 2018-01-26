@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\User;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\BackupDatabase as BackupDatabaseNotification;
+use App\Notifications\GeneralNotification;
 
 class BackupDatabase extends Command
 {
@@ -67,6 +67,8 @@ class BackupDatabase extends Command
         $this->info($message = 'Database has been backed up to '.$config['{path}']);
 
         $users = User::all();
-        Notification::send($users, new BackupDatabaseNotification($message));
+        Notification::send($users, new GeneralNotification(
+            'Database has been backed up.'
+        ));
     }
 }

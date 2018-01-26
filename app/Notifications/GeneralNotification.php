@@ -6,23 +6,39 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class BackupDatabase extends Notification
+class GeneralNotification extends Notification
 {
     use Queueable;
 
     /**
-     * Default notification message.
+     * Default message notification.
      *
      * @var string
      */
     private $message = '';
 
     /**
+     * Notification icon.
+     *
+     * @var string
+     */
+    private $icon = 'fa-bell';
+
+    /**
+     * Link to notification.
+     *
+     * @var string
+     */
+    private $link = '';
+
+    /**
      * Create a new notification instance.
      */
-    public function __construct(string $message)
+    public function __construct(string $message, string $link = '', string $icon = 'fa-bell')
     {
+        $this->icon = $icon;
         $this->message = $message;
+        $this->link = $link;
     }
 
     /**
@@ -65,10 +81,17 @@ class BackupDatabase extends Notification
         ];
     }
 
-    public function toDatabase($notifiable)
+    /**
+     * Send notification to database.
+     *
+     * @param object $notifiable
+     */
+    public function toDatabase($notifiable): array
     {
         return [
+            'icon' => $this->icon,
             'message' => $this->message,
+            'link' => $this->link,
         ];
     }
 }
