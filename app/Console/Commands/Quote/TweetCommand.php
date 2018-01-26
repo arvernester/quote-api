@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Quote;
 use Illuminate\Support\Facades\DB;
 use App\Language;
+use App\QuoteTweet;
 
 class TweetCommand extends Command
 {
@@ -45,10 +46,10 @@ class TweetCommand extends Command
             env('TWITTER_TOKEN_SECRET')
         );
 
-        DB::transaction(function () use (&$quote) {
+        DB::transaction(function () use (&$quote, $twitter) {
             $lang = $this->option('lang');
 
-            if (Language::whereCode($lang)->count() <= 0) {
+            if ($lang and Language::whereCode($lang)->count() <= 0) {
                 $this->error(sprintf('Language "%s" is not exists.', $lang));
                 exit;
             }
@@ -59,17 +60,24 @@ class TweetCommand extends Command
                         return $language->whereCode($lang);
                     });
                 })
+                ->whereNotIn('id', function ($query) {
+                    return $query->from('quote_tweets')->select('quote_id');
+                })
                 ->first();
-        });
 
-        if (!empty($quote)) {
-            if (env('TWITTER_HASHTAG')) {
-                $hashtags = [];
-                foreach (explode(',', env('TWITTER_HASHTAG')) as $tag) {
-                    $hashtags[] = '#'.$tag;
+            if (!empty($quote)) {
+                QuoteTweet::create([
+                    'quote_id' => $quote->id,
+                ]);
+
+                if (env('TWITTER_HASHTAG')) {
+                    $hashtags = [];
+                    foreach (explode(',', env('TWITTER_HASHTAG')) as $tag) {
+                        $hashtags[] = '#'.$tag;
+                    }
                 }
+                $twitter->send(sprintf('%s  ~~ %s. %s', $quote->text, $quote->author->name, implode(' ', $hashtags) ?? '#Quote'));
             }
-            $twitter->send(sprintf('%s  ~~ %s. %s', $quote->text, $quote->author->name, implode(' ', $hashtags) ?? '#Quote'));
-        }
+        });
     }
 }
