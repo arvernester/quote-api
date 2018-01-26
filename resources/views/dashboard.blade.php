@@ -136,7 +136,8 @@
                         <div class="row">
                             <div class="col-xs-2 col-md-2 date">
                                 <div class="large">{{ $author->created_at->format('d') }}</div>
-                                <div class="text-muted">{{ $author->created_at->format('F') }}</div>
+                                <div class="text-muted">{{ $author->created_at->format('M') }}</div>
+                                <div class="text-muted">{{ $author->created_at->format('H:i') }}</div>
                             </div>
                             <div class="col-xs-10 col-md-10">
                                 <h4>
