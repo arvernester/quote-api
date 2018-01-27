@@ -23,8 +23,8 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td>{{ $user->updated_at }}</td>
+                                <td>{{ $user->created_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $user->updated_at->format(config('app.date_format')) }}</td>
                                 <td>
                                     <a href="{{ route('admin.user.show', $user) }}" class="btn btn-primary btn-table">
                                         <em class="fa fa-eye fa-fw"></em>

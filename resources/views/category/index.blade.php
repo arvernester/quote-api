@@ -49,8 +49,8 @@
                                         {{ number_format($category->quotes_count, 0) }}
                                     </a>
                                 </td>
-                                <td>{{ $category->created_at }}</td>
-                                <td>{{ $category->updated_at }}</td>
+                                <td>{{ $category->created_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $category->updated_at->format(config('app.date_format')) }}</td>
                                 <td>
                                     <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>

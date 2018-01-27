@@ -27,8 +27,8 @@
                                 <td>{{ $author->name }}</td>
                                 <td class="text-right">{{ number_format($author->quotes->count()) }}</td>
                                 <td>{{ $author->image_path ? 'Yes' : 'No' }}</td>
-                                <td>{{ $author->created_at }}</td>
-                                <td>{{ $author->updated_at }}</td>
+                                <td>{{ $author->created_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $author->updated_at->format(config('app.date_format')) }}</td>
                                 <td>
                                     <a href="{{ route('admin.author.show', $author) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>

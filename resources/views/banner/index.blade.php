@@ -47,8 +47,8 @@
                             <tr class="{{ $banner->is_active ? '' : 'warning' }}">
                                 <td>{{ $banner->title }}</td>
                                 <td>{{ $banner->description }}</td>
-                                <td>{{ $banner->created_at }}</td>
-                                <td>{{ $banner->updated_at }}</td>
+                                <td>{{ $banner->created_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $banner->updated_at->format(config('app.date_format')) }}</td>
                                 <td>
 
                                     <a href="{{ route('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
