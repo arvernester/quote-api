@@ -114,24 +114,47 @@ class QuoteController extends Controller
     /**
      * Show the form for editing the specified quote.
      *
-     * @param int $id
+     * @param Quote $quote
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit($id)
+    public function edit(Quote $quote): View
     {
+        $quote->load('author');
+
+        return view('quote.edit', compact('quote'))
+            ->with([
+                'categories' => Category::dropdown(),
+                'languages' => Language::dropdown(),
+            ])
+            ->withTitle('Edit Quote');
     }
 
     /**
      * Update the specified quote in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param QuoteRequest $request
+     * @param Quote        $quote
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(QuoteRequest $request, Quote $quote): RedirectResponse
     {
+        $author = Author::firstOrCreate(['name' => $request->author]);
+
+        $request->merge([
+            'category_id' => $request->category,
+            'language_id' => $request->language,
+            'author_id' => $author->id,
+        ]);
+
+        $quote->fill($request->all());
+        $quote->save();
+
+        $route = $request->action == 'view' ? route('admin.quote.show', $quote) : url()->previous();
+
+        return redirect($route)
+            ->withSuccess('Quote has been updated successfully.');
     }
 
     /**
