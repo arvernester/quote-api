@@ -10,7 +10,7 @@
 
                     <div class="form-group {{ !$errors->has('category') ?: 'has-error' }}">
                         <label for="category">Category</label>
-                        <select name="category" class="select2" class="form-control">
+                        <select name="category" class="select2 form-control">
                             @foreach ($categories as $value => $label)
                                 <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
@@ -20,7 +20,7 @@
 
                     <div class="form-group {{ !$errors->has('language') ?: 'has-error' }}">
                         <label for="language">Language</label>
-                        <select name="language" class="select2" class="form-control">
+                        <select name="language" class="select2 form-control">
                             @foreach ($languages as $value => $label)
                                 <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
