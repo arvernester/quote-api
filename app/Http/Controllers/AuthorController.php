@@ -73,9 +73,9 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified author.
      *
-     * @param int $id
+     * @param Author $author
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(Author $author): View
     {
@@ -86,15 +86,15 @@ class AuthorController extends Controller
     /**
      * Update the specified author in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param AuthorRequest $request
+     * @param Author        $author
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(AuthorRequest $request, Author $author): RedirectResponse
     {
         $picture = $request->file('picture');
-        if ($picture->isValid()) {
+        if (!empty($picture) and $picture->isValid()) {
             $directory = sprintf('public/author/%s', Carbon::now()->format('Y/m'));
             $filename = sprintf('%s.%s', str_slug($author->name), $picture->getClientOriginalExtension());
             $path = $picture->storeAs($directory, $filename);
@@ -108,12 +108,13 @@ class AuthorController extends Controller
                     $filename
                 ));
 
-            $author->fill(['image_path' => $path]);
-            $author->save();
+            $author->image_path = $path;
         }
 
-        return redirect()
-            ->route('admin.author.show', $author)
+        $author->name = $request->name;
+        $author->save();
+
+        return redirect($request->action == 'view' ? route('admin.author.show', $author) : url()->previous())
             ->withSuccess('Author has been updated.');
     }
 

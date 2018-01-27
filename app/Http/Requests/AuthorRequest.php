@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AuthorRequest extends FormRequest
 {
@@ -22,10 +23,11 @@ class AuthorRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request): array
     {
         return [
-            'picture' => 'required|file|image|max:1000',
+            'name' => 'required|string|max:100',
+            'picture' => 'file|image|max:1000',
         ];
     }
 }
