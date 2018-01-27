@@ -40,7 +40,7 @@ class Quote extends Model
      */
     public function setTextAttribute(string $text)
     {
-        if (!ends_with('aku', ['.', '...', '?', '!'])) {
+        if (!ends_with($text, ['.', '...', '?', '!'])) {
             $text .= '.';
         }
 
