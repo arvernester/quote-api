@@ -13,6 +13,8 @@ use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Quote\SumitgohilQuote;
 use App\Console\Commands\Quote\ImportOndesign;
 use App\Quote\OndesignQuote;
+use App\Console\Commands\Quote\ImportJagokataCommand;
+use App\Quote\JagokataQuote;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -52,6 +54,13 @@ class QuoteServiceProvider extends ServiceProvider
             ->needs(Quote::class)
             ->give(function () {
                 return new OndesignQuote();
+            });
+
+        // import quote from jagokata.com
+        $this->app->when(ImportJagokataCommand::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new JagokataQuote();
             });
     }
 }

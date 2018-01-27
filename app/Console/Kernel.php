@@ -11,6 +11,7 @@ use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Console\Commands\ImportCountry;
 use App\Console\Commands\MigrateAuthor;
 use App\Console\Commands\BackupDatabase;
+use App\Console\Commands\Quote\ImportJagokataCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
         ImportRandomCommand::class,
         ImportFamousCommand::class,
         ImportSumitgohilCommand::class,
+        ImportJagokataCommand::class,
         ImportCountry::class,
         MigrateAuthor::class,
         BackupDatabase::class,
