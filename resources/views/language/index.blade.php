@@ -20,7 +20,9 @@
                         <tbody>
                             @foreach ($languages as $language)
                             <tr>
-                                <td>{{ $language->code }}</td>
+                                <td>
+                                    <a href="{{ route('admin.quote.index', ['lang' => $language->code]) }}">{{ $language->code }}</a>
+                                </td>
                                 <td>{{ $language->name }}</td>
                                 <td>{{ $language->native_name }}</td>
                                 <td>{{ $language->country->name }}</td>
