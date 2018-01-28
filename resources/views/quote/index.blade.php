@@ -55,7 +55,15 @@
                         <tbody>
                             @foreach ($quotes as $quote)
                             <tr>
-                                <td>{{ $quote->language->code }}</td>
+                                <td>
+                                    @if (! empty($quote->language))
+                                        <abbr title="{{ $quote->language->name }}">
+                                            {{ strtoupper($quote->language->code) }}
+                                        </abbr>
+                                    @else
+                                        <abbr title="Not defined">ND</abbr>
+                                    @endif
+                                </td>
                                 <td>{{ $quote->text }}</td>
                                 <td>
                                     <a href="{{ route('admin.author.show', $quote->author) }}">{{ $quote->author->name }}</a>
