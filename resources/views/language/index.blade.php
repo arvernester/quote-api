@@ -26,7 +26,7 @@
                                 <td>{{ $language->name }}</td>
                                 <td>{{ $language->native_name }}</td>
                                 <td>{{ $language->country->name }}</td>
-                                <td>{{ $language->updated_at }}</td>
+                                <td>{{ $language->updated_at->diffForHumans() }}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -33,7 +33,7 @@
                                 </td>
                                 <td class="text-right">{{ number_format($author->quotes->count()) }}</td>
                                 <td>{{ $author->created_at->format(config('app.date_format')) }}</td>
-                                <td>{{ $author->updated_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $author->updated_at->diffForHumans() }}</td>
                                 <td>
                                     <a href="{{ route('admin.author.show', $author) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>

@@ -5,13 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Traits\FormatDate;
 use Illuminate\Support\Collection;
 
 class Language extends Model
 {
-    use FormatDate;
-
     protected $fillable = [
         'country_id',
         'code',

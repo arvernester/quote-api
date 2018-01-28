@@ -22,7 +22,7 @@
                                 <td>{{ $country->code }}</td>
                                 <td>{{ $country->name }}</td>
                                 <td>{{ $country->native_name }}</td>
-                                <td>{{ $country->updated_at }}</td>
+                                <td>{{ $country->updated_at->diffForHumans() }}</td>
                             </tr>
                             @endforeach
                         </tbody>

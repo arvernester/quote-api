@@ -63,7 +63,7 @@
                                 <td>
                                     <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </td>
-                                <td>{{ $quote->updated_at->format(config('app.date_format')) }}</td>
+                                <td>{{ $quote->updated_at->diffForHumans() }}</td>
                                 <td width="100">
                                     <a href="{{ route('admin.quote.show', $quote) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
