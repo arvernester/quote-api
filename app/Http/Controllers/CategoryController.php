@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Category;
 use Illuminate\Http\RedirectResponse;
 use App\Quote;
+use Numbers\Number;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,10 @@ class CategoryController extends Controller
             ->get();
 
         return view('category.index', compact('categories'))
-            ->withTitle('Category');
+            ->withTitle(sprintf(
+                'Category (%s)',
+                Number::n($categories->count())->format()
+            ));
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Http\Requests\QuoteRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Numbers\Number;
 
 class QuoteController extends Controller
 {
@@ -52,7 +53,7 @@ class QuoteController extends Controller
         $quotes->appends($request->only('limit', 'category', 'keyword', 'user'));
 
         return view('quote.index', compact('quotes'))
-            ->withTitle('Quotes');
+            ->withTitle(sprintf('Quotes (%s)', Number::n($quotes->total())->format()));
     }
 
     /**

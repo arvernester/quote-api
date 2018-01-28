@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Numbers\Number;
 
 class AuthorController extends Controller
 {
@@ -32,7 +33,10 @@ class AuthorController extends Controller
         $authors->appends($request->only('limit', 'keyword'));
 
         return view('author.index', compact('authors'))
-            ->withTitle('Author');
+            ->withTitle(sprintf(
+                'Author (%s)',
+                Number::n($authors->total())->format()
+            ));
     }
 
     /**
