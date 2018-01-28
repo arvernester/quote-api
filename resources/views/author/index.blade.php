@@ -14,7 +14,6 @@
                             <tr>
                                 <th>Author Name</th>
                                 <th>Total Quotes</th>
-                                <th>Has Picture</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th>Actions</th>
@@ -24,9 +23,15 @@
                         <tbody>
                             @foreach ($authors as $author)
                             <tr>
-                                <td>{{ $author->name }}</td>
+                                <td>
+                                    @if ($author->image_path)
+                                        <em class="text-info fa fa-picture-o"></em>
+                                    @else
+                                        <em class="text-muted fa fa-picture-o"></em>
+                                    @endif
+                                    {{ $author->name }}
+                                </td>
                                 <td class="text-right">{{ number_format($author->quotes->count()) }}</td>
-                                <td>{{ $author->image_path ? 'Yes' : 'No' }}</td>
                                 <td>{{ $author->created_at->format(config('app.date_format')) }}</td>
                                 <td>{{ $author->updated_at->format(config('app.date_format')) }}</td>
                                 <td>
