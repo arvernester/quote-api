@@ -23,6 +23,11 @@ class OndesignQuote implements QuoteContract
         if ($response->code == 200) {
             foreach ($response->body as $body) {
                 $sanitezedQuote = preg_replace('/(?:\s\s+|\n|\t)/', '', strip_tags($body->content));
+
+                if (!ends_with($sanitezedQuote, ['.', '...', '?', '!'])) {
+                    $sanitezedQuote .= '.';
+                }
+
                 $exists = Quote::whereText($sanitezedQuote)
                     ->with('author')
                     ->first();
