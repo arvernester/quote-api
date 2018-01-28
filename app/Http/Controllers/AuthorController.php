@@ -70,6 +70,12 @@ class AuthorController extends Controller
     {
         $author->load('quotes', 'quotes.category', 'quotes.language');
 
+        // remove image path if file not exists
+        if (!Storage::exists($author->image_path)) {
+            $author->image_path = null;
+            $author->save();
+        }
+
         return view('author.show', compact('author'))
             ->withTitle('Author Detail');
     }
@@ -83,6 +89,12 @@ class AuthorController extends Controller
      */
     public function edit(Author $author): View
     {
+        // remove image path if file not exists
+        if (!Storage::exists($author->image_path)) {
+            $author->image_path = null;
+            $author->save();
+        }
+
         return view('author.edit', compact('author'))
             ->withTitle('Edit Author');
     }

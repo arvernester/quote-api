@@ -7,7 +7,13 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-body">
-                <img src="{{ $author->full_image_path }}" alt="{{ $author->name }}" class="img-responsive">
+                @if ($author->image_path)
+                    <img src="{{ $author->full_image_path }}" alt="{{ $author->name }}" class="img-responsive">
+                @else
+                    <div class="alert alert-info">
+                        Author has no picture.
+                    </div>
+                @endif
             </div>
         </div>
     </div>
