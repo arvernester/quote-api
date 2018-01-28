@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Category;
+use Illuminate\Http\RedirectResponse;
+use App\Quote;
 
 class CategoryController extends Controller
 {
@@ -88,5 +90,40 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+    }
+
+    /**
+     * Show form to merge dupilcate category or movine category.
+     *
+     * @return View
+     */
+    public function merge(): View
+    {
+        $categories = Category::dropdown();
+
+        return view('category.merge', compact('categories'))
+            ->withTitle('Merge Duplicate Category');
+    }
+
+    /**
+     * Move from one category to another one category.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function fuse(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'source' => 'required|int|exists:categories,id',
+            'destination' => 'required|int|different:source|exists:categories,id',
+        ]);
+
+        Quote::where('category_id', $request->source)
+            ->update(['category_id' => $request->destination]);
+
+        return redirect()
+            ->route('admin.category.index')
+            ->withSuccess('Quote inside source category has been migrated to destination category.');
     }
 }

@@ -22,6 +22,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::group(['as' => 'admin.'], function () {
         Route::resource('banner', 'BannerController');
+
+        Route::get('category/merge', 'CategoryController@merge')->name('category.merge');
+        Route::put('category/fuse', 'CategoryController@fuse')->name('category.fuse');
         Route::resource('category', 'CategoryController');
 
         Route::delete('author/{author}/image', 'AuthorController@removePicture')->name('author.removePicture');
