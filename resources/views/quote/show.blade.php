@@ -20,6 +20,12 @@
                     <label for="lang">Quote</label>
                     <p class="form-control-static">
                         {{ $quote->text }}
+
+                        <div class="actions">
+                            <a title="Share to Twitter" href="{{ route('share.twitter', $quote) }}" class="btn btn-xs btn-primary">
+                                <em class="fa fa-twitter fa-fw"></em>
+                            </a>
+                        </div>
                     </p>
                 </div>
 
