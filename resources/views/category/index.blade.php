@@ -44,11 +44,11 @@
 
                         <tbody>
                             @foreach ($categories as $category)
-                            <tr>
+                            <tr class="{{ $category->quotes_count <= 0 ? 'text-muted' : '' }}">
                                 <td>{{ $category->name }}</td>
-                                <td>
+                                <td class="text-right">
                                     <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
-                                        {{ number_format($category->quotes_count, 0) }}
+                                        {{ Numbers\Number::n($category->quotes_count)->format() }}
                                     </a>
                                 </td>
                                 <td>{{ $category->created_at->format(config('app.date_format')) }}</td>
