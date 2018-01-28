@@ -12,6 +12,7 @@ use App\Console\Commands\ImportCountry;
 use App\Console\Commands\MigrateAuthor;
 use App\Console\Commands\BackupDatabase;
 use App\Console\Commands\Quote\ImportJagokataCommand;
+use App\Console\Commands\Quote\ImportTalaikisCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
         ImportFamousCommand::class,
         ImportSumitgohilCommand::class,
         ImportJagokataCommand::class,
+        ImportTalaikisCommand::class,
         ImportCountry::class,
         MigrateAuthor::class,
         BackupDatabase::class,

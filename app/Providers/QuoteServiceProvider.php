@@ -15,6 +15,8 @@ use App\Console\Commands\Quote\ImportOndesign;
 use App\Quote\OndesignQuote;
 use App\Console\Commands\Quote\ImportJagokataCommand;
 use App\Quote\JagokataQuote;
+use App\Quote\TalaikisQuote;
+use App\Console\Commands\Quote\ImportTalaikisCommand;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -61,6 +63,13 @@ class QuoteServiceProvider extends ServiceProvider
             ->needs(Quote::class)
             ->give(function () {
                 return new JagokataQuote();
+            });
+
+        // import 100 random quotes from talaikis.com
+        $this->app->when(ImportTalaikisCommand::class)
+            ->needs(Quote::class)
+            ->give(function () {
+                return new TalaikisQuote();
             });
     }
 }
