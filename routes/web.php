@@ -16,6 +16,8 @@ Route::get('/', 'PageController');
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('share/twitter/{quote}', 'ShareController@twitter')->name('share.twitter');
+
 Route::redirect('admin', '/admin/dashboard');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController')->name('admin.dashboard');

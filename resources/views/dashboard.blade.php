@@ -89,7 +89,11 @@
                             </div>
                             <div class="timeline-body">
                                 <p>{{ $quote->text }}</p>
-                                <p><a href="{{ route('admin.quote.show', $quote) }}">Show</a></p>
+                                <div class="actions">
+                                    <a class="btn btn-default btn-xs" href="{{ route('admin.quote.show', $quote) }}"><em class="fa fa-eye fa-fw"></em></a>
+                                    <a class="btn btn-default btn-xs btn-copy" data-clipboard-text="{{ $quote->text }} By {{ $quote->author->name }}." href="javascript:void(0)"><em class="fa fa-copy fa-fw"></em></a>
+                                    <a class="btn btn-primary btn-xs" href="{{ route('share.twitter', $quote) }}"><em class="fa fa-twitter fa-fw"></em></a>
+                                </div>
                             </div>
 
                             <hr>
@@ -161,3 +165,11 @@
     <!--/.col-->
 </div>
 @endsection
+
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+<script>
+    new Clipboard('.btn-copy')
+</script>
+@endpush
