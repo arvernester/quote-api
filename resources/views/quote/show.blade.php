@@ -5,8 +5,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">Quote Detail</div>
+        <div class="panel panel-container">
             <div class="panel-body">
                 <div class="form-group">
                     <label for="lang">Language</label>
@@ -24,6 +23,14 @@
                         <div class="actions">
                             <a title="Share to Twitter" href="{{ route('share.twitter', $quote) }}" class="btn btn-xs btn-primary">
                                 <em class="fa fa-twitter fa-fw"></em>
+                            </a>
+                            
+                            <a title="Share to Facebook" href="{{ route('share.twitter', $quote) }}" class="btn btn-xs btn-facebook">
+                                <em class="fa fa-facebook fa-fw"></em>
+                            </a>
+                            
+                            <a title="Share to Google Plus" href="{{ route('share.twitter', $quote) }}" class="btn btn-xs btn-google">
+                                <em class="fa fa-google-plus fa-fw"></em>
                             </a>
                         </div>
                     </p>

@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        Watson\Breadcrumbs\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,5 +229,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Image' => Intervention\Image\Facades\Image::class,
+        'Breadcrumbs' => Watson\Breadcrumbs\Facade::class,
     ],
 ];
