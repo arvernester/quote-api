@@ -12,7 +12,7 @@ class QuoteController extends Controller
     {
         $quote->load('author', 'category', 'language');
 
-        if (session('lang') != $quote->language->code_alternate) {
+        if (session('lang') and (session('lang') != $quote->language->code_alternate)) {
             $language = Language::whereCodeAlternate(session('lang'))->first();
         }
 

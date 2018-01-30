@@ -83,7 +83,9 @@
         {{ __('Next') }} &raquo;
     </a>
 
-    @include('layouts.partials.ad')
+    <div class="ad" style="margin-top:20px">
+        @include('layouts.partials.ad')
+    </div>
 </footer>
 @endsection
 

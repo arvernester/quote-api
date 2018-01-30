@@ -28,7 +28,7 @@ class IndexController extends Controller
             ->take(1)
             ->first();
 
-        if (session('lang') != $random->language->code_alternate) {
+        if (session('lang') and (session('lang') != $random->language->code_alternate)) {
             $language = Language::whereCodeAlternate(session('lang'))->first();
         }
 

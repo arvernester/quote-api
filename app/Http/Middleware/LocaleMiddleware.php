@@ -19,7 +19,7 @@ class LocaleMiddleware
     public function handle($request, Closure $next)
     {
         if (empty('lang')) {
-            session(['lang' => config('app.fallback_locale')]);
+            session(['lang' => config('app.locale')]);
         }
 
         if ($request->method() === 'GET') {
