@@ -56,9 +56,10 @@ class ImportCountry extends Command
                         'code' => $country->alpha3Code,
                     ]);
 
-                    $countryModel->code = $country->alpha3Code;
+                    $countryModel->code_alternate = $country->alpha2Code;
                     $countryModel->name = $country->name;
                     $countryModel->native_name = $country->nativeName;
+                    $countryModel->flag_path = $country->flag;
                     $countryModel->save();
 
                     foreach ($country->languages as $language) {

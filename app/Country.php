@@ -10,7 +10,9 @@ class Country extends Model
     protected $fillable = [
         'code',
         'name',
+        'code',
         'native_name',
+        'flag_path',
     ];
 
     /**
