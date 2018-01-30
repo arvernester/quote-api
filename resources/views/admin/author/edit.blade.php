@@ -11,7 +11,7 @@
                     <img src="{{ $author->full_image_path }}" alt="{{ $author->name }}" class="img-responsive">
                 @else
                     <div class="alert alert-info">
-                        Author has no picture.
+                        {{ __('Author has no picture.') }}
                     </div>
                 @endif
             </div>
@@ -25,22 +25,22 @@
 
                 <div class="panel-body">
                     <div class="form-group  {{ !$errors->has('name') ?: 'has-error' }}">
-                        <label for="name">Name</label>
+                        <label for="name">{{ __('Name') }}</label>
                         <input type="text" name="name" value="{{ old('name', $author->name) }}" class="form-control">
                         <span class="help-block text-danger">{{ $errors->first('name') }}</span>
                     </div>
 
                     <div class="form-group {{ !$errors->has('picture') ?: 'has-error' }}">
-                        <label for="picture">Picture</label>
+                        <label for="picture">{{ __('Picture') }}</label>
                         <input type="file" name="picture">
                         <span class="help-block text-danger">
                             {{ $errors->first('picture') }}
                         </span>
                     </div>
 
-                    <button name="action" value="update" class="btn btn-primary" type="submit">Update</button>
-                    <button name="action" value="view" class="btn btn-default" type="submit">Update &amp; View</button>
-                    <a href="{{ url()->previous() ?? route('admin.author.index') }}" class="btn btn-default">Back</a>
+                    <button name="action" value="update" class="btn btn-primary" type="submit">{{ __('Update') }}</button>
+                    <button name="action" value="view" class="btn btn-default" type="submit">{{ __('Update &amp; View') }}</button>
+                    <a href="{{ url()->previous() ?? route('admin.author.index') }}" class="btn btn-default">{{ __('Back') }}</a>
             </form>
             </div>
         </div>

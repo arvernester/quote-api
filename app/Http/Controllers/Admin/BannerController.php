@@ -25,7 +25,7 @@ class BannerController extends Controller
             ->paginate(20);
 
         return view('admin.banner.index', compact('banners'))
-            ->withTitle('Banner');
+            ->withTitle(__('Banner'));
     }
 
     /**
@@ -69,7 +69,7 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Banner $banner): View
+    public function show($lang, Banner $banner): View
     {
         return view('admin.banner.show', compact('banner'))
             ->withTitle('Banner Detail');
@@ -82,7 +82,7 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Banner $banner): View
+    public function edit($lang, Banner $banner): View
     {
         return view('admin.banner.edit', compact('banner'));
     }
@@ -95,7 +95,7 @@ class BannerController extends Controller
      *
      * @return RedirectResponse
      */
-    public function update(BannerRequest $request, Banner $banner): RedirectResponse
+    public function update(BannerRequest $request, $lang, Banner $banner): RedirectResponse
     {
         $request->merge([
             'is_active' => $request->is_active == 1,

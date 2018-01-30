@@ -12,15 +12,15 @@
                         <img src="{{ $author->full_image_path }}" alt="{{ $author->name }}" class="img-responsive">
                     </figure>
 
-                    <form class="delete" action="{{ route('admin.author.removePicture', $author) }}" method="post">
+                    <form class="delete" action="{{ route_lang('admin.author.removePicture', $author) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
 
-                        <button class="btn btn-danger">Remove Picture</button>
+                        <button class="btn btn-danger">{{ __('Remove Picture') }}</button>
                     </form>
                 @else
                     <div class="alert alert-info">
-                        Author has no picture.
+                        {{ __('Author has no picture.') }}
                     </div>
                 @endif
             </div>
@@ -30,28 +30,28 @@
         <div class="panel panel-container">
             <div class="panel-body">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('Name') }}</label>
                     <p class="form-control-static">{{ $author->name }}</p>
                 </div>
                 
                 <div class="form-group">
-                    <label for="total">Total Quotes</label>
+                    <label for="total">{{ __('Total Quote') }}</label>
                     <p class="form-control-static">{{ $author->quotes->count() }}</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="created">Created</label>
+                    <label for="created">{{ __('Created') }}</label>
                     <p class="form-control-static">{{ $author->created_at->diffForHumans() }}</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="updated">Updated</label>
+                    <label for="updated">{{ __('Updated') }}</label>
                     <p class="form-control-static">{{ $author->created_at->diffForHumans() }}</p>
                 </div>
 
-                <a href="{{ url()->previous() ?? route('admin.author.index') }}" class="btn btn-default">Back</a>
-                <a href="{{ route('admin.author.edit', $author) }}" class="btn btn-primary">Edit</a>
-                <a href="{{ route('admin.author.destroy', $author) }}" class="btn btn-danger delete">Delete</a>
+                <a href="{{ url()->previous() ?? route_lang('admin.author.index') }}" class="btn btn-default">{{ __('Back') }}</a>
+                <a href="{{ route_lang('admin.author.edit', $author) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route_lang('admin.author.destroy', $author) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <div class="col-md-12">
         <div class="panel panel-default ">
             <div class="panel-heading">
-                Quotes
+                {{ __('Quote') }}
                 <ul class="pull-right panel-settings panel-button-tab-right">
                     <li class="dropdown">
                         <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
@@ -71,8 +71,8 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route('admin.quote.index') }}">
-                                            <em class="fa fa-cog"></em> All Quotes
+                                        <a href="{{ route_lang('admin.quote.index') }}">
+                                            <em class="fa fa-cog"></em> {{ __('All Quote') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -97,15 +97,15 @@
                             </div>
                             <div class="timeline-body">
                                 <p>{{ $quote->text }}</p>
-                                <p><a href="{{ route('admin.quote.show', $quote) }}">Show</a></p>
+                                <p><a href="{{ route_lang('admin.quote.show', $quote) }}">{{ __('Show') }}</a></p>
                             </div>
 
                             <hr>
 
                             <div class="timeline-time">
                                 <p>
-                                    {{ $quote->created_at->diffForHumans() }} in
-                                    <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
+                                    {{ $quote->created_at->diffForHumans() }} {{ __('in') }}
+                                    <a href="{{ route_lang('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </p>
                             </div>
                         </div>

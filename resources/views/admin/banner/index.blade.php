@@ -17,8 +17,8 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route('admin.banner.create') }}">
-                                            <em class="fa fa-plus"></em> Upload Banner
+                                        <a href="{{ route_lang('admin.banner.create') }}">
+                                            <em class="fa fa-plus"></em> {{ __('Upload Banner') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -35,11 +35,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Actions</th>
+                                <th>{{ __('Title') }}</th>
+                                <th>{{ __('Description') }}</th>
+                                <th>{{ __('Created') }}</th>
+                                <th>{{ __('Updated') }}</th>
+                                <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,13 +51,13 @@
                                 <td>{{ $banner->updated_at->diffForHumans() }}</td>
                                 <td>
 
-                                    <a href="{{ route('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
+                                    <a href="{{ route_lang('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route_lang('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
+                                    <a href="{{ route_lang('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>
                                     </a>
                                 </td>

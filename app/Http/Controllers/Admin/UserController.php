@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\User;
 use App\Quote;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -23,7 +24,7 @@ class UserController extends Controller
 
         $users->appends($request->only('limit', 'keyword'));
 
-        return view('user.index', compact('users'))
+        return view('admin.user.index', compact('users'))
             ->withTitle('User');
     }
 
@@ -62,7 +63,7 @@ class UserController extends Controller
             ->take(10)
             ->get();
 
-        return view('user.show', compact('user', 'quotes'))
+        return view('admin.user.show', compact('user', 'quotes'))
             ->withTitle('User Detail');
     }
 

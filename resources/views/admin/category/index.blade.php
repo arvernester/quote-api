@@ -17,7 +17,7 @@
                                 <ul class="dropdown-settings">
                                     <li>
                                         <a href="{{ route('admin.category.create') }}">
-                                            <em class="fa fa-plus"></em> Create Category
+                                            <em class="fa fa-plus"></em> {{ __('Create Category') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -34,11 +34,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Total Quote</td>
-                                <td>Created</td>
-                                <td>Updated</td>
-                                <td>Actions</td>
+                                <td>{{ __('Name') }}</td>
+                                <td>{{ __('Total Quote') }}</td>
+                                <td>{{ __('Created') }}</td>
+                                <td>{{ __('Updated') }}</td>
+                                <td>{{ __('Actions') }}</td>
                             </tr>
                         </thead>
 
@@ -54,16 +54,16 @@
                                 <td>{{ $category->created_at->format(config('app.date_format')) }}</td>
                                 <td>{{ $category->updated_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route_lang('admin.category.show', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route_lang('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.category.merge', ['source' => $category->id]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
+                                    <a href="{{ route_lang('admin.category.merge', ['source' => $category->id]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
                                         <i class="fa fa-compress fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
+                                    <a href="{{ route_lang('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>
                                     </a>
                                 </td>

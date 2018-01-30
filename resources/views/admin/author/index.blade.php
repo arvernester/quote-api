@@ -12,11 +12,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Author Name</th>
-                                <th>Total Quotes</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Actions</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Total Quote') }}</th>
+                                <th>{{ __('Created') }}</th>
+                                <th>{{ __('Updated') }}</th>
+                                <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
 
@@ -35,13 +35,13 @@
                                 <td>{{ $author->created_at->format(config('app.date_format')) }}</td>
                                 <td>{{ $author->updated_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('admin.author.show', $author) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route_lang('admin.author.show', $author) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.author.edit', $author) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route_lang('admin.author.edit', $author) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
                                     </a>
-                                    <a href="{{ route('admin.author.edit', $author) }}" class="btn btn-danger btn-table delete">
+                                    <a href="{{ route_lang('admin.author.edit', $author) }}" class="btn btn-danger btn-table delete">
                                         <i class="fa fa-trash fa-fw"></i>
                                     </a>
                                 </td>

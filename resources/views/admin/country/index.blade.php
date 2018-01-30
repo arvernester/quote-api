@@ -9,10 +9,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Native Name</th>
-                                <th>Updated</th>
+                                <th>{{ __('Code') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Native Name') }}</th>
+                                <th>{{ __('Updated') }}</th>
                             </tr>
                         </thead>
 

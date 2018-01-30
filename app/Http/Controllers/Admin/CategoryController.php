@@ -57,7 +57,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category): View
+    public function show($lang, Category $category): View
     {
         return view('admin.category.show', compact('category'))
             ->withTitle('Category Detail');
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         $categories = Category::dropdown();
 
         return view('admin.category.merge', compact('categories'))
-            ->withTitle('Merge Duplicate Category');
+            ->withTitle(__('Merge Duplicate Category'));
     }
 
     /**

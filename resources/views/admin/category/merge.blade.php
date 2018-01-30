@@ -6,17 +6,17 @@
         <div class="panel panel-container">
             <div class="panel-body">
                 <div class="alert alert-warning">
-                    <strong>Warning!</strong><br>
-                    Quote inside source category will be moved to destination category. This action cannot be undone.
+                    <strong>{{ __('Warning') }}!</strong><br>                    
+                    {{ __('Quote inside source category will be moved to destination category. This action cannot be undone.') }}
                 </div>
-                <form action="{{ route('admin.category.fuse') }}" method="post">
+                <form action="{{ route_lang('admin.category.fuse') }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('put') }}
                     
                     <div class="form-group {{ !$errors->has('source') ?: 'has-error' }}">
-                        <label for="source">Source</label>
+                        <label for="source">{{ __('Source') }}</label>
                         <select name="source" id="category-source" class="form-control select2">
-                            <option value="">Select first category</option>
+                            <option value="">{{ __('Select first category') }}</option>
                             @foreach ($categories as $value => $label)
                                 <option value="{{ $value }}" {{ request('source') == $value ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
@@ -27,9 +27,9 @@
                     </div>
                     
                     <div class="form-group {{ !$errors->has('destination') ?: 'has-error' }}">
-                        <label for="destination">Destination</label>
+                        <label for="destination">{{ __('Destination') }}</label>
                         <select name="destination" id="category-destination" class="form-control select2">
-                            <option value="">Select destination category</option>
+                            <option value="">{{ __('Select destination category') }}</option>
                             @foreach ($categories as $value => $label)
                                 <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
@@ -39,8 +39,8 @@
                         </span>
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Merge</button>
-                    <a href="{{ url()->previous() ?? route('admin.category.index') }}" class="btn btn-default">Back</a>
+                    <button class="btn btn-primary" type="submit">{{ __('Merge') }}</button>
+                    <a href="{{ url()->previous() ?? route('admin.category.index') }}" class="btn btn-default">{{ __('Back') }}</a>
                 </form>
             </div>
         </div>

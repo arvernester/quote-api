@@ -23,7 +23,7 @@ class LocaleMiddleware
         }
 
         if ($request->method() === 'GET') {
-            $lang = $request->segment(1);
+            $lang = $request->segment(request()->routeIs('admin.*') ? 2 : 1);
             if (session('lang') != $lang) {
                 $language = Language::whereCodeAlternate($lang)->first();
 

@@ -15,18 +15,18 @@
                                 <ul class="dropdown-settings">
                                     <li>
                                         <a href="{{ route('admin.quote.create') }}">
-                                            <em class="fa fa-plus fa-fw"></em> Add New
+                                            <em class="fa fa-plus fa-fw"></em> {{ __('Add New') }}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{ route('admin.quote.create') }}">
-                                            <em class="fa fa-user fa-fw"></em> Submitted Quotes
+                                            <em class="fa fa-user fa-fw"></em> {{ __('Submitted Quotes') }}
                                         </a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('admin.quote.create') }}'">
-                                            <em class="fa fa-trash fa-fw"></em> Trash Bin
+                                            <em class="fa fa-trash fa-fw"></em> {{ __('Trash Bin') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -43,12 +43,12 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Language</th>
-                                <th>Quote</th>
-                                <th>Author</th>
-                                <th>Category</th>
-                                <th>Updated</th>
-                                <th>Actions</th>
+                                <th>{{ __('Language') }}</th>
+                                <th>{{ __('Quote') }}</th>
+                                <th>{{ __('Author') }}</th>
+                                <th>{{ __('Category') }}</th>
+                                <th>{{ __('Updated') }}</th>
+                                <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
 
@@ -61,7 +61,7 @@
                                             {{ strtoupper($quote->language->code) }}
                                         </abbr>
                                     @else
-                                        <abbr title="Not defined">ND</abbr>
+                                        <abbr title="{{ __('Not defined') }}">ND</abbr>
                                     @endif
                                 </td>
                                 <td>{{ $quote->text }}</td>

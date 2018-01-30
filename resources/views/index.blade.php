@@ -50,7 +50,9 @@
         <p>{{ $quote->text }}</p>
         <ul class="actions">
             <li>
-                <a href="{{ route('quote.show', [session('lang'), $quote]) }}" class="button">Full Story</a>
+                <a href="{{ route('quote.show', [session('lang'), $quote]) }}" class="button small">
+                    {{ __('See') }}
+                </a>
             </li>
         </ul>
     </article>

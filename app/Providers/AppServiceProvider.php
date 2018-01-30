@@ -18,5 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $helpers = glob(app_path('Helpers/*'));
+        foreach ($helpers as $helper) {
+            include_once $helper;
+        }
     }
 }

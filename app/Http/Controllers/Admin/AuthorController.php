@@ -67,7 +67,7 @@ class AuthorController extends Controller
      *
      * @return View
      */
-    public function show(Author $author): View
+    public function show($lang, Author $author): View
     {
         $author->load('quotes', 'quotes.category', 'quotes.language');
 

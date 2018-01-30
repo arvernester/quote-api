@@ -27,7 +27,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('share/twitter/{quote}', 'ShareController@twitter')->name('share.twitter');
 
 Route::redirect('admin', '/admin/dashboard');
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin'], function () {
+Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(function () {
     Route::get('dashboard', 'DashboardController')->name('admin.dashboard');
 
     Route::group(['as' => 'admin.'], function () {

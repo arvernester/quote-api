@@ -8,7 +8,7 @@
         <div class="panel panel-container">
             <div class="panel-body">
                 <div class="form-group">
-                    <label for="lang">Language</label>
+                    <label for="lang">{{ __('Language') }}</label>
                     <p class="form-control-static">
                         {{ $quote->language->name }} - {{ $quote->language->native_name }}
                         <span class="label label-info">{{ $quote->language->code }}</span>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lang">Quote</label>
+                    <label for="lang">{{ __('Quote') }}</label>
                     <p class="form-control-static">
                         {{ $quote->text }}
 
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="author">Author</label>
+                    <label for="author">{{ __('Author') }}</label>
                     <p class="form-control-static">
                         <a href="{{ route('admin.author.show', $quote->author) }}">
                             {{ $quote->author->name }}
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Category</label>
+                    <label for="category">{{ __('Category') }}</label>
                     <p class="form-control-static">
                         <a href="{{ route('admin.category.show', $quote->category) }}">
                             {{ $quote->category->name }}
@@ -56,7 +56,7 @@
 
                 @if ($quote->user)
                     <div class="form-group">
-                        <label for="category">User</label>
+                        <label for="category">{{ __('User') }}</label>
                         <p class="form-control-static">
                             <a href="{{ route('admin.user.show', $quote->user) }}">
                                 {{ $quote->user->name }}
@@ -67,7 +67,7 @@
 
                 @if ($quote->source)
                     <div class="form-group">
-                        <label for="source">Source</label>
+                        <label for="source">{{ __('Source') }}</label>
                         <p class="form-control-static">
                             {{ $quote->source }}
                         </p>
@@ -75,22 +75,22 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="created">Created</label>
+                    <label for="created">{{ __('Created') }}</label>
                     <p class="form-control-static">
                         {{ $quote->created_at->diffForHumans() }}
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="updated">Updated</label>
+                    <label for="updated">{{ __('Updated') }}</label>
                     <p class="form-control-static">
                         {{ $quote->updated_at->diffForHumans() }}
                     </p>
                 </div>
 
-                <a href="{{ route('admin.quote.index') }}" class="btn btn-default">Back</a>
-                <a href="{{ route('admin.quote.edit', $quote) }}" class="btn btn-primary">Edit</a>
-                <a href="{{ route('admin.quote.edit', $quote) }}" class="btn btn-danger delete">Delete</a>
+                <a href="{{ route('admin.quote.index') }}" class="btn btn-default">{{ __('Back') }}</a>
+                <a href="{{ route('admin.quote.edit', $quote) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('admin.quote.edit', $quote) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@
         "mashape/unirest-php": "^3.0",
         "nicmart/numbers": "^0.1.0",
         "roumen/sitemap": "^2.7",
+        "themsaid/laravel-langman-gui": "^0.3.1",
         "watson/breadcrumbs": "^1.0"
     },
     "require-dev": {

@@ -169,6 +169,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Watson\Breadcrumbs\ServiceProvider::class,
+        Themsaid\LangmanGUI\LangmanServiceProvider::class,
 
         /*
          * Application Service Providers...

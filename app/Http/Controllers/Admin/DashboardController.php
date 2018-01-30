@@ -34,6 +34,6 @@ class DashboardController extends Controller
                 'latestQuotes' => $latestQuotes,
                 'latestAuthors' => $latestAuthors,
             ])
-            ->withTitle('Dashboard');
+            ->withTitle(__('Dashboard'));
     }
 }

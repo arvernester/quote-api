@@ -41,7 +41,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#header" class="button icon fa-arrow-down scrolly">Continue</a>
+					<a href="#header" class="button icon fa-arrow-down scrolly">{{ __('Continue') }}</a>
 				</li>
 			</ul>
 		</div>
@@ -110,44 +110,44 @@
 			<section>
 				<form method="post" action="#">
 					<div class="field">
-						<label for="name">Name</label>
+						<label for="name">{{ __('Name') }}</label>
 						<input type="text" name="name" id="name" />
 					</div>
 					<div class="field">
-						<label for="email">Email</label>
+						<label for="email">{{ __('Email') }}</label>
 						<input type="text" name="email" id="email" />
 					</div>
 					<div class="field">
-						<label for="message">Message</label>
+						<label for="message">{{ __('Message') }}</label>
 						<textarea name="message" id="message" rows="3"></textarea>
 					</div>
 					<ul class="actions">
 						<li>
-							<input type="submit" value="Send Message" />
+							<input type="submit" value="{{ __('Send') }}" />
 						</li>
 					</ul>
 				</form>
 			</section>
 			<section class="split contact">
 				<section class="alt">
-					<h3>Address</h3>
+					<h3>{{ __('Address') }}</h3>
 					<p>1234 Somewhere Road #87257
 						<br /> Nashville, TN 00000-0000</p>
 				</section>
 				<section>
-					<h3>Phone</h3>
+					<h3>{{ __('Phone') }}</h3>
 					<p>
 						<a href="#">(000) 000-0000</a>
 					</p>
 				</section>
 				<section>
-					<h3>Email</h3>
+					<h3>{{ __('Email') }}</h3>
 					<p>
 						<a href="#">info@kutip.org</a>
 					</p>
 				</section>
 				<section>
-					<h3>Social</h3>
+					<h3>{{ __('Social') }}</h3>
 					<ul class="icons alt">
 						<li>
 							<a href="#" class="icon alt fa-twitter">
@@ -178,7 +178,7 @@
 		<div id="copyright">
 			<ul>
 				<li>&copy; {{ config('app.name') }}</li>
-				<li>Design:
+				<li>{{ __('Design') }}:
 					<a href="https://html5up.net">HTML5 UP</a>
 				</li>
 			</ul>
