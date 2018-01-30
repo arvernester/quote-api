@@ -1,0 +1,13 @@
+{
+    "name": "kutip/translation",
+    "description": "Translate text using third party provider like as Yandex, Google, etc",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dedy Yugo Purwanto",
+            "email": "dedy.yugo.purwanto@gmail.com"
+        }
+    ],
+    "require": {}
+}
