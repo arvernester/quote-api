@@ -28,5 +28,9 @@
         </li>
 
     </ul>
+
+    <div class="ads">
+        @include('layouts.partials.ad')
+    </div>
 </article>
 @endsection

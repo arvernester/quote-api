@@ -12,3 +12,7 @@ npm-debug.log
 yarn-error.log
 .env
 Envoy.blade.php
+
+public/sitemap-author.xml
+public/sitemap-quote.xml
+public/sitemap-category.xml

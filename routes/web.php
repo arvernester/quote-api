@@ -15,6 +15,10 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('/', 'IndexController')->name('index');
 
     Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
+
+    Route::get('author/{author}', 'AuthorController@show')->name('author.show');
+
+    Route::get('category/{category}', 'CategoryController@show')->name('category.show');
 });
 
 Auth::routes();

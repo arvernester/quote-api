@@ -16,6 +16,7 @@
         "laravel/tinker": "~1.0",
         "mashape/unirest-php": "^3.0",
         "nicmart/numbers": "^0.1.0",
+        "roumen/sitemap": "^2.7",
         "watson/breadcrumbs": "^1.0"
     },
     "require-dev": {
