@@ -12,6 +12,7 @@ class Language extends Model
     protected $fillable = [
         'country_id',
         'code',
+        'code_alternate',
         'name',
     ];
 
