@@ -11,18 +11,16 @@ if (!function_exists('route_lang')) {
      */
     function route_lang(string $name, $params = []): string
     {
-        $locale = ['lang' => session('lang') ?? config('app.locale')];
+        $locale = ['lang' => session('lang') ?? 'en'];
 
         if (!empty($params)) {
             if (!is_array($params)) {
                 $params = [$params];
             }
 
-            array_merge(['lang' => session('lang')], $params);
-
-            return route($name, array_merge(['lang' => session('lang')], $params));
+            return route($name, array_merge($locale, $params));
         }
 
-        return route($name, [session('lang')]);
+        return route($name, $locale);
     }
 }

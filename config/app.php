@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +171,11 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Watson\Breadcrumbs\ServiceProvider::class,
         Themsaid\LangmanGUI\LangmanServiceProvider::class,
+
+        /*
+         * Self development package...
+         */
+        Kutip\Translation\Providers\TranslationServiceProvider::class,
 
         /*
          * Application Service Providers...

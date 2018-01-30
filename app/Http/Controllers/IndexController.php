@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Quote;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use App\Language;
 
 class IndexController extends Controller
 {
@@ -23,13 +24,17 @@ class IndexController extends Controller
         });
 
         $random = Quote::inRandomOrder()
-            ->with('category', 'author')
+            ->with('category', 'author', 'language')
             ->take(1)
             ->first();
+
+        if (session('lang') != $random->language->code_alternate) {
+            $language = Language::whereCodeAlternate(session('lang'))->first();
+        }
 
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->paginate(10);
 
-        return view('index', compact('quote', 'random', 'quotes'));
+        return view('index', compact('quote', 'random', 'quotes', 'language'));
     }
 }

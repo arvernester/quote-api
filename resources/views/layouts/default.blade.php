@@ -10,6 +10,8 @@
 	<title>{{ $title or config('app.name') }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/main.css" />
 	<noscript>
@@ -36,7 +38,7 @@
 			</p>
 			<ul class="actions">
 				<li>
-					<a href="{{ route('share.twitter', $quote) }}" class="button icon fa-twitter special">
+					<a title="{{ __('Share to Twitter') }}" href="{{ route('share.twitter', $quote) }}" class="button icon fa-twitter special">
 						{{ __('Tweet') }}
 					</a>
 				</li>
@@ -129,17 +131,6 @@
 				</form>
 			</section>
 			<section class="split contact">
-				<section class="alt">
-					<h3>{{ __('Address') }}</h3>
-					<p>1234 Somewhere Road #87257
-						<br /> Nashville, TN 00000-0000</p>
-				</section>
-				<section>
-					<h3>{{ __('Phone') }}</h3>
-					<p>
-						<a href="#">(000) 000-0000</a>
-					</p>
-				</section>
 				<section>
 					<h3>{{ __('Email') }}</h3>
 					<p>
@@ -149,27 +140,60 @@
 				<section>
 					<h3>{{ __('Social') }}</h3>
 					<ul class="icons alt">
+						@if(ENV("TWITTER_USERNAME"))
 						<li>
 							<a href="#" class="icon alt fa-twitter">
-								<span class="label">Twitter</span>
+								<span class="label">
+									{{ env('TWITTER_USERNAME') }}
+								</span>
 							</a>
 						</li>
+						@endif
+						
+						@if(ENV('FACEBOOK_USERNAME'))
 						<li>
 							<a href="#" class="icon alt fa-facebook">
-								<span class="label">Facebook</span>
+								<span class="label">
+									{{ ENV('FACEBOOK_USERNAME') }}
+								</span>
 							</a>
 						</li>
+						@endif
+						
+						@if(ENV('INSTAGRAM_USERNAME'))
 						<li>
 							<a href="#" class="icon alt fa-instagram">
-								<span class="label">Instagram</span>
+								<span class="label">
+									{{ ENV('INSTAGRAM_USERNAME') }}
+								</span>
 							</a>
 						</li>
+						@endif
+						
+						@if(ENV('GITHUB_USERNAME'))
 						<li>
 							<a href="#" class="icon alt fa-github">
-								<span class="label">GitHub</span>
+								<span class="label">
+									{{ ENV('GITHUB_USERNAME') }}
+								</span>
 							</a>
 						</li>
+						@endif
 					</ul>
+				</section>
+				<section>
+					<h3>{{ __('Language') }}</h3>
+					<p>
+						@foreach ($langs as $lang)
+							@if (session('lang') == $lang->code_alternate)
+								{{ $lang->name }} ({{ $lang->code_alternate }}) <em class="fa fa-check fa-fw">&nbsp;</em> <br>
+							@else
+								<a href="{{ route('index', $lang->code_alternate) }}">
+									{{ $lang->name }} ({{ $lang->code_alternate }}) <br>
+								</a>
+							@endif
+						@endforeach
+					</p>
 				</section>
 			</section>
 		</footer>

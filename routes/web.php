@@ -11,6 +11,8 @@
 |
 */
 
+Route::post('translation/translate', 'TranslationController@translate')->name('translation.translate');
+
 Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('/', 'IndexController')->name('index');
 
