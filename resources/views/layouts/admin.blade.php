@@ -80,20 +80,9 @@
                     <em class="fa fa-users">&nbsp;</em> Author
                 </a>
             </li>
-            <li class="parent {{ request()->routeIs('admin.quote.*') ? 'active' : '' }}">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <em class="fa fa-quote-right">&nbsp;</em> Quotes
-                    <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
-                        <em class="fa fa-plus"></em>
-                    </span>
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a href="{{ route('admin.quote.index') }}">
-                            <span class="fa fa-arrow-right">&nbsp;</span> All
-                        </a>
-                    </li>
-                </ul>
+            <li class="{{ request()->routeIs('admin.quote.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.quote.index') }}">
+                    <em class="fa fa-quote-right">&nbsp;</em> Quote</a>
             </li>
             <li class="parent">
                 <a data-toggle="collapse" href="#misc">
