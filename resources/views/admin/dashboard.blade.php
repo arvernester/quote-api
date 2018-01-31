@@ -100,7 +100,7 @@
 
                             <div class="timeline-time">
                                 <p>
-                                    {{ $quote->created_at->diffForHumans() }} in
+                                    {{ $quote->created_at->diffForHumans() }} {{ __('in') }}
                                     <a href="{{ route('admin.category.show', [session('lang'), $quote->category]) }}">{{ $quote->category->name }}</a>
                                 </p>
                             </div>
