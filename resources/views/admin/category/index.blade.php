@@ -54,16 +54,16 @@
                                 <td>{{ $category->created_at->format(config('app.date_format')) }}</td>
                                 <td>{{ $category->updated_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route_lang('admin.category.show', $category) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
-                                    <a href="{{ route_lang('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
                                     </a>
-                                    <a href="{{ route_lang('admin.category.merge', ['source' => $category->id]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
+                                    <a href="{{ route('admin.category.merge', ['source' => $category->id]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
                                         <i class="fa fa-compress fa-fw"></i>
                                     </a>
-                                    <a href="{{ route_lang('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
+                                    <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>
                                     </a>
                                 </td>

@@ -14,7 +14,7 @@
             <div class="panel">
                 <div>
                     <div class="panel-body">
-                        <form action="{{ route_lang('admin.banner.update', $banner) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.banner.update', $banner) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
                             

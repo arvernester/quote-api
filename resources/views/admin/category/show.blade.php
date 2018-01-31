@@ -26,9 +26,9 @@
                     </p>
                 </div>
 
-                <a href="{{ url()->previous() ?? route_lang('admin.category.index') }}" class="btn btn-default">{{ __('Back') }}</a>
-                <a href="{{ route_lang('admin.category.edit', $category) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                <a href="{{ route_lang('admin.category.destroy', $category) }}" class="btn btn-danger">{{ __('Delete') }}</a>
+                <a href="{{ url()->previous() ?? route('admin.category.index') }}" class="btn btn-default">{{ __('Back') }}</a>
+                <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger">{{ __('Delete') }}</a>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
                     <strong>{{ __('Warning') }}!</strong><br>                    
                     {{ __('Quote inside source category will be moved to destination category. This action cannot be undone.') }}
                 </div>
-                <form action="{{ route_lang('admin.category.fuse') }}" method="post">
+                <form action="{{ route('admin.category.fuse') }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('put') }}
                     

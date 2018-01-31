@@ -55,8 +55,8 @@
                 </div>
 
                 <a href="{{ url()->previous() }}" class="btn btn-default">{{ __('Back') }}</a>
-                <a href="{{ route_lang('admin.banner.edit', $banner) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                <a href="{{ route_lang('admin.banner.destroy', $banner) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
+                <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('admin.banner.destroy', $banner) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
             </div>
         </div>
     </div>

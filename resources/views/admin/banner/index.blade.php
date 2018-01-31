@@ -17,7 +17,7 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route_lang('admin.banner.create') }}">
+                                        <a href="{{ route('admin.banner.create') }}">
                                             <em class="fa fa-plus"></em> {{ __('Upload Banner') }}
                                         </a>
                                     </li>
@@ -51,13 +51,13 @@
                                 <td>{{ $banner->updated_at->diffForHumans() }}</td>
                                 <td>
 
-                                    <a href="{{ route_lang('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
+                                    <a href="{{ route('admin.banner.show', $banner) }}" class="btn btn-table btn-primary">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
-                                    <a href="{{ route_lang('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
+                                    <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
                                     </a>
-                                    <a href="{{ route_lang('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
+                                    <a href="{{ route('admin.banner.destroy', $banner) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>
                                     </a>
                                 </td>

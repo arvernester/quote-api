@@ -6,7 +6,7 @@
             <div class="panel">
                 <div>
                     <div class="panel-body">
-                        <form action="{{ route_lang('admin.banner.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             
                             <div class="form-group {{ !$errors->has('title') ?: 'has-error' }}">

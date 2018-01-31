@@ -12,7 +12,7 @@
                         <img src="{{ $author->full_image_path }}" alt="{{ $author->name }}" class="img-responsive">
                     </figure>
 
-                    <form class="delete" action="{{ route_lang('admin.author.removePicture', $author) }}" method="post">
+                    <form class="delete" action="{{ route('admin.author.removePicture', $author) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
 
@@ -49,9 +49,9 @@
                     <p class="form-control-static">{{ $author->created_at->diffForHumans() }}</p>
                 </div>
 
-                <a href="{{ url()->previous() ?? route_lang('admin.author.index') }}" class="btn btn-default">{{ __('Back') }}</a>
-                <a href="{{ route_lang('admin.author.edit', $author) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                <a href="{{ route_lang('admin.author.destroy', $author) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
+                <a href="{{ url()->previous() ?? route('admin.author.index') }}" class="btn btn-default">{{ __('Back') }}</a>
+                <a href="{{ route('admin.author.edit', $author) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('admin.author.destroy', $author) }}" class="btn btn-danger delete">{{ __('Delete') }}</a>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route_lang('admin.quote.index') }}">
+                                        <a href="{{ route('admin.quote.index') }}">
                                             <em class="fa fa-cog"></em> {{ __('All Quote') }}
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="timeline-body">
                                 <p>{{ $quote->text }}</p>
-                                <p><a href="{{ route_lang('admin.quote.show', $quote) }}">{{ __('Show') }}</a></p>
+                                <p><a href="{{ route('admin.quote.show', $quote) }}">{{ __('Show') }}</a></p>
                             </div>
 
                             <hr>
@@ -105,7 +105,7 @@
                             <div class="timeline-time">
                                 <p>
                                     {{ $quote->created_at->diffForHumans() }} {{ __('in') }}
-                                    <a href="{{ route_lang('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
+                                    <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </p>
                             </div>
                         </div>

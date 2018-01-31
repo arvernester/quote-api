@@ -64,24 +64,24 @@
         </form>
         <ul class="nav menu">
             <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : ''  }}">
-                <a href="{{ route_lang('admin.dashboard') }}">
+                <a href="{{ route('admin.dashboard') }}">
                     <em class="fa fa-dashboard">&nbsp;</em> {{ __('Dashboard') }}</a>
             </li>
             <li class="{{ request()->routeIs('admin.banner.*') ? 'active' : '' }}">
-                <a href="{{ route_lang('admin.banner.index') }}">
+                <a href="{{ route('admin.banner.index') }}">
                     <em class="fa fa-picture-o">&nbsp;</em> {{ __('Banner') }}</a>
             </li>
             <li class="{{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
-                <a href="{{ route_lang('admin.category.index') }}">
+                <a href="{{ route('admin.category.index') }}">
                     <em class="fa fa-th">&nbsp;</em> {{ __('Category') }}</a>
             </li>
             <li class="{{ request()->routeIs('admin.author.*') ? 'active' : '' }}">
-                <a href="{{ route_lang('admin.author.index') }}">
+                <a href="{{ route('admin.author.index') }}">
                     <em class="fa fa-users">&nbsp;</em> {{ __('Author') }}
                 </a>
             </li>
             <li class="{{ request()->routeIs('admin.quote.*') ? 'active' : '' }}">
-                <a href="{{ route_lang('admin.quote.index') }}">
+                <a href="{{ route('admin.quote.index') }}">
                     <em class="fa fa-quote-right">&nbsp;</em> {{ __('Quote') }}</a>
             </li>
             <li class="parent">
@@ -93,17 +93,17 @@
                 </a>
                 <ul class="children collapse" id="misc">
                     <li>
-                        <a href="{{ route_lang('admin.user.index') }}">
+                        <a href="{{ route('admin.user.index') }}">
                             <span class="fa fa-users">&nbsp;</span> {{ __('User') }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route_lang('admin.country.index') }}">
+                        <a href="{{ route('admin.country.index') }}">
                             <span class="fa fa-globe">&nbsp;</span> {{ __('Country') }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route_lang('admin.language.index') }}">
+                        <a href="{{ route('admin.language.index') }}">
                             <span class="fa fa-language">&nbsp;</span> {{ __('Language') }}
                         </a>
                     </li>

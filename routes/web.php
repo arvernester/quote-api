@@ -13,16 +13,6 @@
 
 Route::post('translation/translate', 'TranslationController@translate')->name('translation.translate');
 
-Route::prefix('{lang?}')->middleware('locale')->group(function () {
-    Route::get('/', 'IndexController')->name('index');
-
-    Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
-
-    Route::get('author/{author}', 'AuthorController@show')->name('author.show');
-
-    Route::get('category/{category}', 'CategoryController@show')->name('category.show');
-});
-
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -70,4 +60,14 @@ Route::group(['namespace' => 'Api', 'middleware' => 'cors', 'prefix' => 'api'], 
     Route::get('language', 'LanguageController@index');
 
     Route::get('banner/latest', 'BannerController@latest');
+});
+
+Route::prefix('{lang?}')->middleware('locale')->group(function () {
+    Route::get('/', 'IndexController')->name('index');
+
+    Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
+
+    Route::get('author/{author}', 'AuthorController@show')->name('author.show');
+
+    Route::get('category/{category}', 'CategoryController@show')->name('category.show');
 });
