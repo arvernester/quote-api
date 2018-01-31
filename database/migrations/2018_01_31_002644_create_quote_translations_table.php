@@ -14,14 +14,22 @@ class CreateQuoteTranslationsTable extends Migration
         Schema::create('quote_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quote_id')->unsigned();
-            $table->string('source_lang', 2);
-            $table->string('destination_lang', 2);
+            $table->integer('source_lang_id')->unsigned();
+            $table->integer('destination_lang_id')->unsigned();
             $table->text('text');
             $table->timestamps();
 
             $table->foreign('quote_id')
                 ->references('id')
                 ->on('quotes');
+
+            $table->foreign('source_lang_id')
+                ->references('id')
+                ->on('languages');
+
+            $table->foreign('destination_lang_id')
+                ->references('id')
+                ->on('languages');
         });
     }
 

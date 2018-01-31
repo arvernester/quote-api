@@ -9,8 +9,8 @@ class QuoteTranslation extends Model
 {
     protected $fillable = [
         'quote_id',
-        'source_lang',
-        'destination_lang',
+        'source_lang_id',
+        'destination_lang_id',
         'text',
     ];
 
@@ -22,5 +22,25 @@ class QuoteTranslation extends Model
     public function quote(): BelongsTo
     {
         return $this->belongsTo(Quote::class);
+    }
+
+    /**
+     * Source lang belong to Language.
+     *
+     * @return BelongsTo
+     */
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Language::class, 'source_lang_id');
+    }
+
+    /**
+     * Destination lang belongs to Language.
+     *
+     * @return BelongsTo
+     */
+    public function destination(): BelongsTo
+    {
+        return $this->belongsTo(Language::class, 'destination_lang_id');
     }
 }
