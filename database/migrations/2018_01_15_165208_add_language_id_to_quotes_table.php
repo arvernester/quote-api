@@ -16,6 +16,7 @@ class AddLanguageIdToQuotesTable extends Migration
             $language = Language::whereCode('eng')->first();
 
             $table->integer('language_id')
+                ->unsigned()
                 ->nullable()
                 ->default($language->id ?? null)
                 ->after('user_id');
