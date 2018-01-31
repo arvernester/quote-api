@@ -10,8 +10,8 @@
                 <div class="form-group">
                     <label for="lang">{{ __('Language') }}</label>
                     <p class="form-control-static">
-                        {{ $quote->language->name }} - {{ $quote->language->native_name }}
-                        <span class="label label-info">{{ $quote->language->code }}</span>
+                        {{ $quote->language->name }} ({{ $quote->language->native_name }})
+                        <span class="label label-info">{{ $quote->language->code_alternate }}</span>
                     </p>
                 </div>
 

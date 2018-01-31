@@ -25,7 +25,7 @@ class UserController extends Controller
         $users->appends($request->only('limit', 'keyword'));
 
         return view('admin.user.index', compact('users'))
-            ->withTitle('User');
+            ->withTitle(__('User'));
     }
 
     /**
@@ -59,12 +59,13 @@ class UserController extends Controller
     {
         // get latest quotes from user
         $quotes = Quote::whereUserId($user->id)
+            ->with('category', 'author')
             ->orderBy('created_at', 'DESC')
             ->take(10)
             ->get();
 
         return view('admin.user.show', compact('user', 'quotes'))
-            ->withTitle('User Detail');
+            ->withTitle(__('User Detail'));
     }
 
     /**

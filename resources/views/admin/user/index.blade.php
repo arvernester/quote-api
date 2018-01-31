@@ -10,11 +10,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Actions</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Email') }}</th>
+                                <th>{{ __('Created') }}</th>
+                                <th>{{ __('Updated') }}</th>
+                                <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
 

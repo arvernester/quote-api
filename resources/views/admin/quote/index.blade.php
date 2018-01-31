@@ -15,7 +15,7 @@
                                 <ul class="dropdown-settings">
                                     <li>
                                         <a href="{{ route('admin.quote.create') }}">
-                                            <em class="fa fa-plus fa-fw"></em> {{ __('Add New') }}
+                                            <em class="fa fa-plus fa-fw"></em> {{ __('Create New') }}
                                         </a>
                                     </li>
                                     <li>
@@ -57,8 +57,8 @@
                             <tr>
                                 <td>
                                     @if (! empty($quote->language))
-                                        <abbr title="{{ $quote->language->name }}">
-                                            {{ strtoupper($quote->language->code) }}
+                                        <abbr title="{{ $quote->language->name }} ({{ $quote->language->native_name }})">
+                                            {{ strtoupper($quote->language->code_alternate) }}
                                         </abbr>
                                     @else
                                         <abbr title="{{ __('Not defined') }}">ND</abbr>

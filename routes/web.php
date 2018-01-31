@@ -43,7 +43,7 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
     });
 });
 
-Route::group(['namespace' => 'Api', 'middleware' => 'cors', 'prefix' => 'api'], function () {
+Route::group(['namespace' => 'Api', 'middleware' => ['cors', 'locale'], 'prefix' => 'api'], function () {
     Route::get('quote', 'QuoteController@index');
     Route::get('quote/random', 'QuoteController@random');
     Route::get('quote/of-the-day', 'QuoteController@quoteOfTheDay');

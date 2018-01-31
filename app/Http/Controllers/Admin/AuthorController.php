@@ -34,10 +34,9 @@ class AuthorController extends Controller
         $authors->appends($request->only('limit', 'keyword'));
 
         return view('admin.author.index', compact('authors'))
-            ->withTitle(sprintf(
-                'Author (%s)',
-                Number::n($authors->total())->format()
-            ));
+            ->withTitle(__('Author (:total)', [
+                'total' => Number::n($authors->total())->format(),
+            ]));
     }
 
     /**
@@ -67,7 +66,7 @@ class AuthorController extends Controller
      *
      * @return View
      */
-    public function show($lang, Author $author): View
+    public function show(Author $author): View
     {
         $author->load('quotes', 'quotes.category', 'quotes.language');
 
@@ -78,7 +77,7 @@ class AuthorController extends Controller
         }
 
         return view('admin.author.show', compact('author'))
-            ->withTitle('Author Detail');
+            ->withTitle(__('Author Detail'));
     }
 
     /**
@@ -97,7 +96,7 @@ class AuthorController extends Controller
         }
 
         return view('admin.author.edit', compact('author'))
-            ->withTitle('Edit Author');
+            ->withTitle(__('Edit Author'));
     }
 
     /**

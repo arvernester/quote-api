@@ -25,6 +25,9 @@ class LanguageController extends Controller
                     ->orWhere('name', 'LIKE', '%'.$request->keyword.'%')
                     ->orWhere('native_name', 'LIKE', '%'.$request->keyword.'%');
             })
+            ->when($request->country, function ($query) use ($request) {
+                return $query->whereCountryId($request->country);
+            })
             ->get();
 
         return view('admin.language.index', compact('languages'))

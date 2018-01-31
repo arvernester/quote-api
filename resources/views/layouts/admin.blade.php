@@ -59,7 +59,7 @@
         <div class="divider"></div>
         <form role="search" action="{{ url()->current() }}">
             <div class="form-group">
-                <input value="{{ request('keyword') }}" name="keyword" type="text" class="form-control">
+                <input value="{{ request('keyword') }}" name="keyword" type="text" class="form-control" placeholder="{{ __('Keyword') }}...">
             </div>
         </form>
         <ul class="nav menu">

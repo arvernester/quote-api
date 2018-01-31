@@ -12,6 +12,7 @@
                                 <th>{{ __('Code') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Native Name') }}</th>
+                                <th>{{ __('Total Language') }}</th>
                                 <th>{{ __('Updated') }}</th>
                             </tr>
                         </thead>
@@ -25,6 +26,11 @@
                                     {{ $country->name }}
                                 </td>
                                 <td>{{ $country->native_name }}</td>
+                                <td class="text-right">
+                                    <a href="{{ route('admin.language.index', ['country' => $country->id]) }}">
+                                        {{ Numbers\Number::n($country->languages_count)->format() }}
+                                    </a>
+                                </td>
                                 <td>{{ $country->updated_at->diffForHumans() }}</td>
                             </tr>
                             @endforeach

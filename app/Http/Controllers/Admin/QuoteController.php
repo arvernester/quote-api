@@ -54,7 +54,9 @@ class QuoteController extends Controller
         $quotes->appends($request->only('limit', 'category', 'keyword', 'user'));
 
         return view('admin.quote.index', compact('quotes'))
-            ->withTitle(sprintf('Quotes (%s)', Number::n($quotes->total())->format()));
+            ->withTitle(__('Quote (:total)', [
+                'total' => Number::n($quotes->total())->format(),
+            ]));
     }
 
     /**
@@ -68,7 +70,7 @@ class QuoteController extends Controller
         $languages = Language::dropdown();
 
         return view('admin.quote.create', compact('categories', 'languages'))
-            ->withTitle('Add Quote');
+            ->withTitle(__('Create Quote'));
     }
 
     /**

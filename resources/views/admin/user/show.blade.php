@@ -7,28 +7,28 @@
             <div class="panel-body">
 
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('Name') }}</label>
                     <p class="form-control-static">
                         {{ $user->name }}
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">{{ __('Email') }}</label>
                     <p class="form-control-static">
                         {{ $user->email }}
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="created">Created</label>
+                    <label for="created">{{ __('Created') }}</label>
                     <p class="form-control-static">
                         {{ $user->created_at->diffForHumans() }}
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="updated">Updated</label>
+                    <label for="updated">{{ __('Updated') }}</label>
                     <p class="form-control-static">
                         {{ $user->updated_at->diffForHumans() }}
                     </p>
@@ -41,7 +41,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Latest Quotes from {{ $user->name }}
+                {{ __('Quote from :user', ['user' => $user->name]) }}
             </div>
             <div class="panel-body timeline-container">
                 <ul class="timeline">
@@ -56,14 +56,14 @@
                             </div>
                             <div class="timeline-body">
                                 <p>{{ $quote->text }}</p>
-                                <p><a href="{{ route('admin.quote.show', $quote) }}">Show</a></p>
+                                <p><a href="{{ route('admin.quote.show', $quote) }}">{{ __('Show') }}</a></p>
                             </div>
 
                             <hr>
 
                             <div class="timeline-time">
                                 <p>
-                                    {{ $quote->created_at->diffForHumans() }} in
+                                    {{ $quote->created_at->diffForHumans() }} {{ __('in') }}
                                     <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </p>
                             </div>
@@ -73,7 +73,7 @@
                 </ul>
 
                 <a href="{{ route('admin.quote.index', ['user' => $user->id]) }}" class="btn btn-block btn-primary">
-                    Show All Quotes from {{ $user->name }}
+                    {{ __('Show All Quotes from :user', ['user' => $user->name]) }}
                 </a>
             </div>
         </div>

@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function __invoke(): View
     {
         $latestQuotes = Quote::orderBy('created_at', 'DESC')
-            ->with('category')
+            ->with('category', 'author')
             ->take(10)
             ->get();
 

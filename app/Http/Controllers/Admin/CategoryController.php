@@ -7,8 +7,8 @@ use Illuminate\View\View;
 use App\Category;
 use Illuminate\Http\RedirectResponse;
 use App\Quote;
+use App\Http\Controllers\Controller;
 use Numbers\Number;
-use Arcanedev\Support\Http\Controller;
 
 class CategoryController extends Controller
 {
@@ -24,10 +24,9 @@ class CategoryController extends Controller
             ->get();
 
         return view('admin.category.index', compact('categories'))
-            ->withTitle(sprintf(
-                'Category (%s)',
-                Number::n($categories->count())->format()
-            ));
+            ->withTitle(__('Category (:total)', [
+                'total' => Number::n($categories->count())->format(),
+            ]));
     }
 
     /**
@@ -53,14 +52,14 @@ class CategoryController extends Controller
     /**
      * Display the specified category.
      *
-     * @param int $id
+     * @param Category $category
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($lang, Category $category): View
+    public function show(Category $category): View
     {
         return view('admin.category.show', compact('category'))
-            ->withTitle('Category Detail');
+            ->withTitle(__('Category Detail'));
     }
 
     /**
@@ -129,6 +128,6 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.category.index')
-            ->withSuccess('Quote inside source category has been migrated to destination category.');
+            ->withSuccess(__('Quote inside source category has been migrated to destination category.'));
     }
 }

@@ -19,6 +19,7 @@ class CountryController extends Controller
     public function index(Request $request): View
     {
         $countries = Country::orderBy('name', 'ASC')
+            ->withCount('languages')
             ->when($request->keyword, function ($query) use ($request) {
                 return $query->where('code', 'LIKE', '%'.$request->keyword.'%')
                     ->orWhere('name', 'LIKE', '%'.$request->keyword.'%')
@@ -27,7 +28,7 @@ class CountryController extends Controller
             ->get();
 
         return view('admin.country.index', compact('countries'))
-            ->withTitle('Country');
+            ->withTitle(__('Country'));
     }
 
     /**
