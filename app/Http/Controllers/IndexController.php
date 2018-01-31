@@ -33,6 +33,7 @@ class IndexController extends Controller
         }
 
         $quotes = Quote::orderBy('created_at', 'DESC')
+            ->with('author')
             ->paginate(10);
 
         return view('index', compact('quote', 'random', 'quotes', 'language'));
