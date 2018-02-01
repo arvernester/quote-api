@@ -4,7 +4,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() ?? config('app.locale') }}">
 
 <head>
 	<title>{{ $title or config('app.name') }}</title>
@@ -13,7 +13,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<meta name="og:site_name" content="{{ config('app.name') }}">
-	<meta property="og:locale" content="{{ app()->getLocale() }}">
+	<meta property="og:locale" content="{{ app()->getLocale() ?? config('app.locale') }}">
     <meta property="og:url" content="{{ url()->current() }}">
 	@stack('meta')
 
