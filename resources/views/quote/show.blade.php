@@ -1,5 +1,15 @@
 @extends('layouts.default')
 
+@push('meta')
+    <meta name="title" content="{{ __('Quote by :author', ['author' => $quote->author->name]) }}" />
+    <meta name="description" content="{{ $quote->text }}">
+
+    <meta property="og:title" content="{{ __('Quote by :author', ['author' => $quote->author->name]) }}" />
+    <meta property="og:description" content="{{ $quote->text }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ asset('img/header-'.app()->getLocale().'.png') }}" />
+@endpush
+
 @section('content')
 <article class="post featured">
     <header class="major">
