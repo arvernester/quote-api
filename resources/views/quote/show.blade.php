@@ -7,7 +7,7 @@
             <a href="#">{{ $quote->category->name }}</a>
         </span>
         <h2>
-            <a href="#">{{ $quote->author->name }}</a>
+            <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
         </h2>
         <p>{{ $quote->text }}</p>
     </header>
@@ -58,6 +58,14 @@
 @endpush
 
 @push('schema')
+<script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'http://schema.org',
+        '@type' => 'Person',
+        'name' => $quote->author->name
+    ]) !!}
+</script>
+
 <script type="application/ld+json">
 {!! json_encode([
     '@context' => 'http://schema.org/',
