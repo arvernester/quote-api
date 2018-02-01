@@ -7,7 +7,7 @@
     <meta property="og:title" content="{{ config('app.name') }}" />
     <meta property="og:description" content="{{ __('Inspirational and motivational quotes for your life') }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="{{ asset('img/header-'.app()->getLocale().'.png') }}" />
+    <meta property="og:image" content="{{ asset('img/header-'.app()->getLocale() ?? 'en'.'.png') }}" />
 @endpush
 
 @section('content')
