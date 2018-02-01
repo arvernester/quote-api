@@ -57,6 +57,20 @@
 </style>
 @endpush
 
+@push('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'http://schema.org/',
+    '@type' => 'Quotation',
+    'spokenByCharacter' => [
+        '@type' => 'Person',
+        'name' => $quote->author->name
+    ],
+    'text' => $quote->text
+]) !!}
+</script>
+@endpush
+
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 <script>

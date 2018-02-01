@@ -220,6 +220,29 @@
 
 	@stack('js')
 
+	<script type="application/ld+json">
+		{!! json_encode([
+			'@context' => 'http://schema.org',
+			'@type' => 'Organization',
+			'url' => route('index'),
+			'logo' => asset('img/logo.png')
+		]) !!}
+	</script>
+
+	<script type="application/ld+json">
+		{!! json_encode([
+			'@context' => 'http://schema.org',
+			'@type' => 'Person',
+			'name' => config('app.name'),
+			'url' => route('index'),
+			'sameAs' => [
+				'https://www.twitter.com/'.env('TWITTER_USERNAME')
+			]
+		]) !!}
+	</script>
+
+	@stack('schema')
+
 </body>
 
 </html>
