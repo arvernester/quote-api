@@ -13,9 +13,9 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	@if (env('FACEBOOK_APP_ID'))
-	<meta name="fb:app_id" content="{{ env('FACEBOOK_APP_ID') }}">
+	<meta property="fb:app_id" content="{{ env('FACEBOOK_APP_ID') }}">
 	@endif
-	<meta name="og:site_name" content="{{ config('app.name') }}">
+	<meta property="og:site_name" content="{{ config('app.name') }}">
 	<meta property="og:locale" content="{{ app()->getLocale() ?? config('app.locale') }}">
     <meta property="og:url" content="{{ url()->current() }}">
 	@stack('meta')
