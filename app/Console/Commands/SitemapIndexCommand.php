@@ -53,9 +53,14 @@ class SitemapIndexCommand extends Command
 
         $bar = $this->output->createProgressBar($categories->count());
 
+        $sitemap = app()->make('sitemap');
+
         foreach ($categories as $category) {
+            $category->load('quotes');
+
+            $sitemapPost = app()->make('sitemap');
             foreach ($category->quotes as $quote) {
-                $sitemap->add(
+                $sitemapPost->add(
                     route_lang('quote.show', $quote),
                     $quote->updated_at->toIso8601String(),
                     '0.8',
@@ -63,7 +68,8 @@ class SitemapIndexCommand extends Command
                 );
             }
 
-            $sitemap->store('xml', $path = $subDir.str_slug($category->name));
+            $sitemapPost->store('xml', $path = $subDir.str_slug($category->name));
+            unset($sitemapPost);
 
             $bar->advance();
 
