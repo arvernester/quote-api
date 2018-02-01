@@ -134,7 +134,7 @@
 				<section>
 					<h3>{{ __('Email') }}</h3>
 					<p>
-						<a href="#">info@kutip.org</a>
+						<a href="mailto:mail@kutip.org">mail@kutip.org</a>
 					</p>
 				</section>
 				<section>
