@@ -67,7 +67,10 @@ class SitemapIndexCommand extends Command
 
             $bar->advance();
 
-            $sitemap->addSitemap(url($path.'.xml'));
+            $sitemap->addSitemap(
+                url($path.'.xml'),
+                $category->updated_at->toIso8601String()
+            );
         }
 
         $sitemap->store('sitemapindex', 'sitemap');
