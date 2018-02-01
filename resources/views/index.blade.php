@@ -52,9 +52,11 @@
         </p>
     </header>
 
-    <div class="ads">
-        @include('layouts.partials.ad')
-    </div>
+    @if (app()->environment('production'))
+        <div class="ads">
+            @include('layouts.partials.ad')
+        </div>
+    @endif
 </article>
 
 <!-- Posts -->
@@ -93,9 +95,11 @@
         {{ __('Next') }} &raquo;
     </a>
 
-    <div class="ad" style="margin-top:20px">
-        @include('layouts.partials.ad')
-    </div>
+    @if (app()->environment('production'))
+        <div class="ad" style="margin-top:20px">
+            @include('layouts.partials.ad')
+        </div>
+    @endif
 </footer>
 @endsection
 
