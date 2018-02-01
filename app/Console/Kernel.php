@@ -13,9 +13,7 @@ use App\Console\Commands\MigrateAuthor;
 use App\Console\Commands\BackupDatabase;
 use App\Console\Commands\Quote\ImportJagokataCommand;
 use App\Console\Commands\Quote\ImportTalaikisCommand;
-use App\Console\Commands\Sitemap\AuthorCommand as SitemapAuthorCommand;
-use App\Console\Commands\Sitemap\CategoryCommand as SitemapCategoryCommand;
-use App\Console\Commands\Sitemap\QuoteCommand as SitemapQuoteCommand;
+use App\Console\Commands\SitemapIndexCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -34,9 +32,7 @@ class Kernel extends ConsoleKernel
         ImportCountry::class,
         MigrateAuthor::class,
         BackupDatabase::class,
-        SitemapQuoteCommand::class,
-        SitemapAuthorCommand::class,
-        SitemapCategoryCommand::class,
+        SitemapIndexCommand::class,
     ];
 
     /**

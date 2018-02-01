@@ -13,6 +13,5 @@ yarn-error.log
 .env
 Envoy.blade.php
 
-public/sitemap-author.xml
-public/sitemap-quote.xml
-public/sitemap-category.xml
+public/sitemap/
+public/sitemap.xml
