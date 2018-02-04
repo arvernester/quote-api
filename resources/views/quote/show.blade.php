@@ -69,14 +69,35 @@
 
 @push('schema')
 <script type="application/ld+json">
-    {!! json_encode([
-        '@context' => 'http://schema.org',
-        '@type' => 'Person',
-        'name' => $quote->author->name
-    ]) !!}
-</script>
+{!! json_encode([
+    '@context' => 'http://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'item' => [
+                'id' => route_lang('index'),
+                'name' => __('Quote')
+            ]
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'item' => [
+                'id' => url()->current(),
+                'name' => __('Quote by :author', ['author' => $quote->author->name])
+            ]
+        ]
+    ]
+]) !!}
 
-<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'http://schema.org',
+    '@type' => 'Person',
+    'name' => $quote->author->name
+]) !!}
+    
 {!! json_encode([
     '@context' => 'http://schema.org/',
     '@type' => 'Quotation',
