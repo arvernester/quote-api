@@ -36,6 +36,10 @@ class IndexController extends Controller
             ->with('author')
             ->paginate(10);
 
-        return view('index', compact('quote', 'random', 'quotes', 'language'));
+        return view('index', compact('quote', 'random', 'quotes', 'language'))
+            ->withTitle(sprintf('%s - %s',
+                config('app.name'),
+                __('Motivational & Inspirational Quotes')
+        ));
     }
 }
