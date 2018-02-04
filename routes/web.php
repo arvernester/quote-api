@@ -11,12 +11,13 @@
 |
 */
 
+Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');
+Route::post('contact/post', 'ContactController@post')->name('contact.post');
+Route::get('share/twitter/{quote}', 'ShareController@twitter')->name('share.twitter');
 Route::post('translation/translate', 'TranslationController@translate')->name('translation.translate');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-
-Route::get('share/twitter/{quote}', 'ShareController@twitter')->name('share.twitter');
 
 Route::redirect('admin', '/admin/dashboard');
 Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(function () {

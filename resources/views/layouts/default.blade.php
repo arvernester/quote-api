@@ -29,7 +29,7 @@
 	@stack('css')
 </head>
 
-<body class="is-loading">
+<body class="">
 
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
@@ -117,27 +117,7 @@
 
 		<!-- Footer -->
 		<footer id="footer">
-			<section>
-				<form method="post" action="#">
-					<div class="field">
-						<label for="name">{{ __('Name') }}</label>
-						<input type="text" name="name" id="name" />
-					</div>
-					<div class="field">
-						<label for="email">{{ __('Email') }}</label>
-						<input type="text" name="email" id="email" />
-					</div>
-					<div class="field">
-						<label for="message">{{ __('Message') }}</label>
-						<textarea name="message" id="message" rows="3"></textarea>
-					</div>
-					<ul class="actions">
-						<li>
-							<input type="submit" value="{{ __('Send') }}" />
-						</li>
-					</ul>
-				</form>
-			</section>
+			<contact-form></contact-form>
 			<section class="split contact">
 				<section>
 					<h3>{{ __('Email') }}</h3>
@@ -219,12 +199,14 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.scrollex.min.js"></script>
-	<script src="/js/jquery.scrolly.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
+	<script src="{{ asset('js/jquery.min.js') }}"></script>
+	<script src="{{ asset('js/lang.js') }}"></script>
+	<script src="{{ asset('js/jquery.scrollex.min.js') }}"></script>
+	<script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
+	<script src="{{ asset('js/skel.min.js') }}"></script>
+	<script src="{{ asset('js/util.js') }}"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
+	<script src="{{ asset('js/app.js') }}"></script>
 
 	@stack('js')
 

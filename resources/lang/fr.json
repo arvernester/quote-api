@@ -15,6 +15,7 @@
     "Category (:total)": "Catégorie (:total)",
     "Category Detail": "Détail de la catégorie",
     "Code": "Code",
+    "Contact us": "Contactez nous",
     "Continue": "Continuer",
     "Copy": "Copie",
     "Country": "Pays",
@@ -30,6 +31,7 @@
     "Edit": "Modifier",
     "Edit Author": "Modifier l'auteur",
     "Email": "Email",
+    "Hello :name": "Bonjour :name",
     "Image": "Image",
     "Image Path": "Chemin de l'image",
     "Inspirational and motivational quotes for your life": "Citations inspirantes et motivantes pour votre vie",
@@ -42,6 +44,7 @@
     "Merge": "Fusionner",
     "Merge Duplicate Category": "Fusionner une catégorie en double",
     "Message": "Message",
+    "Message from :sender": "Message de :sender",
     "Miscellaneous": "Divers",
     "Motivational & Inspirational Quotes": "Citations Motivantes et Inspirantes",
     "Name": "Prénom",
@@ -96,6 +99,8 @@
     "User": "Utilisateur",
     "User Detail": "Détail de l'utilisateur",
     "Warning": "Warning",
+    "You got message from :sender.": "Vous avez reçu un message de :sender.",
+    "Your message has been sent successfully.": "Votre message a été envoyé avec succès.",
     "by": "par",
     "in": "dans"
 }

@@ -15,6 +15,7 @@
     "Category (:total)": "Kategori (:total)",
     "Category Detail": "Detail Kategori",
     "Code": "Kode",
+    "Contact us": "Hubungi Kami",
     "Continue": "Lanjutkan",
     "Copy": "Salin",
     "Country": "Negara",
@@ -30,6 +31,7 @@
     "Edit": "Sunting",
     "Edit Author": "Sunting Tokoh",
     "Email": "Surel",
+    "Hello :name": "Halo :name",
     "Image": "Gambar",
     "Image Path": "Lokasi Gambar",
     "Inspirational and motivational quotes for your life": "Kata bijak penuh inspirasi untuk kehidupan kamu",
@@ -42,6 +44,7 @@
     "Merge": "Gabung",
     "Merge Duplicate Category": "Gabung Kategori Ganda",
     "Message": "Pesan",
+    "Message from :sender": "Pesan dari :sender",
     "Miscellaneous": "Lainnya",
     "Motivational & Inspirational Quotes": "Kata Bijak Penuh Inspirasi & Motivasi",
     "Name": "Nama",
@@ -96,6 +99,8 @@
     "User": "Kontributor",
     "User Detail": "Detail Kontributor",
     "Warning": "Peringatan",
+    "You got message from :sender.": "Anda mendapatkan pesan dari :sender",
+    "Your message has been sent successfully.": "Pesan Anda berhasil dikirim.",
     "by": "Oleh",
     "in": "dalam"
 }
