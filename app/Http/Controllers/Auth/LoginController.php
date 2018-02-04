@@ -55,7 +55,7 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         $user->notify(new GeneralNotification(
-            'Logged in into admin system.',
+            __('Logged in into admin system.'),
             '',
             'fa-unlock-alt'
         ));

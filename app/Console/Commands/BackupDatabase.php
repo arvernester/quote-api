@@ -68,7 +68,9 @@ class BackupDatabase extends Command
 
         $users = User::all();
         Notification::send($users, new GeneralNotification(
-            'Database has been backed up.'
+            __('Database has been backed up.'),
+            '',
+            'fa-database'
         ));
     }
 }

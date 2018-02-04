@@ -86,7 +86,8 @@ class SitemapIndexCommand extends Command
         $users = User::all();
         Notification::send($users, new GeneralNotification(
             __('Sitemap index has been generated'),
-            'fa fa-sitemap'
+            '',
+            'fa-sitemap'
         ));
 
         $this->info(PHP_EOL.__('Sitemap has been generated.'));
