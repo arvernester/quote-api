@@ -89,7 +89,7 @@
 
 				@if(ENV('FACEBOOK_USERNAME'))
 				<li>
-					<a href="https://www.github.com/{{ ENV('FACEBOOK_USERNAME') }}" class="icon fa-facebook">
+					<a href="https://www.facebook.com/{{ ENV('FACEBOOK_USERNAME') }}" class="icon fa-facebook">
 						<span class="label">Facebook</span>
 					</a>
 				</li>
@@ -145,7 +145,7 @@
 						
 						@if(ENV('FACEBOOK_USERNAME'))
 						<li>
-							<a href="#" class="icon alt fa-facebook">
+							<a href="https://www.facebook.com/{{ env('FACEBOOK_USERNAME') }}" class="icon alt fa-facebook">
 								<span class="label">
 									{{ ENV('FACEBOOK_USERNAME') }}
 								</span>
