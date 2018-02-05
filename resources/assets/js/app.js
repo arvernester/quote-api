@@ -27,6 +27,7 @@ Vue.prototype.__ = string => {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('contact-form', require('./components/contact/Form.vue'))
+Vue.component('quote-submit', require('./components/quote/Submit.vue'))
  
 
 const app = new Vue({

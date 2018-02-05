@@ -17,7 +17,7 @@
                         {{ $notification->created_at->diffForHumans() }}
                     </small>
                     @if (! empty($notification->data['link']))
-                    <a href="#">
+                    <a href="{{ url($notification->data['link']) }}">
                         {{ $notification->data['message'] }}
                     </a>
                     @else {{ $notification->data['message'] }} @endif

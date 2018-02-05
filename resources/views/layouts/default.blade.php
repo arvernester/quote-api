@@ -67,9 +67,14 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li class="active">
-					<a href="{{ route('index', session('lang')) }}">
+				<li class="{{ request()->routeIs('index') ? 'active' : '' }}">
+					<a href="{{ route_lang('index') }}">
 						{{ __('Quotes') }}
+					</a>
+				</li>
+				<li class="{{ request()->routeIs('quote.create') ? 'active' : '' }}">
+					<a href="{{ route_lang('quote.create') }}">
+						{{ __('Submit Quote') }}
 					</a>
 				</li>
 			</ul>
