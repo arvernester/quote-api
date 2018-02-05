@@ -13,7 +13,7 @@ class LanguageController extends Controller
     {
         \Debugbar::disable();
 
-        $locale = session('lang');
+        $locale = session('lang') ?? config('app.locale');
 
         // get language from php file
         $files = glob(resource_path('lang/'.$locale.'/*.php'));
