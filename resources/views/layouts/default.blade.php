@@ -77,6 +77,11 @@
 						{{ __('Submit Quote') }}
 					</a>
 				</li>
+				<li class="{{ request()->routeIs('category.*') ? 'active' : '' }}">
+					<a href="{{ route_lang('category.index') }}">
+						{{ __('Category') }}
+					</a>
+				</li>
 			</ul>
 			<ul class="icons">
 				@if(ENV('TWITTER_USERNAME'))

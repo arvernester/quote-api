@@ -1,6 +1,10 @@
 <template>
   <section class="post">
-    <h2>{{ __('Submit Quote') }}</h2>
+    <header class="major">
+      <h1>{{ __('Submit Quote') }}</h1>
+    </header>
+
+    <hr>
 
     <div v-if="submitted" class="box">
       <p>{{ __('Thank you! Your quote has been submitted.') }}</p>

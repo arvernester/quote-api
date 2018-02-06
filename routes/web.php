@@ -70,6 +70,8 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
     Route::post('quote', 'QuoteController@store')->name('quote.store');
 
+    Route::get('category', 'CategoryController@index')->name('category.index');
+
     Route::get('author/{author}', 'AuthorController@show')->name('author.show');
 
     Route::get('category/{category}', 'CategoryController@show')->name('category.show');
