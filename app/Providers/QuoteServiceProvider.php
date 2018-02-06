@@ -3,20 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Quote\RandomQuote;
 use App\Contracts\Quote;
-use App\Console\Commands\Quote\ImportRandomCommand;
-use App\Console\Commands\Quote\ImportFamousCommand;
-use App\Quote\FamousQuote;
-use App\Quote\Ondesign;
-use App\Console\Commands\Quote\ImportSumitgohilCommand;
-use App\Quote\SumitgohilQuote;
-use App\Console\Commands\Quote\ImportOndesign;
-use App\Quote\OndesignQuote;
-use App\Console\Commands\Quote\ImportJagokataCommand;
-use App\Quote\JagokataQuote;
-use App\Quote\TalaikisQuote;
-use App\Console\Commands\Quote\ImportTalaikisCommand;
 
 class QuoteServiceProvider extends ServiceProvider
 {
@@ -30,46 +17,17 @@ class QuoteServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register($vendor = null)
     {
-        $this->app->when(ImportRandomCommand::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new RandomQuote();
-            });
+        $this->app->bind(Quote::class, function ($app, $params) {
+            if (empty($params['vendor'])) {
+                $params['vendor'] = 'Programming';
+            }
+            $class = '\\App\\Quote\\'.studly_case($params['vendor']).'Quote';
 
-        $this->app->when(ImportFamousCommand::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new FamousQuote();
-            });
+            abort_if(!class_exists($class), 500, sprintf('Class %s is not exists.', $class));
 
-        // Sumitgohil provider
-        $this->app->when(ImportSumitgohilCommand::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new SumitgohilQuote();
-            });
-
-        // Ondesign provider
-        $this->app->when(ImportOndesign::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new OndesignQuote();
-            });
-
-        // import quote from jagokata.com
-        $this->app->when(ImportJagokataCommand::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new JagokataQuote();
-            });
-
-        // import 100 random quotes from talaikis.com
-        $this->app->when(ImportTalaikisCommand::class)
-            ->needs(Quote::class)
-            ->give(function () {
-                return new TalaikisQuote();
-            });
+            return new $class();
+        });
     }
 }

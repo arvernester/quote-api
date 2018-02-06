@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Language;
 use App\QuoteTweet;
 
-class TweetCommand extends Command
+class TweetQuoteCommand extends Command
 {
     /**
      * The name and signature of the console command.

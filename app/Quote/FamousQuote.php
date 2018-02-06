@@ -4,21 +4,19 @@ namespace App\Quote;
 
 use App\Contracts\Quote;
 use Unirest\Request;
-use Illuminate\Support\Facades\Log;
-use App\Quote as QuoteModel;
 use App\Category;
-use Illuminate\Support\Facades\DB;
 use App\Language;
 use App\Author;
+use Illuminate\Support\Facades\Log;
 
 class FamousQuote implements Quote
 {
     /**
-     * Import quote from API.
+     * Import quote from API https://andruxnet-random-famous-quotes.p.mashape.com.
      *
-     * @return QuoteModel
+     * @return array|null
      */
-    public function import(): QuoteModel
+    public function import(): ? array
     {
         $url = 'https://andruxnet-random-famous-quotes.p.mashape.com';
 
@@ -27,43 +25,19 @@ class FamousQuote implements Quote
         ]);
 
         if ($response->code == 200) {
-            // log to debug
-            Log::debug($response->raw_body);
-
-            $existsQuote = QuoteModel::whereText($response->body->quote)
-                ->with('author', 'category')
-                ->first();
-
-            if (!empty($existsQuote)) {
-                Log::info(sprintf('Quote from %s is already exists.', $url), [
-                    'text' => $existsQuote->text,
-                    'author' => $existsQuote->author->name,
-                ]);
-            }
-
-            if (empty($existsQuote)) {
-                DB::transaction(function () use ($url, $response, &$quote) {
-                    $category = Category::firstOrCreate([
-                        'name' => $response->body->category,
-                    ]);
-
-                    $language = Language::whereCode('eng')->first();
-
-                    $author = Author::firstOrCreate([
-                        'name' => $response->body->author,
-                    ]);
-
-                    $quote = QuoteModel::create([
-                        'category_id' => $category->id,
-                        'language_id' => $language->id ?? null,
-                        'author_id' => $author->id,
-                        'text' => $response->body->quote,
-                        'source' => $url,
-                    ]);
-                });
-            }
+            return [
+                'author' => $response->body->author,
+                'quote' => $response->body->quote,
+                'category' => ucwords($response->body->category),
+                'language' => 'en',
+                'source' => $url,
+            ];
         }
 
-        return $existsQuote ?? $quote;
+        Log::error(sprintf('Failed to get response from %s.', $url), [
+            'code' => $response->code,
+        ]);
+
+        return null;
     }
 }

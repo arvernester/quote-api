@@ -6,7 +6,6 @@ use App\Contracts\Quote as QuoteContract;
 use Unirest\Request;
 use Illuminate\Support\Facades\Log;
 use App\Quote;
-use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Language;
 use App\Author;
@@ -16,73 +15,40 @@ class SumitgohilQuote implements QuoteContract
     /**
      * Import random quote from sumitgohil API.
      *
-     * @return Quote|null
+     * @return array|null
      */
-    public function import(): ? Quote
+    public function import(): ? array
     {
         $url = 'https://sumitgohil-random-quotes-v1.p.mashape.com/fetch/randomQuote';
         $response = Request::get($url, [
             'X-Mashape-Key' => config('services.quote.key'),
         ]);
 
-        if ($response->code !== 200) {
-            Log::error($response->raw_body);
+        if ($response->code == 200) {
+            $body = $response->body[0];
 
-            return null;
-        }
+            // decode and remove tabs from string
+            $decodedQuote = preg_replace('/\t+/', '', trim(
+                mb_convert_encoding(
+                    $body->quote,
+                    'UTF-8',
+                    'HTML-ENTITIES'
+                )
+            ));
 
-        if (empty($response->body[0])) {
-            Log::error(sprintf('Quote from %s is empty', $url));
-
-            return null;
-        }
-
-        $body = $response->body[0];
-
-        // decode and remove tabs from string
-        $decodedQuote = preg_replace('/\t+/', '', trim(
-            mb_convert_encoding(
-                $body->quote,
-                'UTF-8',
-                'HTML-ENTITIES'
-            )
-        ));
-
-        $existsQuote = Quote::whereText($decodedQuote)
-            ->with('author', 'category')
-            ->first();
-
-        if (!empty($existsQuote)) {
-            Log::info(sprintf('Quote from %s is already exists', $url), [
-                'text' => $decodedQuote,
-                'author' => $existsQuote->author->name,
-            ]);
-
-            return $existsQuote;
-        }
-
-        Log::debug(json_encode($body));
-
-        DB::transaction(function () use ($url, $body, $decodedQuote, &$quote) {
-            $category = Category::firstOrCreate([
-                'name' => $body->category_name,
-            ]);
-
-            $language = Language::whereCode('eng')->first();
-
-            $author = Author::firstOrCreate([
-                'name' => $body->author_name,
-            ]);
-
-            $quote = Quote::create([
-                'category_id' => $category->id,
-                'language_id' => $language->id ?? null,
-                'author_id' => $author->id,
-                'text' => $decodedQuote,
+            return [
+                'author' => $body->author_name,
+                'quote' => $decodedQuote,
+                'category' => $body->category_name,
+                'language' => 'en',
                 'source' => $url,
-            ]);
-        });
+            ];
+        }
 
-        return $quote ?? null;
+        Log::error(sprintf('Failed to get response from %s.'), [
+            'code' => $response->code,
+        ]);
+
+        return null;
     }
 }

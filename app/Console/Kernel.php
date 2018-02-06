@@ -4,16 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Quote\TweetCommand;
-use App\Console\Commands\Quote\ImportRandomCommand;
-use App\Console\Commands\Quote\ImportFamousCommand;
-use App\Console\Commands\Quote\ImportSumitgohilCommand;
 use App\Console\Commands\ImportCountry;
-use App\Console\Commands\MigrateAuthor;
 use App\Console\Commands\BackupDatabase;
-use App\Console\Commands\Quote\ImportJagokataCommand;
-use App\Console\Commands\Quote\ImportTalaikisCommand;
 use App\Console\Commands\SitemapIndexCommand;
+use App\Console\Commands\ImportQuoteCommand;
+use App\Console\Commands\Quote\TweetQuoteCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,16 +18,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        TweetCommand::class,
-        ImportRandomCommand::class,
-        ImportFamousCommand::class,
-        ImportSumitgohilCommand::class,
-        ImportJagokataCommand::class,
-        ImportTalaikisCommand::class,
+        TweetQuoteCommand::class,
         ImportCountry::class,
-        MigrateAuthor::class,
         BackupDatabase::class,
         SitemapIndexCommand::class,
+        ImportQuoteCommand::class,
     ];
 
     /**
