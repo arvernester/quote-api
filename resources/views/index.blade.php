@@ -27,7 +27,7 @@
             </a>
         </li>
         <li>
-            <button href="#" class="button icon fa-copy button-copy" data-clipboard-text="{{ $quote->text }} {{ ucwords(__('by')) }} {{ $quote->author->name }}.">
+            <button href="#" class="button icon fa-copy button-copy" data-clipboard-text="{{ $random->text }} {{ ucwords(__('by')) }} {{ $random->author->name }}.">
                 {{ __('Copy') }}
             </button>
         </li>
@@ -65,7 +65,7 @@
                 {{ $quote->created_at->diffForHumans() }}
             </span>
             <h2>
-                <a href="#">{{ $quote->author->name }}</a>
+                <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
             </h2>
         </header>
         <p>{{ $quote->text }}</p>
@@ -74,6 +74,11 @@
                 <a href="{{ route_lang('quote.show', $quote) }}" class="button small">
                     {{ __('See') }}
                 </a>
+            </li>
+            <li>
+                <button class="button small special button-copy" data-clipboard-text="{{ $quote->text }} {{ __('By') }} {{ $quote->author->name }}.">
+                    {{ __('Copy') }}
+                </button>
             </li>
         </ul>
     </article>
