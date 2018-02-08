@@ -63,7 +63,7 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route('admin.quote.index', [session('lang')]) }}">
+                                        <a href="{{ route('admin.quote.index') }}">
                                             <em class="fa fa-cog"></em> {{ __('All Quote') }}
                                         </a>
                                     </li>
@@ -90,7 +90,7 @@
                             <div class="timeline-body">
                                 <p>{{ $quote->text }}</p>
                                 <div class="actions">
-                                    <a class="btn btn-default btn-xs" href="{{ route('admin.quote.show', [session('lang'), $quote]) }}"><em class="fa fa-eye fa-fw"></em></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('admin.quote.show', $quote) }}"><em class="fa fa-eye fa-fw"></em></a>
                                     <a class="btn btn-default btn-xs btn-copy" data-clipboard-text="{{ $quote->text }} By {{ $quote->author->name }}." href="javascript:void(0)"><em class="fa fa-copy fa-fw"></em></a>
                                     <a class="btn btn-primary btn-xs" href="{{ route('share.twitter', $quote) }}"><em class="fa fa-twitter fa-fw"></em></a>
                                 </div>
@@ -101,7 +101,7 @@
                             <div class="timeline-time">
                                 <p>
                                     {{ $quote->created_at->diffForHumans() }} {{ __('in') }}
-                                    <a href="{{ route('admin.category.show', [session('lang'), $quote->category]) }}">{{ $quote->category->name }}</a>
+                                    <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </p>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                             <li>
                                 <ul class="dropdown-settings">
                                     <li>
-                                        <a href="{{ route('admin.author.index', [session('lang')]) }}">
+                                        <a href="{{ route('admin.author.index') }}">
                                             <em class="fa fa-cog"></em> {{ __('All Author') }}
                                         </a>
                                     </li>
@@ -149,7 +149,7 @@
                             </div>
                             <div class="col-xs-10 col-md-10">
                                 <h4>
-                                    <a href="{{ route('admin.author.show', [session('lang'), $author]) }}">{{ $author->name }}</a>
+                                    <a href="{{ route('admin.author.show', $author) }}">{{ $author->name }}</a>
                                 </h4>
                                 <p>{{ $author->latestQuote->text }}</p>
                             </div>
