@@ -69,7 +69,17 @@
 			<ul class="links">
 				<li class="{{ request()->routeIs('index') ? 'active' : '' }}">
 					<a href="{{ route_lang('index') }}">
+						{{ __('Homepage') }}
+					</a>
+				</li>
+				<li class="{{ request()->routeIs('quote.index') ? 'active' : '' }}">
+					<a href="{{ route_lang('quote.index') }}">
 						{{ __('Quotes') }}
+					</a>
+				</li>
+				<li class="{{ request()->routeIs('quote.random') ? 'active' : '' }}">
+					<a href="{{ route_lang('quote.random') }}">
+						{{ __('Random') }}
 					</a>
 				</li>
 				<li class="{{ request()->routeIs('quote.create') ? 'active' : '' }}">
@@ -170,7 +180,7 @@
 						
 						@if(ENV('GITHUB_USERNAME'))
 						<li>
-							<a href="#" class="icon alt fa-github">
+							<a href="https://www.github.com/{{ env('GITHUB_USERNAME') }}" class="icon alt fa-github">
 								<span class="label">
 									{{ ENV('GITHUB_USERNAME') }}
 								</span>

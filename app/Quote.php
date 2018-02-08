@@ -86,4 +86,19 @@ class Quote extends Model
     {
         return $this->belongsTo(Author::class);
     }
+
+    /**
+     * Filter quote using language code (alternate).
+     *
+     * @param object      $query
+     * @param string|null $lang
+     */
+    public function scopeLanguage($query, ?string $lang = null)
+    {
+        return $query->when($lang, function ($query) use ($lang) {
+            return $query->whereHas('language', function ($language) use ($lang) {
+                return $language->where('code_alternate', $lang);
+            });
+        });
+    }
 }

@@ -17,6 +17,21 @@ use Illuminate\Support\Facades\Notification;
 
 class QuoteController extends Controller
 {
+    public function index($lang, Request $request): View
+    {
+        $quotes = Quote::orderBy('created_at')
+            ->with('author')
+            ->language($request->lang)
+            ->paginate(10);
+
+        $quotes->appends($request->only('lang'));
+
+        return view('quote.index', compact('quotes'))
+            ->withTitle(
+                __('Inspirational and Motivational Quotes That Will Make Your Day!')
+            );
+    }
+
     /**
      * Show single quote.
      *
@@ -96,5 +111,25 @@ class QuoteController extends Controller
             'status' => true,
             'quote' => $quote,
         ]);
+    }
+
+    /**
+     * Response random quotes.
+     *
+     * @param Request $request
+     *
+     * @return View
+     */
+    public function random($lang, Request $request): View
+    {
+        $quotes = Quote::inRandomOrder()
+            ->language($request->lang)
+            ->take(10)
+            ->get();
+
+        return view('quote.random', compact('quotes'))
+            ->withTitle(
+                __('Get Ten Random Quotes for Your Inspiration and Motivation')
+            );
     }
 }

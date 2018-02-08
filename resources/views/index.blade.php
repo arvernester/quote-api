@@ -20,9 +20,6 @@
         </h2>
         <p>{{ $random->text }}</p>
     </header>
-    <a href="#" class="image main">
-        <img src="/images/pic01.jpg" alt="" />
-    </a>
     <ul class="actions">
         <li>
             <a href="{{ route('share.twitter', $random) }}" class="button icon special fa-twitter">
@@ -52,7 +49,7 @@
         </p>
     </header>
 
-    @if (app()->environment('production'))
+    @if (!app()->environment('production'))
         <div class="ads">
             @include('layouts.partials.ad')
         </div>
@@ -71,9 +68,6 @@
                 <a href="#">{{ $quote->author->name }}</a>
             </h2>
         </header>
-        <a href="#" class="image fit">
-            <img src="images/pic02.jpg" alt="" />
-        </a>
         <p>{{ $quote->text }}</p>
         <ul class="actions">
             <li>
@@ -95,7 +89,7 @@
         {{ __('Next') }} &raquo;
     </a>
 
-    @if (app()->environment('production'))
+    @if (!app()->environment('production'))
         <div class="ad" style="margin-top:20px">
             @include('layouts.partials.ad')
         </div>

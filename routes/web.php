@@ -66,7 +66,9 @@ Route::group(['namespace' => 'Api', 'middleware' => ['cors', 'locale'], 'prefix'
 Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('/', 'IndexController')->name('index');
 
-    Route::get('/quote/create', 'QuoteController@create')->name('quote.create');
+    Route::get('random', 'QuoteController@random')->name('quote.random');
+    Route::get('quote', 'QuoteController@index')->name('quote.index');
+    Route::get('quote/create', 'QuoteController@create')->name('quote.create');
     Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
     Route::post('quote', 'QuoteController@store')->name('quote.store');
 
