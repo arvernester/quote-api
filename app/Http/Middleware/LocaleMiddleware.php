@@ -18,7 +18,7 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (empty('lang')) {
+        if (empty(session('lang'))) {
             session(['lang' => config('app.locale')]);
         }
 
@@ -28,12 +28,13 @@ class LocaleMiddleware
                 $language = Language::whereCodeAlternate($lang)->first();
 
                 session([
-                    'lang' => $language->code_alternate ?? 'en',
+                    'lang' => $language->code_alternate ?? config('app.fallback_locale'),
                 ]);
             }
-            app()->setLocale(session('lang'));
-            Carbon::setLocale(session('lang'));
         }
+
+        app()->setLocale(session('lang'));
+        Carbon::setLocale(session('lang'));
 
         return $next($request);
     }
