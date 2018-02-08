@@ -4,7 +4,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html lang="{{ app()->getLocale() ?? config('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
 	<title>{{ $title or config('app.name') }}</title>
@@ -25,6 +25,8 @@
 	<noscript>
 		<link rel="stylesheet" href="/css/noscript.css" />
 	</noscript>
+	
+	<link rel="alternate" href="{{ route_lang('index') }}" hreflang="{{ app()->getLocale() }}" />
 
 	@stack('css')
 </head>
