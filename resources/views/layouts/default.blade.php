@@ -25,7 +25,7 @@
 	<noscript>
 		<link rel="stylesheet" href="/css/noscript.css" />
 	</noscript>
-	
+
 	<link rel="alternate" href="{{ route_lang('index') }}" hreflang="{{ app()->getLocale() }}" />
 
 	@stack('css')
@@ -43,7 +43,7 @@
 			<p>{{ $quote->text }}</p>
 			<p>
 				<strong>
-					<a href="#">{{ $quote->author->name }}</a>
+					<a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
 				</strong>
 			</p>
 			<ul class="actions">
