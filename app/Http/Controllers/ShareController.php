@@ -17,13 +17,28 @@ class ShareController extends Controller
 
         $tweet = sprintf(
             '%s By %s. Via @%s.',
-            $quote->text,
+            $quote->text.$quote->text.$quote->text,
             $quote->author->name,
             env('TWITTER_USERNAME')
         );
 
-        abort_if(strlen($tweet) > 280, 500, 'Tweet character is too long.');
+        if (strlen($tweet) > 280) {
+            return redirect(route_lang('index'));
+        }
 
         return redirect('https://twitter.com/home?status='.$tweet);
+    }
+
+    public function facebook(Quote $quote)
+    {
+        $url = sprintf(
+            'https://www.facebook.com/dialog/share?app_id=%s&display=page&href=%s&redirect_uri=%s&quote=%s',
+            env('FACEBOOK_APP_ID'),
+            urlencode(route_lang('quote.show', $quote)),
+            urlencode(url()->previous() ?? route_lang('quote.show', $quote)),
+            urlencode($quote->text)
+        );
+
+        return redirect($url);
     }
 }

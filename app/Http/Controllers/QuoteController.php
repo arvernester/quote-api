@@ -49,7 +49,18 @@ class QuoteController extends Controller
             $language = Language::whereCodeAlternate(session('lang'))->first();
         }
 
-        return view('quote.show', compact('quote', 'language'))
+        $shareQuote = sprintf(
+            '%s By %s. Via @%s.',
+            $quote->text.$quote->text.$quote->text,
+            $quote->author->name,
+            env('TWITTER_USERNAME')
+        );
+
+        return view('quote.show', compact(
+            'quote',
+            'language',
+            'shareQuote'
+        ))
             ->withTitle(__('Quote by :author', ['author' => $quote->author->name]));
     }
 

@@ -19,13 +19,22 @@
             <a href="{{ route_lang('author.show', $random->author) }}">{{ $random->author->name }}</a>
         </h2>
         <p>{{ $random->text }}</p>
+        <div class="fb-quote"></div>
     </header>
     <ul class="actions">
+        @if (strlen($shareRandomQuote) <= 280)
         <li>
             <a href="{{ route('share.twitter', $random) }}" class="button icon special fa-twitter">
                 {{ __('Tweet') }}
             </a>
         </li>
+        @else
+        <li>
+            <a href="{{ route('share.facebook', $random) }}" class="button icon special fa-facebook">
+                Facebook
+            </a>
+        </li>
+        @endif
         <li>
             <button href="#" class="button icon fa-copy button-copy" data-clipboard-text="{{ $random->text }} {{ ucwords(__('by')) }} {{ $random->author->name }}.">
                 {{ __('Copy') }}

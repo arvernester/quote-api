@@ -19,6 +19,7 @@
 
 <!-- Posts -->
 <section class="posts">
+    <div class="fb-quote"></div>
     @foreach ($quotes as $quote)
     <article>
         <header>

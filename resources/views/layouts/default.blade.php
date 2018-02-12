@@ -38,20 +38,29 @@
 
 		<!-- Intro -->
 		@if(request()->routeIs('index'))
-		<div id="intro">
+		<div id="intro" class="fb-quotable">
 			<h1>{{ __('Quote of the Day') }}</h1>
-			<p>{{ $quote->text }}</p>
+			<p>{{ $today->text }}</p>
+			<div class="fb-quote"></div>
 			<p>
 				<strong>
-					<a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
+					<a href="{{ route_lang('author.show', $today->author) }}">{{ $today->author->name }}</a>
 				</strong>
 			</p>
 			<ul class="actions">
+				@if(strlen($shareTodayQuote) <= 280)
 				<li>
-					<a title="{{ __('Share to Twitter') }}" href="{{ route('share.twitter', $quote) }}" class="button icon fa-twitter special">
+					<a title="{{ __('Share to Twitter') }}" href="{{ route('share.twitter', $today) }}" class="button icon fa-twitter special">
 						{{ __('Tweet') }}
 					</a>
 				</li>
+				@else
+				<li>
+					<a href="{{ route('share.facebook', $today) }}" class="button icon special fa-facebook">
+						Facebook
+					</a>
+				</li>
+				@endif
 				<li>
 					<a href="#header" class="button icon fa-arrow-down scrolly">{{ __('Continue') }}</a>
 				</li>
@@ -252,6 +261,15 @@
 			]
 		]) !!}
 	</script>
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
 	@stack('schema')
 

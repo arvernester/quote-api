@@ -19,6 +19,7 @@ Route::get('quote/{quote}/poster.png', 'QuoteController@poster')->name('quote.po
 Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');
 Route::post('contact/post', 'ContactController@post')->name('contact.post');
 Route::get('share/twitter/{quote}', 'ShareController@twitter')->name('share.twitter');
+Route::get('share/facebook/{quote}', 'ShareController@facebook')->name('share.facebook');
 Route::post('translation/translate', 'TranslationController@translate')->name('translation.translate');
 
 Auth::routes();

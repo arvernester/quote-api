@@ -22,16 +22,22 @@
             <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
         </h2>
         <p>{{ $quote->text }}</p>
+        <div class="fb-quote"></div>
     </header>
-    <a href="#" class="image main">
-        <img src="{{ route('quote.poster', $quote) }}" alt="" />
-    </a>
     <ul class="actions">
+        @if (strlen($shareQuote) <= 280)
         <li>
             <a href="{{ route('share.twitter', $quote) }}" class="button icon special fa-twitter">
                 {{ __('Tweet') }}
             </a>
         </li>
+        @else
+        <li>
+            <a href="{{ route('share.facebook', $quote) }}" class="button icon special fa-facebook">
+                Facebook
+            </a>
+        </li>
+        @endif
         <li>
             <button class="button icon fa-copy button-copy" data-clipboard-text="{{ $quote->text }} {{ ucwords(__('by')) }} {{ $quote->author->name }}.">
                 {{ __('Copy') }}
@@ -59,6 +65,10 @@
         @include('layouts.partials.ad')
     </div>
 </article>
+
+<div class="post">
+    <img class="image fit" src="{{ route('quote.poster', $quote) }}" alt="{{ __('Quote by :author', ['author' => $quote->author->name]) }}">
+</div>
 @endsection
 
 @push('css')

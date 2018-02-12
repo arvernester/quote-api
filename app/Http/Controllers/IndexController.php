@@ -15,7 +15,7 @@ class IndexController extends Controller
     {
         $tommorow = Carbon::now()->addDay(1);
 
-        $quote = Cache::remember('quote.day', $tommorow, function () {
+        $today = Cache::remember('quote.day', $tommorow, function () {
             return Quote::inRandomOrder()
                 ->whereRaw('LENGTH(text) >= 250')
                 ->with('author')
@@ -23,10 +23,24 @@ class IndexController extends Controller
                 ->first();
         });
 
+        $shareTodayQuote = sprintf(
+            '%s By %s. Via @%s.',
+            $today->text,
+            $today->author->name,
+            env('TWITTER_USERNAME')
+        );
+
         $random = Quote::inRandomOrder()
             ->with('category', 'author', 'language')
             ->take(1)
             ->first();
+
+        $shareRandomQuote = sprintf(
+            '%s By %s. Via @%s.',
+            $random->text,
+            $random->author->name,
+            env('TWITTER_USERNAME')
+        );
 
         if (session('lang') and (session('lang') != $random->language->code_alternate)) {
             $language = Language::whereCodeAlternate(session('lang'))->first();
@@ -36,7 +50,14 @@ class IndexController extends Controller
             ->with('author')
             ->paginate(10);
 
-        return view('index', compact('quote', 'random', 'quotes', 'language'))
+        return view('index', compact(
+            'today',
+            'random',
+            'quotes',
+            'language',
+            'shareRandomQuote',
+            'shareTodayQuote'
+        ))
             ->withTitle(sprintf('%s - %s',
                 config('app.name'),
                 __('Motivational & Inspirational Quotes')

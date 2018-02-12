@@ -20,6 +20,7 @@
 <!-- Posts -->
 @if ($quotes->count() >= 1)
 <section class="posts">
+    <div class="fb-quote"></div>
     @foreach ($quotes as $quote)
     <article>
         <header>
@@ -27,7 +28,7 @@
                 {{ $quote->created_at->diffForHumans() }}
             </span>
             <h2>
-                <a href="#">{{ $quote->author->name }}</a>
+                <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
             </h2>
         </header>
         <p>{{ $quote->text }}</p>
