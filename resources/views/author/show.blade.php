@@ -16,8 +16,12 @@
 
 <article class="post">
     <h3>{{ __('Quote by :author', ['author' => $author->name]) }}</h3>
+    
     @foreach ($author->quotes as $quote)
-        <div class="box">{{ $quote->text }}</div>
+    <div class="fb-quote" data-href="{{ route_lang('quote.show', $quote) }}"></div>
+        <div class="box">
+            {{ $quote->text }}
+        </div>
     @endforeach
 </article>
 @endsection
