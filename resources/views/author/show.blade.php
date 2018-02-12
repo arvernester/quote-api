@@ -1,5 +1,18 @@
 @extends('layouts.default')
 
+@push('meta')
+    <meta name="title" content="{{ $author->name }}" />
+    @if (! empty($description))
+    <meta name="description" content="{{ $description }}">
+    @endif
+
+    <meta property="og:title" content="{{ $author->name }}" />
+    @if (! empty($description))
+    <meta property="og:description" content="{{ $description }}">
+    @endif
+    <meta property="og:type" content="article" />
+@endpush
+
 @section('content')
 <article class="post featured">
     <header class="major">
@@ -7,6 +20,17 @@
             {{ __('Author') }}
         </span>
         <h1>{{ $author->name }}</h1>
+        @if (! empty($description))
+            <p>{{ $description }}</p>
+        @endif
+
+        @if (! empty($url))
+            <ul class="actions">
+                <li>
+                    <a href="{{ $url }}" class="button icon fa-wikipedia">Wikipedia</a>
+                </li>
+            </ul>
+        @endif
     </header>
 
     <div class="ads">
