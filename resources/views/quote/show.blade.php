@@ -8,6 +8,8 @@
     <meta property="og:description" content="{{ $quote->text }}" />
     <meta property="og:type" content="article" />
     <meta property="og:image" content="{{ route('quote.poster', $quote) }}" />
+    <meta property="og:image:height" content="400">
+    <meta property="og:image:width" content="600">
 @endpush
 
 @section('content')
@@ -22,7 +24,7 @@
         <p>{{ $quote->text }}</p>
     </header>
     <a href="#" class="image main">
-        <img src="/images/pic01.jpg" alt="" />
+        <img src="{{ route('quote.poster', $quote) }}" alt="" />
     </a>
     <ul class="actions">
         <li>
@@ -57,12 +59,6 @@
         @include('layouts.partials.ad')
     </div>
 </article>
-
-<div class="post">
-    <span class="image fit">
-        <img src="{{ route('quote.poster', $quote) }}" alt="" width="600">
-    </span>
-</div>
 @endsection
 
 @push('css')
