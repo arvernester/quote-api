@@ -16,7 +16,7 @@
     <header class="major">
         <span class="date">{{ __('Random Quote') }}</span>
         <h2>
-            <a href="{{ route_lang('author.show', $quote->author) }}">{{ $random->author->name }}</a>
+            <a href="{{ route_lang('author.show', $random->author) }}">{{ $random->author->name }}</a>
         </h2>
         <p>{{ $random->text }}</p>
     </header>
