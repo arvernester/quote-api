@@ -57,6 +57,12 @@
         @include('layouts.partials.ad')
     </div>
 </article>
+
+<div class="post">
+    <span class="image fit">
+        <img src="{{ route('quote.poster', $quote) }}" alt="" width="600">
+    </span>
+</div>
 @endsection
 
 @push('css')
