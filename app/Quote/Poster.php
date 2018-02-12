@@ -38,7 +38,7 @@ class Poster
         $box->setFontColor(new Color(255, 255, 255));
         // $box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
         $box->setFontSize($fontSize + 15);
-        $box->setBox(20, 100, 620, 426);
+        $box->setBox(20, 100, 610, 426);
         $box->setTextAlign('center', 'top');
         $box->draw($quote->text);
 
