@@ -49,7 +49,7 @@
         </p>
     </header>
 
-    @if (!app()->environment('production'))
+    @if (app()->environment('production'))
         <div class="ads">
             @include('layouts.partials.ad')
         </div>
@@ -94,7 +94,7 @@
         {{ __('Next') }} &raquo;
     </a>
 
-    @if (!app()->environment('production'))
+    @if (app()->environment('production'))
         <div class="ad" style="margin-top:20px">
             @include('layouts.partials.ad')
         </div>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Quote\Poster;
+use App\Quote;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +13,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('quote/{quote}/poster.png', 'QuoteController@poster')->name('quote.poster');
 
 Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');
 Route::post('contact/post', 'ContactController@post')->name('contact.post');

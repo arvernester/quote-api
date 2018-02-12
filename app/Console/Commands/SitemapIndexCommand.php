@@ -64,7 +64,16 @@ class SitemapIndexCommand extends Command
                     route_lang('quote.show', $quote),
                     $quote->updated_at->toIso8601String(),
                     '0.8',
-                    'weekly'
+                    'weekly',
+                    [
+                        [
+                            'url' => route('quote.poster', $quote),
+                            'caption' => $caption = __('Quote by :author', [
+                                'author' => $quote->author->name,
+                            ]),
+                            'title' => $caption,
+                        ],
+                    ]
                 );
             }
 

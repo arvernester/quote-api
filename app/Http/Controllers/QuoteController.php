@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Facades\Poster;
 
 class QuoteController extends Controller
 {
@@ -131,5 +132,16 @@ class QuoteController extends Controller
             ->withTitle(
                 __('Get Ten Random Quotes for Your Inspiration and Motivation')
             );
+    }
+
+    /**
+     * Generate poster on the fly when access quote detail.
+     *
+     * @param Quote $quote
+     */
+    public function poster(Quote $quote): void
+    {
+        header('Content-type: image/png');
+        Poster::generate($quote);
     }
 }

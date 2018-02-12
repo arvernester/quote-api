@@ -7,7 +7,7 @@
     <meta property="og:title" content="{{ __('Quote by :author', ['author' => $quote->author->name]) }}" />
     <meta property="og:description" content="{{ $quote->text }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="{{ asset('img/header-'.app()->getLocale().'.png') }}" />
+    <meta property="og:image" content="{{ route('quote.poster', $quote) }}" />
 @endpush
 
 @section('content')
