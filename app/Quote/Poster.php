@@ -10,46 +10,48 @@ class Poster
 {
     public function generate(Quote $quote)
     {
-        $image = imagecreatetruecolor(600, 400);
-
-        $bgColor = imagecolorallocate($image, 29, 39, 44);
-        imagefill($image, 0, 0, $bgColor);
+        $image = imagecreatefromjpeg(public_path('img/quote-bg.jpg'));
 
         $box = new Box($image);
         $box->setFontFace(
-            $fontPath = resource_path('assets/fonts/MoonTypeface/Moon Light.otf')
+            $fontPath = resource_path('assets/fonts/Geomanist/Geomanist-Regular.otf')
         );
         $box->setFontColor(new Color(255, 255, 255));
-        $box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
-        $box->setFontSize(25);
-        $box->setBox(20, 10, 560, 90);
+        $box->setFontSize(30);
+        $box->setBox(20, 10, 620, 426);
         $box->setTextAlign('center', 'top');
         $box->draw($quote->author->name);
 
         $fontSize = 30;
-        if (strlen($quote->text) > 500) {
-            $fontSize = 16;
-        } elseif (strlen($quote->text) > 250) {
+        if (strlen($quote->text) > 300) {
+            $fontSize = 14;
+        } elseif (strlen($quote->text) > 200) {
             $fontSize = 18;
         } elseif (strlen($quote->text) > 150) {
             $fontSize = 19;
         }
 
         $box = new Box($image);
-        $box->setFontFace($fontPath);
+        $box->setFontFace(
+            resource_path('assets/fonts/Savoye/Savoye LET Plain1.0.ttf')
+        );
         $box->setFontColor(new Color(255, 255, 255));
         // $box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
-        $box->setFontSize($fontSize);
-        $box->setBox(20, 100, 560, 300);
+        $box->setFontSize($fontSize + 15);
+        $box->setBox(20, 100, 620, 426);
         $box->setTextAlign('center', 'top');
         $box->draw($quote->text);
 
         $box = new Box($image);
-        $box->setFontFace($fontPath);
-        $box->setFontColor(new Color(255, 255, 255));
-        $box->setBox(20, 10, 560, 380);
+        $box->setFontFace(
+            resource_path('assets/fonts/Geomanist/Geomanist-Regular.otf')
+        );
+        $box->setFontColor(new Color(29, 39, 44));
+        $box->setBox(20, 10, 620, 406);
+        $box->setFontSize(15);
         $box->setTextAlign('center', 'bottom');
-        $box->draw('www.kutip.org');
+        $box->setBackgroundColor(new Color(255, 255, 255));
+        $box->draw('  www.kutip.org ');
 
         imagepng($image);
     }
