@@ -17,8 +17,8 @@ class Poster
             $fontPath = resource_path('assets/fonts/Geomanist/Geomanist-Regular.otf')
         );
         $box->setFontColor(new Color(255, 255, 255));
-        $box->setFontSize(30);
-        $box->setBox(20, 10, 620, 426);
+        $box->setFontSize(20);
+        $box->setBox(20, 10, 580, 426);
         $box->setTextAlign('center', 'top');
         $box->draw($quote->author->name);
 
@@ -38,7 +38,7 @@ class Poster
         $box->setFontColor(new Color(255, 255, 255));
         // $box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
         $box->setFontSize($fontSize + 15);
-        $box->setBox(20, 100, 610, 426);
+        $box->setBox(10, 100, 590, 426);
         $box->setTextAlign('center', 'top');
         $box->draw($quote->text);
 
@@ -47,7 +47,7 @@ class Poster
             resource_path('assets/fonts/Geomanist/Geomanist-Regular.otf')
         );
         $box->setFontColor(new Color(29, 39, 44));
-        $box->setBox(20, 10, 620, 406);
+        $box->setBox(20, 10, 560, 380);
         $box->setFontSize(15);
         $box->setTextAlign('center', 'bottom');
         $box->setBackgroundColor(new Color(255, 255, 255));
