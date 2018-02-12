@@ -6,12 +6,19 @@
         <span class="date">
             {{ __('Author') }}
         </span>
-        <h2>{{ $author->name }}</a></h2>
+        <h1>{{ $author->name }}</h1>
     </header>
 
     <div class="ads">
         @include('layouts.partials.ad')
     </div>
+</article>
+
+<article class="post">
+    <h3>{{ __('Quote by :author', ['author' => $author->name]) }}</h3>
+    @foreach ($author->quotes as $quote)
+        <div class="box">{{ $quote->text }}</div>
+    @endforeach
 </article>
 @endsection
 
