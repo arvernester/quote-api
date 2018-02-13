@@ -1,8 +1,5 @@
 <?php
 
-use App\Quote\Poster;
-use App\Quote;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +11,7 @@ use App\Quote;
 |
 */
 
-Route::get('quote/{quote}/poster.png', 'QuoteController@poster')->name('quote.poster');
+Route::get('quote/poster/{quote}.png', 'QuoteController@poster')->name('quote.poster');
 
 Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');
 Route::post('contact/post', 'ContactController@post')->name('contact.post');
