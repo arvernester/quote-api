@@ -29,6 +29,7 @@ class QuoteRequest extends FormRequest
             'language' => 'required|integer|exists:languages,id',
             'author' => 'max:100',
             'text' => 'required|max:5000',
+            'status' => 'boolean',
         ];
 
         return $rules;

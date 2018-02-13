@@ -26,6 +26,11 @@ Breadcrumbs::for('admin.quote.index', function ($trail) {
     $trail->add(__('Quote'), route('admin.quote.index'));
 });
 
+Breadcrumbs::for('admin.quote.submitted', function ($trail) {
+    $trail->parent('admin.quote.index');
+    $trail->add(__('Submitted Quote'), route('admin.quote.submitted'));
+});
+
 Breadcrumbs::for('admin.quote.create', function ($trail) {
     $trail->parent('admin.quote.index');
     $trail->add(__('Create New'), route('admin.quote.create'));

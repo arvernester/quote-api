@@ -39,6 +39,7 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
         Route::delete('author/{author}/image', 'AuthorController@removePicture')->name('author.removePicture');
         Route::resource('author', 'AuthorController');
 
+        Route::get('quote/submitted', 'QuoteController@submitted')->name('quote.submitted');
         Route::resource('quote', 'QuoteController');
 
         Route::resource('country', 'CountryController');

@@ -101,4 +101,14 @@ class Quote extends Model
             });
         });
     }
+
+    /**
+     * Return where quote status is I (Inactive).
+     *
+     * @param object $query
+     */
+    public function scopePending($query)
+    {
+        return $query->whereStatus('I');
+    }
 }

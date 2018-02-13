@@ -19,8 +19,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('admin.quote.submitted') }}">
-                                            <em class="fa fa-refresh fa-fw"></em> {{ __('Submitted Quotes') }}
+                                        <a href="{{ route('admin.quote.index') }}">
+                                            <em class="fa fa-quote-right fa-fw"></em> {{ __('Quote') }}
                                         </a>
                                     </li>
                                     <li class="divider"></li>
@@ -40,6 +40,7 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
+                    @if ($quotes->total() >= 1)
                     <table class="table">
                         <thead>
                             <tr>
@@ -87,6 +88,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @else
+                        <div class="alert alert-info">
+                            {{ __('No submitted quotes at this time.') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -75,6 +75,17 @@
                 @endif
 
                 <div class="form-group">
+                    <label for="status">{{ __('Status') }}</label>
+                    <p class="form-control-static">
+                        @if ($quote->status == 'A')
+                            <span class="label label-success">{{ __('Published') }}</span>
+                        @else
+                            <span class="label label-warning">{{ __('Unpublished') }}</span>
+                        @endif
+                    </p>
+                </div>
+
+                <div class="form-group">
                     <label for="created">{{ __('Created') }}</label>
                     <p class="form-control-static">
                         {{ $quote->created_at->diffForHumans() }}

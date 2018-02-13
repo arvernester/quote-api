@@ -60,6 +60,23 @@ class QuoteController extends Controller
     }
 
     /**
+     * Quotes submitted by user.
+     *
+     * @param Request $request
+     *
+     * @return View
+     */
+    public function submitted(Request $request): View
+    {
+        $quotes = Quote::orderBy('created_at')
+            ->pending()
+            ->paginate();
+
+        return view('admin.quote.submitted', compact('quotes'))
+            ->withTitle(__('Submitted Quote'));
+    }
+
+    /**
      * Show the form for creating a new quote.
      *
      * @return View
@@ -150,6 +167,7 @@ class QuoteController extends Controller
             'category_id' => $request->category,
             'language_id' => $request->language,
             'author_id' => $author->id,
+            'status' => $request->status == 1 ? 'A' : 'I',
         ]);
 
         $quote->fill($request->all());

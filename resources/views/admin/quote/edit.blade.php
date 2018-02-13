@@ -49,6 +49,14 @@
                         <span class="help-block text-danger">{{ $errors->first('source') }}</span>
                     </div>
 
+                    <div class="form-group checkbox">
+                        <label for="status">
+                            <input type="checkbox" name="status" value="1" id="quote-status" checked>
+                            {{ __('Publish Quote') }}
+                        </label>
+                        <span class="help-block text-danger">{{ $errors->first('status') }}</span>
+                    </div>
+
                     <button name="action" class="btn btn-primary" type="submit" value="submit">{{ __('Submit') }}</button>
                     <button name="action" class="btn btn-default" type="submit" value="view">{{ __('Submit & View') }}</button>
                     <a href="{{ url()->previous() ?? route('admin.quote.index') }}" class="btn btn-default">{{ __('Back') }}</a>
