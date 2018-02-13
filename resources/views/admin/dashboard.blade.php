@@ -151,7 +151,9 @@
                                 <h4>
                                     <a href="{{ route('admin.author.show', $author) }}">{{ $author->name }}</a>
                                 </h4>
-                                <p>{{ $author->latestQuote->text }}</p>
+                                @if (! empty($author->latestQuote))
+                                    <p>{{ $author->latestQuote->text }}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
