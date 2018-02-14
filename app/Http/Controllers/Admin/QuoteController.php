@@ -171,6 +171,7 @@ class QuoteController extends Controller
             'language_id' => $request->language,
             'author_id' => $author->id,
             'status' => $request->status == 1 ? 'A' : 'I',
+            'slug' => str_slug($author->name),
         ]);
 
         $quote->fill($request->all());

@@ -7,6 +7,14 @@
     <div class="col-md-12">
         <div class="panel panel-container">
             <div class="panel-body">
+
+                <div class="form-group">
+                    <label for="permalink">{{ __('Permalink') }}</label>
+                    <p class="form-control-static">
+                        <a href="{{ route_lang('quote.show.slug', $quote->slug) }}">{{ route_lang('quote.show.slug', $quote->slug) }}</a>
+                    </p>
+                </div>
+
                 <div class="form-group">
                     <label for="lang">{{ __('Language') }}</label>
                     <p class="form-control-static">
