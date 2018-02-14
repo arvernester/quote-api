@@ -43,7 +43,7 @@ class LoginController extends Controller
      *
      * @return string
      */
-    public function redirect(): string
+    public function redirectPath(): string
     {
         return route('admin.dashboard');
     }
