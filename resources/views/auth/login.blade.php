@@ -14,10 +14,9 @@
                 <div class="form-group {{ !$errors->has('password') ?: 'has-error' }}">
                     <input class="form-control" placeholder="{{ __('Password') }}" name="password" type="password" value="">
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input name="remember" type="checkbox" value="Remember Me">{{ __('Remember Me') }}
-                    </label>
+                <div class="checkbox icheck-primary">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">{{ __('Remember me') }}</label>
                 </div>
                 <button class="btn btn-primary" type="submit">{{ __('Log In') }}</button>
 

@@ -1,3 +1,6 @@
 {
-    "/js/app.js": "/js/app.js"
+    "/js/app.js": "/js/app.js",
+    "/lumino/css/all.css": "/lumino/css/all.css",
+    "/lumino/css/all.min.css": "/lumino/css/all.min.css",
+    "/lumino/js/all.js": "/lumino/js/all.js"
 }

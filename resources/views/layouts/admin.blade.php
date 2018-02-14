@@ -7,12 +7,9 @@
     <meta name="robots" content="noindex">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>{{ $title or config('app.name') }}</title>
 
-    <link href="{{ asset('lumino/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lumino/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lumino/css/datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('lumino/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('lumino/css/all.css') }}" rel="stylesheet">
 
     @stack('css')
 
@@ -143,9 +140,7 @@
     <!-- /.row -->
 
     <script src="{{ asset('lumino/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ asset('lumino/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('lumino/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ asset('lumino/js/custom.js') }}"></script>
+    <script src="{{ asset('lumino/js/all.js') }}"></script>
 
     @stack('js')
 

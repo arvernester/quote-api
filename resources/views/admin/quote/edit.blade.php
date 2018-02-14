@@ -49,11 +49,9 @@
                         <span class="help-block text-danger">{{ $errors->first('source') }}</span>
                     </div>
 
-                    <div class="form-group checkbox">
-                        <label for="status">
-                            <input type="checkbox" name="status" value="1" id="quote-status" checked>
-                            {{ __('Publish Quote') }}
-                        </label>
+                    <div class="checkbox icheck-primary">
+                        <input name="status" type="checkbox" id="status" value="1" checked />
+                        <label for="status">{{ __('Publish Quote') }}</label>
                         <span class="help-block text-danger">{{ $errors->first('status') }}</span>
                     </div>
 

@@ -7,9 +7,8 @@
 	<meta name="robots" content="noindex">
 	<title>{{ config('app.name') }}</title>
 	
-	<link href="{{ asset('lumino/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('lumino/css/datepicker3.css') }}" rel="stylesheet">
-	<link href="{{ asset('lumino/css/styles.css') }}" rel="stylesheet">
+	<link href="{{ asset('lumino/css/all.css') }}" rel="stylesheet">
+
 	<!--[if lt IE 9]>
 	<script src="{{ asset('lumino/js/html5shiv.js') }}"></script>
 	<script src="{{ asset('lumino/js/respond.min.js') }}"></script>

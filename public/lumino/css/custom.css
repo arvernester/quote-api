@@ -1,0 +1,7 @@
+.panel-body input[type="checkbox"]:checked+label {
+    text-decoration: none !important;
+}
+
+.panel-body input[type="checkbox"]+label {
+    text-decoration: line-through !important;
+}
