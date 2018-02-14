@@ -49,7 +49,7 @@
                         <span class="help-block text-danger">{{ $errors->first('source') }}</span>
                     </div>
 
-                    <div class="checkbox icheck-primary">
+                    <div class="checkbox icheck-info">
                         <input name="status" type="checkbox" id="status" value="1" checked />
                         <label for="status">{{ __('Publish Quote') }}</label>
                         <span class="help-block text-danger">{{ $errors->first('status') }}</span>
