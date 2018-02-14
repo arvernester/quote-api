@@ -47,6 +47,9 @@ class IndexController extends Controller
         }
 
         $quotes = Quote::orderBy('created_at', 'DESC')
+            ->when($request->lang, function ($query) use ($request) {
+                return $query->language($request->lang);
+            })
             ->with('author')
             ->paginate(10);
 
