@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Numbers\Number;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Schema;
 
 class AuthorController extends Controller
 {
@@ -152,9 +151,10 @@ class AuthorController extends Controller
      */
     public function updateable(Request $request): JsonResponse
     {
-        if (!Schema::hasColumn(with(new Author())->getTable(), $request->name)) {
-            abort(400, __('Column not found.'));
-        }
+        $this->validate($request, [
+            'pk' => 'required|integer|exists:authors,id',
+            'name' => 'required|string|has_column:authors',
+        ]);
 
         $author = Author::whereId($request->pk)
             ->update([$request->name => $request->value]);

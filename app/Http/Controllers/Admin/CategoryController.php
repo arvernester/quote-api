@@ -10,7 +10,6 @@ use App\Quote;
 use App\Http\Controllers\Controller;
 use Numbers\Number;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Schema;
 
 class CategoryController extends Controller
 {
@@ -87,11 +86,19 @@ class CategoryController extends Controller
     {
     }
 
+    /**
+     * Update category by column and value.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function updateable(Request $request): JsonResponse
     {
-        if (!Schema::hasColumn(with(new Category())->getTable(), $request->name)) {
-            abort(400, __('Column not found.'));
-        }
+        $this->validate($request, [
+            'pk' => 'required|integer|exists:categories,id',
+            'name' => 'required|string|has_column:categories',
+        ]);
 
         $category = Category::whereId($request->pk)
             ->update([$request->name => $request->value]);
