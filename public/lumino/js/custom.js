@@ -1,4 +1,6 @@
-$('#calendar').datepicker({});
+if ($.fn.datepicker) {
+	$('#calendar').datepicker({});
+}
 
 ! function ($) {
 	$(document).on("click", "ul.nav li.parent > a ", function () {
@@ -29,16 +31,18 @@ $(document).on('click', '.panel-heading span.clickable', function (e) {
 })
 
 $(function(){
-	$.fn.editable.defaults.ajaxOptions = { type: "PUT" };
-	$('.editable').editable({
-		params: function(params) {
-			params._token = $('meta[name=csrf-token]').attr('content')
-			return params;
-		},
-		error: function(response, val) {
-			return response.responseJSON.message
-		}
-	})
+	if ($.fn.editable) {
+		$.fn.editable.defaults.ajaxOptions = { type: "PUT" };
+		$('.editable').editable({
+			params: function (params) {
+				params._token = $('meta[name=csrf-token]').attr('content')
+				return params;
+			},
+			error: function (response, val) {
+				return response.responseJSON.message
+			}
+		})
+	}
 })
 
 $(function(){
@@ -58,4 +62,8 @@ $(function(){
 			}
 		})
 	})
+})
+
+$(function(){
+	$('[data-toggle=popover]').popover()
 })

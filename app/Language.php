@@ -21,6 +21,16 @@ class Language extends Model
     ];
 
     /**
+     * Mutate native_name attributes.
+     *
+     * @return string
+     */
+    public function getNativeNameAttribute(): string
+    {
+        return ucwords($this->attributes['native_name']);
+    }
+
+    /**
      * Languages belongs to Country.
      *
      * @return BelongsTo

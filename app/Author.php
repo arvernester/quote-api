@@ -46,9 +46,24 @@ class Author extends Model
         return $this->hasMany(Quote::class);
     }
 
+    /**
+     * Show latest quote from author.
+     *
+     * @return HasOne
+     */
     public function latestQuote(): HasOne
     {
         return $this->hasOne(Quote::class)
             ->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Author has many profile in different language.
+     *
+     * @return HasMany
+     */
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(AuthorProfile::class);
     }
 }

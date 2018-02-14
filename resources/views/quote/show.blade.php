@@ -66,7 +66,8 @@
     </div>
 </article>
 
-<div class="post">
+<div class="post image-center">
+    <h2>{{ __('Quote Poster') }}</h2>
     <img class="image fit" src="{{ route('quote.poster', $quote->slug) }}" alt="{{ __('Quote by :author', ['author' => $quote->author->name]) }}">
 </div>
 @endsection

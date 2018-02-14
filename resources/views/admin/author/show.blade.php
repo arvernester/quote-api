@@ -57,6 +57,39 @@
     </div>
 </div>
 
+@if ($author->profiles->count() >= 1)
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ __('Profiles') }}</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('Language') }}</th>
+                                <th>{{ __('About') }}</th>
+                                <th>{{ __('URL') }}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($author->profiles as $profile)
+                                <tr>
+                                    <td><a href="javascript:void(0)" data-trigger="hover" data-toggle="popover" data-title="{{ __('Language') }}" data-content="{{ $profile->language->name }} ({{ $profile->language->native_name }})">{{ $profile->language->code_alternate }}</a></td>
+                                    <td>{{ $profile->about }}</td>
+                                    <td><a href="{{ $profile->url }}" data-placement="left" data-trigger="hover" data-toggle="popover" data-title="URL" data-content="{{ __('Open URL in new window') }}: {{ $profile->url }}" class="btn btn-info btn-xs"> <em class="fa fa-external-link"></em></a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default ">

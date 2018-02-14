@@ -70,7 +70,14 @@ class AuthorController extends Controller
      */
     public function show(Author $author): View
     {
-        $author->load('quotes', 'quotes.category', 'quotes.language');
+        $author->load(
+            'quotes',
+            'quotes.author',
+            'quotes.category',
+            'quotes.language',
+            'profiles',
+            'profiles.language'
+        );
 
         // remove image path if file not exists
         if (!Storage::exists($author->image_path)) {
