@@ -77,7 +77,7 @@
                             @foreach ($author->profiles as $profile)
                                 <tr>
                                     <td><span class="dotted-underline" data-trigger="hover" data-toggle="popover" data-title="{{ __('Language') }}" data-content="{{ $profile->language->name }} ({{ $profile->language->native_name }})">{{ $profile->language->code_alternate }}</a></td>
-                                    <td>{{ $profile->about }}</td>
+                                    <td><a href="#" class="editable" data-url="{{ route('admin.author.profile.updateable') }}" data-name="about" data-type="textarea" data-pk="{{ $profile->id }}">{{ $profile->about }}</a></td>
                                     <td><a href="{{ $profile->url }}" data-placement="left" data-trigger="hover" data-toggle="popover" data-title="URL" data-content="{{ $profile->url }}" class="btn btn-info btn-xs"> <em class="fa fa-external-link"></em></span></td>
                                 </tr>
                             @endforeach
@@ -157,4 +157,12 @@
         margin-top: 20px;
     }
 </style>
+@endpush
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css') }}">
+@endpush
+
+@push('js')
+<script src="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
 @endpush

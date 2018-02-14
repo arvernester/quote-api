@@ -38,6 +38,8 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
         Route::delete('author/{author}/image', 'AuthorController@removePicture')->name('author.removePicture');
         Route::resource('author', 'AuthorController');
 
+        Route::put('author/profile/updateable', 'AuthorProfileController@updateable')->name('author.profile.updateable');
+
         Route::get('quote/submitted', 'QuoteController@submitted')->name('quote.submitted');
         Route::resource('quote', 'QuoteController');
 
