@@ -76,9 +76,9 @@
                         <tbody>
                             @foreach ($author->profiles as $profile)
                                 <tr>
-                                    <td><a href="javascript:void(0)" data-trigger="hover" data-toggle="popover" data-title="{{ __('Language') }}" data-content="{{ $profile->language->name }} ({{ $profile->language->native_name }})">{{ $profile->language->code_alternate }}</a></td>
+                                    <td><span class="dotted-underline" data-trigger="hover" data-toggle="popover" data-title="{{ __('Language') }}" data-content="{{ $profile->language->name }} ({{ $profile->language->native_name }})">{{ $profile->language->code_alternate }}</a></td>
                                     <td>{{ $profile->about }}</td>
-                                    <td><a href="{{ $profile->url }}" data-placement="left" data-trigger="hover" data-toggle="popover" data-title="URL" data-content="{{ __('Open URL in new window') }}: {{ $profile->url }}" class="btn btn-info btn-xs"> <em class="fa fa-external-link"></em></a></td>
+                                    <td><a href="{{ $profile->url }}" data-placement="left" data-trigger="hover" data-toggle="popover" data-title="URL" data-content="{{ $profile->url }}" class="btn btn-info btn-xs"> <em class="fa fa-external-link"></em></span></td>
                                 </tr>
                             @endforeach
                         </tbody>

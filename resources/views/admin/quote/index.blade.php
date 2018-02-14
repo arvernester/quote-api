@@ -57,9 +57,7 @@
                             <tr>
                                 <td>
                                     @if (! empty($quote->language))
-                                        <abbr title="{{ $quote->language->name }} ({{ $quote->language->native_name }})">
-                                            {{ strtoupper($quote->language->code_alternate) }}
-                                        </abbr>
+                                        <span class="dotted-underline" data-trigger="hover" data-title="{{ __('Language') }}" data-toggle="popover" data-content="{{ $quote->language->name }} ({{ $quote->language->native_name }})">{{ $quote->language->code_alternate }}</span>
                                     @else
                                         <abbr title="{{ __('Not defined') }}">ND</abbr>
                                     @endif

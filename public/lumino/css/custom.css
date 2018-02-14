@@ -5,3 +5,8 @@
 .panel-body input[type="checkbox"]+label {
     text-decoration: line-through !important;
 }
+
+span.dotted-underline {
+    border-bottom: 1px dotted;
+    cursor: pointer;
+}
