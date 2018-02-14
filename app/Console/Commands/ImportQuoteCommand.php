@@ -112,6 +112,7 @@ class ImportQuoteCommand extends Command
             $quote->author_id = $author->id;
             $quote->language_id = $language->id ?? null;
             $quote->category_id = $category->id;
+            $quote->slug = str_slug($author->name);
             $quote->source = $source ?? null;
             $quote->save();
         });
