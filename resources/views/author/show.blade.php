@@ -27,7 +27,7 @@
         @if (! empty($url))
             <ul class="actions">
                 <li>
-                    <a href="{{ $url }}" class="button icon fa-wikipedia">Wikipedia</a>
+                    <a href="{{ $url }}" class="button icon fa-wikipedia">{{ __('Full Profile') }}</a>
                 </li>
             </ul>
         @endif
