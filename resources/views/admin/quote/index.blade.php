@@ -59,7 +59,7 @@
                                     @if (! empty($quote->language))
                                         <span class="dotted-underline" data-trigger="hover" data-title="{{ __('Language') }}" data-toggle="popover" data-content="{{ $quote->language->name }} ({{ $quote->language->native_name }})">{{ $quote->language->code_alternate }}</span>
                                     @else
-                                        <abbr title="{{ __('Not defined') }}">ND</abbr>
+                                        <span class="dotted-underline" data-trigger="hover" data-toggle="popover" data-title="{{ __('Language') }}" data-content="{{ __('Undefined') }}">n/a</span>
                                     @endif
                                 </td>
                                 <td>{{ $quote->text }}</td>
