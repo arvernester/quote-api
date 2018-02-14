@@ -140,10 +140,12 @@
     <!-- /.row -->
 
     <script src="{{ asset('lumino/js/jquery-1.11.1.min.js') }}"></script>
+    
     <script src="{{ asset('lumino/js/all.js') }}"></script>
-
+    
     @stack('js')
-
+    
+    <script src="{{ asset('lumino/js/custom.js') }}"></script>
 </body>
 
 </html>

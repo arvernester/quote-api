@@ -41,6 +41,5 @@ mix.minify('public/lumino/css/all.css');
  */
 mix.scripts([
     'public/lumino/js/bootstrap.js',
-    'lumino/js/bootstrap-datepicker.js',
-    'lumino/js/custom.js'
+    'lumino/js/bootstrap-datepicker.js'
 ], 'public/lumino/js/all.js')

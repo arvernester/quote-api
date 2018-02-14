@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Quote;
 use App\Http\Controllers\Controller;
 use Numbers\Number;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Schema;
 
 class CategoryController extends Controller
 {
@@ -83,6 +85,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+    }
+
+    public function updateable(Request $request): JsonResponse
+    {
+        if (!Schema::hasColumn(with(new Category())->getTable(), $request->name)) {
+            abort(400, __('Column not found.'));
+        }
+
+        $category = Category::whereId($request->pk)
+            ->update([$request->name => $request->value]);
+
+        return response()->json([
+            'message' => __('Category has been updated.'),
+        ]);
     }
 
     /**

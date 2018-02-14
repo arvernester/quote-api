@@ -45,7 +45,9 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr class="{{ $category->quotes_count <= 0 ? 'text-muted' : '' }}">
-                                <td>{{ $category->name }}</td>
+                                <td>
+                                    <a href="#" class="editable" data-name="name" data-type="text" data-pk="{{ $category->id }}" data-url="{{ route('admin.category.updateable') }}">{{ $category->name }}</a>
+                                </td>
                                 <td class="text-right">
                                     <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
                                         {{ Numbers\Number::n($category->quotes_count)->format() }}
@@ -77,3 +79,11 @@
     </div>
 </div>
 @endsection
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css') }}">
+@endpush
+
+@push('js')
+<script src="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+@endpush

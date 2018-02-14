@@ -29,6 +29,19 @@ $(document).on('click', '.panel-heading span.clickable', function (e) {
 })
 
 $(function(){
+	$.fn.editable.defaults.ajaxOptions = { type: "PUT" };
+	$('.editable').editable({
+		params: function(params) {
+			params._token = $('meta[name=csrf-token]').attr('content')
+			return params;
+		},
+		error: function(response, val) {
+			return response.responseJSON.message
+		}
+	})
+})
+
+$(function(){
 	$('a.open-notification').click(function(){
 		$.ajax({
 			type: 'post',

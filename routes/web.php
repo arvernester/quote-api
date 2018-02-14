@@ -30,6 +30,7 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
         Route::resource('banner', 'BannerController');
 
         Route::get('category/merge', 'CategoryController@merge')->name('category.merge');
+        Route::put('category/updateable', 'CategoryController@updateable')->name('category.updateable');
         Route::put('category/fuse', 'CategoryController@fuse')->name('category.fuse');
         Route::resource('category', 'CategoryController');
 
