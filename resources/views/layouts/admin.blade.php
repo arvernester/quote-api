@@ -9,7 +9,7 @@
 
     <title>{{ $title or config('app.name') }}</title>
 
-    <link href="{{ asset('lumino/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('lumino/css/all.min.css') }}" rel="stylesheet">
 
     @stack('css')
 

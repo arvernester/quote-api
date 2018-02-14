@@ -20,10 +20,10 @@
     <meta property="og:url" content="{{ url()->current() }}">
 	@stack('meta')
 
-	<link rel="stylesheet" href="/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/main.css" />
+	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/main.min.css') }}" />
 	<noscript>
-		<link rel="stylesheet" href="/css/noscript.css" />
+		<link rel="stylesheet" href="{{ asset('css/noscript.css') }}" />
 	</noscript>
 
 	<link rel="alternate" href="{{ route_lang('index') }}" hreflang="{{ app()->getLocale() }}" />
@@ -235,8 +235,8 @@
 	<script src="{{ asset('js/jquery.scrollex.min.js') }}"></script>
 	<script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
 	<script src="{{ asset('js/skel.min.js') }}"></script>
-	<script src="{{ asset('js/util.js') }}"></script>
-	<script src="{{ asset('js/main.js') }}"></script>
+	<script src="{{ asset('js/util.min.js') }}"></script>
+	<script src="{{ asset('js/main.min.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 
 	@stack('js')

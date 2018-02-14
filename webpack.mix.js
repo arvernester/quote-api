@@ -16,6 +16,11 @@ mix.disableSuccessNotifications();
 mix.js('resources/assets/js/app.js', 'public/js');
 
 /**
+ * Minify asset
+ */
+mix.minify('public/css/main.css')
+
+/**
  * Combine CSS for Lumino admin CSS
  */
 mix.styles([
