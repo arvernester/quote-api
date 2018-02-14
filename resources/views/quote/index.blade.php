@@ -33,7 +33,7 @@
         <p>{{ $quote->text }}</p>
         <ul class="actions">
             <li>
-                <a href="{{ route_lang('quote.show', $quote) }}" class="button small">
+                <a href="{{ route_lang('quote.show.slug', $quote->slug) }}" class="button small">
                     {{ __('See') }}
                 </a>
             </li>

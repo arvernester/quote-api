@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('quote/poster/{quote}.png', 'QuoteController@poster')->name('quote.poster');
+Route::get('quote/poster/{slug}.png', 'QuoteController@poster')->name('quote.poster');
 
 Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');
 Route::post('contact/post', 'ContactController@post')->name('contact.post');
@@ -83,4 +83,6 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('author/{author}', 'AuthorController@show')->name('author.show');
 
     Route::get('category/{category}', 'CategoryController@show')->name('category.show');
+
+    Route::get('{slug}', 'QuoteController@showBySlug')->name('quote.show.slug');
 });

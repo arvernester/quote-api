@@ -112,6 +112,9 @@ class QuoteController extends Controller
             ]);
 
             $quote = Quote::create($request->all());
+
+            $quote->slug = str_slug($quote->author->name);
+            $quote->save();
         });
 
         return redirect()

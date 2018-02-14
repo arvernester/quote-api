@@ -5,16 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Quote extends Model
 {
     use SoftDeletes;
+    use HasSlug;
 
     protected $fillable = [
         'category_id',
         'user_id',
         'language_id',
         'author_id',
+        'slug',
         'text',
         'source',
         'status',
@@ -45,6 +49,20 @@ class Quote extends Model
         }
 
         $this->attributes['text'] = ucfirst($text);
+    }
+
+    /**
+     * Generate slug based on some string.
+     *
+     * @return SlugOptions
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->slugsShouldBeNoLongerThan(150)
+            ->doNotGenerateSlugsOnCreate()
+            // ->doNotGenerateSlugsOnUpdate()
+            ->saveSlugsTo('slug');
     }
 
     /**

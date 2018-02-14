@@ -61,13 +61,13 @@ class SitemapIndexCommand extends Command
             $sitemapPost = app()->make('sitemap');
             foreach ($category->quotes as $quote) {
                 $sitemapPost->add(
-                    route_lang('quote.show', $quote),
+                    route_lang('quote.show.slug', $quote->slug),
                     $quote->updated_at->toIso8601String(),
                     '0.8',
                     'weekly',
                     [
                         [
-                            'url' => route('quote.poster', $quote),
+                            'url' => route('quote.poster', $quote->slug),
                             'caption' => $caption = __('Quote by :author', [
                                 'author' => $quote->author->name,
                             ]),

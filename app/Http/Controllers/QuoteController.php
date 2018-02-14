@@ -15,6 +15,7 @@ use App\User;
 use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Facades\Poster;
+use Illuminate\Http\RedirectResponse;
 
 class QuoteController extends Controller
 {
@@ -36,14 +37,23 @@ class QuoteController extends Controller
     /**
      * Show single quote.
      *
-     * @param string $lang
+     * @param [type] $lang
      * @param Quote  $quote
      *
-     * @return View
+     * @return RedirectResponse
      */
-    public function show($lang, Quote $quote): View
+    public function show($lang, Quote $quote): RedirectResponse
     {
-        $quote->load('author', 'category', 'language');
+        return redirect(route_lang('quote.show.slug', $quote->slug));
+    }
+
+    public function showBySlug($lang, string $slug): View
+    {
+        $quote = Quote::whereSlug($slug)
+            ->with('author', 'category', 'language')
+            ->first();
+
+        abort_if(empty($quote), 404, __('Quote not found.'));
 
         if (session('lang') and (session('lang') != $quote->language->code_alternate)) {
             $language = Language::whereCodeAlternate(session('lang'))->first();
@@ -111,6 +121,9 @@ class QuoteController extends Controller
                 'status' => 'I',
             ]);
 
+            $quote->slug = str_slug($quote->author->name);
+            $quote->save();
+
             $users = User::all();
             Notification::send($users, new GeneralNotification(
                 __('New quote has been submitted.'),
@@ -150,9 +163,15 @@ class QuoteController extends Controller
      *
      * @param Quote $quote
      */
-    public function poster(Quote $quote): void
+    public function poster(string $slug): void
     {
-        header('Content-type: image/png');
+        $quote = Quote::whereSlug($slug)
+            ->with('author')
+            ->first();
+        if (!empty($quote)) {
+            header('Content-type: image/png');
+        }
+
         Poster::generate($quote);
     }
 }

@@ -9,6 +9,7 @@ use App\Console\Commands\BackupDatabase;
 use App\Console\Commands\SitemapIndexCommand;
 use App\Console\Commands\ImportQuoteCommand;
 use App\Console\Commands\Quote\TweetQuoteCommand;
+use App\Console\Commands\GenerateQuoteSlugCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
         BackupDatabase::class,
         SitemapIndexCommand::class,
         ImportQuoteCommand::class,
+        GenerateQuoteSlugCommand::class,
     ];
 
     /**
