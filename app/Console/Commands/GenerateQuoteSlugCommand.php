@@ -36,16 +36,16 @@ class GenerateQuoteSlugCommand extends Command
      */
     public function handle()
     {
-        $quotes = Quote::all();
+        $bar = $this->output->createProgressBar(Quote::count());
 
-        $bar = $this->output->createProgressBar($quotes->count());
+        Quote::orderBy('id')->chunk(1000, function ($quotes) use ($bar) {
+            foreach ($quotes as $quote) {
+                $quote->slug = str_slug($quote->author->name);
+                $quote->save();
 
-        foreach ($quotes as $quote) {
-            $quote->slug = str_slug($quote->author->name);
-            $quote->save();
-
-            $bar->advance();
-        }
+                $bar->advance();
+            }
+        });
 
         $bar->finish();
     }
