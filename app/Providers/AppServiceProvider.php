@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Quote\Poster;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,15 @@ class AppServiceProvider extends ServiceProvider
 
         // remove line below when using Bootsrap version 4
         Paginator::useBootstrapThree();
+
+        Validator::extend('has_column', function ($attribute, $value, $params, $validator) {
+            if (empty($params[0])) {
+                // table name must be defined
+                return false;
+            }
+
+            return Schema::hasColumn($params[0], $value);
+        });
     }
 
     /**
