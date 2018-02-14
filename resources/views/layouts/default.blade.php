@@ -235,8 +235,8 @@
 	<script src="{{ asset('js/jquery.scrollex.min.js') }}"></script>
 	<script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
 	<script src="{{ asset('js/skel.min.js') }}"></script>
-	<script src="{{ asset('js/util.min.js') }}"></script>
-	<script src="{{ asset('js/main.min.js') }}"></script>
+	<script src="{{ asset('js/util.js') }}"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 
 	@stack('js')
