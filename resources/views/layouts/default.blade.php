@@ -10,6 +10,7 @@
 	<title>{{ $title or config('app.name') }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="theme-color" content="#212931">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	@if (env('FACEBOOK_APP_ID'))
@@ -161,7 +162,7 @@
 					<ul class="icons alt">
 						@if(ENV("TWITTER_USERNAME"))
 						<li>
-							<a href="#" class="icon alt fa-twitter">
+							<a href="https://www.twitter.com/{{ env('TWITTER_USERNAME') }}" class="icon alt fa-twitter">
 								<span class="label">
 									{{ env('TWITTER_USERNAME') }}
 								</span>
