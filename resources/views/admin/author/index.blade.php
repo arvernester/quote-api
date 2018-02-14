@@ -29,7 +29,7 @@
                                     @else
                                         <em class="text-muted fa fa-picture-o"></em>
                                     @endif
-                                    {{ $author->name }}
+                                    <a href="#" class="editable" data-pk="{{ $author->id }}" data-name="name" data-url="{{ route('admin.author.updateable') }}">{{ $author->name }}</a>
                                 </td>
                                 <td class="text-right">{{ number_format($author->quotes->count()) }}</td>
                                 <td>{{ $author->created_at->format(config('app.date_format')) }}</td>
@@ -57,3 +57,11 @@
     </div>
 </div>
 @endsection
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css') }}">
+@endpush
+
+@push('js')
+<script src="{{ asset('lumino/vendor/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+@endpush

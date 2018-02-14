@@ -34,6 +34,7 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
         Route::put('category/fuse', 'CategoryController@fuse')->name('category.fuse');
         Route::resource('category', 'CategoryController');
 
+        Route::put('author/updateable', 'AuthorController@updateable')->name('author.updateable');
         Route::delete('author/{author}/image', 'AuthorController@removePicture')->name('author.removePicture');
         Route::resource('author', 'AuthorController');
 

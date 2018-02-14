@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Numbers\Number;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Schema;
 
 class AuthorController extends Controller
 {
@@ -132,6 +134,27 @@ class AuthorController extends Controller
 
         return redirect($request->action == 'view' ? route('admin.author.show', $author) : url()->previous())
             ->withSuccess('Author has been updated.');
+    }
+
+    /**
+     * Update partial author by field name.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function updateable(Request $request): JsonResponse
+    {
+        if (!Schema::hasColumn(with(new Author())->getTable(), $request->name)) {
+            abort(400, __('Column not found.'));
+        }
+
+        $author = Author::whereId($request->pk)
+            ->update([$request->name => $request->value]);
+
+        return response()->json([
+            'message' => __('Author has been updated.'),
+        ]);
     }
 
     /**
