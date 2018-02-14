@@ -5,5 +5,4 @@
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-@else
-<img src="https://lh6.ggpht.com/Ab63gyKVnGwbQaj0guyJ0caGj-VugefmMd3SyzpPOX2RgCDA1tzQTY36sGI65Guw5OXdas4f5w=w303" alt="Google Adsense"> @endif
+@endif
