@@ -11,6 +11,7 @@ use App\Console\Commands\ImportQuoteCommand;
 use App\Console\Commands\Quote\TweetQuoteCommand;
 use App\Console\Commands\GenerateQuoteSlugCommand;
 use App\Console\Commands\GenerateAuthorSlugCommand;
+use App\Console\Commands\GenerateCategorySlugCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
         ImportQuoteCommand::class,
         GenerateQuoteSlugCommand::class,
         GenerateAuthorSlugCommand::class,
+        GenerateCategorySlugCommand::class,
     ];
 
     /**
