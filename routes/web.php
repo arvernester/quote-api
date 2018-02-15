@@ -64,6 +64,7 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
         ->name('quote.show')
         ->where(['quote' => '[0-9]+']);
     Route::post('quote', 'QuoteController@store')->name('quote.store');
+    Route::get('feed.json', 'QuoteController@feed')->name('quote.feed');
 
     Route::get('category', 'CategoryController@index')->name('category.index');
 

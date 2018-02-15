@@ -139,6 +139,12 @@
 				@endif
 
 				<li>
+					<a href="{{ route_lang('quote.feed') }}" class="icon fa-rss" title="{{ __('JSON Feed') }}">
+						<span class="label">{{ __('JSON Feed') }}</span>
+					</a>
+				</li>
+				
+				<li>
 					<a href="{{ route('api') }}" class="icon fa-random" title="{{ __('API service') }}">
 						<span class="label">{{ __('API service') }}</span>
 					</a>
@@ -197,6 +203,12 @@
 							</a>
 						</li>
 						@endif
+
+						<li>
+							<a href="{{ route_lang('quote.feed') }}" class="icon fa-rss" title="{{ __('JSON Feed') }}">
+								<span class="label">{{ __('JSON Feed') }}</span>
+							</a>
+						</li>
 
 						<li>
 							<a href="{{ route('api') }}" class="icon fa-random" title="{{ __('API service') }}">

@@ -16,6 +16,7 @@ use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Facades\Poster;
 use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
 
 class QuoteController extends Controller
 {
@@ -170,5 +171,56 @@ class QuoteController extends Controller
         }
 
         Poster::generate($quote);
+    }
+
+    /**
+     * Return feed as JSON and JSONP format.
+     * https://jsonfeed.org/version/1.
+     *
+     * @return JsonResponse
+     */
+    public function feed(string $lang, Request $request): JsonResponse
+    {
+        $this->validate($request, [
+            'callback' => 'string|valid_callback',
+            'limit' => 'integer|max:50',
+        ]);
+
+        $quotes = Quote::orderBy('created_at', 'DESC')
+            ->with('author')
+            ->take(20)
+            ->paginate();
+
+        $quotes->appends($request->only('limit', 'callback'));
+
+        return response()
+            ->json([
+                'version' => 'https://jsonfeed.org/version/1',
+                'title' => __('Motivational & Inspirational Quotes'),
+                'home_page_url' => route_lang('index'),
+                'feed_url' => route_lang('quote.feed'),
+                'description' => __('Inspirational and Motivational Quotes That Will Make Your Day!'),
+                'next_url' => $quotes->nextPageUrl(),
+                'author' => [
+                    'name' => config('app.name'),
+                ],
+                '_api' => [
+                    'about' => __('Restful API service for quotes'),
+                    'url' => route('api'),
+                ],
+                'items' => $quotes->map(function ($quote) {
+                    return [
+                        'id' => $quote->id,
+                        'url' => route_lang('quote.show.slug', $quote->slug),
+                        'title' => __('Quote by :author', ['author' => $quote->author->name]),
+                        'content_text' => $quote->text,
+                        'image' => route('quote.poster', $quote->slug),
+                        'date_published' => $quote->created_at->format(Carbon::RFC3339),
+                        'date_modified' => $quote->updated_at->format(Carbon::RFC3339),
+                        'author' => $quote->author->name,
+                    ];
+                }),
+            ])
+            ->withCallback($request->callback);
     }
 }
