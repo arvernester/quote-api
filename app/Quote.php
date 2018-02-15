@@ -5,13 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Quote extends Model
 {
     use SoftDeletes;
-    use HasSlug;
+    use Sluggable;
 
     protected $fillable = [
         'category_id',
@@ -52,17 +51,17 @@ class Quote extends Model
     }
 
     /**
-     * Generate slug based on some string.
+     * Return the sluggable configuration array for this model.
      *
-     * @return SlugOptions
+     * @return array
      */
-    public function getSlugOptions(): SlugOptions
+    public function sluggable(): array
     {
-        return SlugOptions::create()
-            ->slugsShouldBeNoLongerThan(150)
-            ->doNotGenerateSlugsOnCreate()
-            // ->doNotGenerateSlugsOnUpdate()
-            ->saveSlugsTo('slug');
+        return [
+            'slug' => [
+                'source' => 'author.name',
+            ],
+        ];
     }
 
     /**

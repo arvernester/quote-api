@@ -40,8 +40,8 @@ class GenerateQuoteSlugCommand extends Command
 
         Quote::orderBy('id')->chunk(1000, function ($quotes) use ($bar) {
             foreach ($quotes as $quote) {
-                $quote->slug = str_slug($quote->author->name);
-                $quote->save();
+                $quote->slug = null;
+                $quote->update(['text' => $quote->text]);
 
                 $bar->advance();
             }

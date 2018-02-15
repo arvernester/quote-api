@@ -121,9 +121,6 @@ class QuoteController extends Controller
                 'status' => 'I',
             ]);
 
-            $quote->slug = str_slug($quote->author->name);
-            $quote->save();
-
             $users = User::all();
             Notification::send($users, new GeneralNotification(
                 __('New quote has been submitted.'),

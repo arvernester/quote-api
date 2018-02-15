@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.1.3",
         "arcanedev/log-viewer": "^4.4",
+        "cviebrock/eloquent-sluggable": "^4.5",
         "dg/twitter-php": "^3.6",
         "fabpot/goutte": "^3.2",
         "fideloper/proxy": "~4.0",
@@ -16,7 +17,6 @@
         "mashape/unirest-php": "^3.0",
         "nicmart/numbers": "^0.1.0",
         "roumen/sitemap": "^2.7",
-        "spatie/laravel-sluggable": "^2.1",
         "stil/gd-text": "^1.1",
         "watson/breadcrumbs": "^1.0"
     },
