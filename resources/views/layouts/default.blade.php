@@ -242,6 +242,8 @@
 
 	@stack('js')
 
+	@include('layouts.partials.google-analytic')
+
 	<script type="application/ld+json">
 		{!! json_encode([
 			'@context' => 'http://schema.org',
