@@ -39,6 +39,7 @@ class Quote extends Model
 
     protected $appends = [
         'permalink',
+        'image_path',
     ];
 
     /**
@@ -67,6 +68,16 @@ class Quote extends Model
                 'source' => 'author.name',
             ],
         ];
+    }
+
+    /**
+     * Get poster URL.
+     *
+     * @return string
+     */
+    public function getImagePathAttribute(): string
+    {
+        return route('quote.poster', $this->attributes['slug']);
     }
 
     /**
