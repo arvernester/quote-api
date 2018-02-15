@@ -12,7 +12,7 @@
 |
 */
 
-Route::group(['namespace' => 'Api'], function () {
+Route::group(['namespace' => 'Api', 'middleware' => 'mashape.proxy'], function () {
     Route::get('quote', 'QuoteController@index');
     Route::get('quote/random', 'QuoteController@random');
     Route::get('quote/of-the-day', 'QuoteController@quoteOfTheDay');
