@@ -122,7 +122,7 @@ class QuoteController extends Controller
             })
             ->paginate($request->limit ?? 30);
 
-        $quotes->appends($request->only('limit', 'format', 'lang'));
+        $quotes->appends($request->only('limit', 'lang', 'callback'));
 
         return response()
             ->json($quotes)
