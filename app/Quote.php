@@ -30,10 +30,15 @@ class Quote extends Model
     protected $hidden = [
         'status',
         'user_id',
+        'slug',
         'language_id',
         'author_id',
         'category_id',
         'deleted_at',
+    ];
+
+    protected $appends = [
+        'permalink',
     ];
 
     /**
@@ -62,6 +67,16 @@ class Quote extends Model
                 'source' => 'author.name',
             ],
         ];
+    }
+
+    /**
+     * Generate permalink for quote.
+     *
+     * @return string
+     */
+    public function getPermalinkAttribute(): string
+    {
+        return route_lang('quote.show.slug', $this->attributes['slug']);
     }
 
     /**

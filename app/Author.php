@@ -23,6 +23,7 @@ class Author extends Model
     ];
 
     protected $appends = [
+        'permalink',
         'full_image_path',
     ];
 
@@ -38,6 +39,16 @@ class Author extends Model
                 'source' => ['name'],
             ],
             ];
+    }
+
+    /**
+     * Generate permalink for author.
+     *
+     * @return string
+     */
+    public function getPermalinkAttribute(): string
+    {
+        return route_lang('author.show.slug', $this->attributes['slug']);
     }
 
     /**
