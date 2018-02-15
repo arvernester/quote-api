@@ -95,5 +95,5 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
 
     Route::get('{slug}', 'QuoteController@showBySlug')
         ->name('quote.show.slug')
-        ->where(['slug' => '[A-Za-z09\-]+']);
+        ->where(['slug' => '[A-Za-z0-9\-\_]+']);
 });
