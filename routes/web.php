@@ -11,6 +11,8 @@
 |
 */
 
+Route::redirect('api', ' https://market.mashape.com/arvernester/kutipan')->name('api');
+
 Route::get('quote/poster/{slug}.png', 'QuoteController@poster')->name('quote.poster');
 
 Route::get('js/lang.js', 'LanguageController@lang')->name('language.lang');

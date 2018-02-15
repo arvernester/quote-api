@@ -106,37 +106,43 @@
 				</li>
 			</ul>
 			<ul class="icons">
-				@if(ENV('TWITTER_USERNAME'))
+				@if(env('TWITTER_USERNAME'))
 				<li>
-					<a href="https://www.twitter.com/{{ ENV('TWITTER_USERNAME') }}" class="icon fa-twitter">
+					<a href="https://www.twitter.com/{{ env('TWITTER_USERNAME') }}" class="icon fa-twitter" title="{{ __('Twitter profile') }}">
 						<span class="label">Twitter</span>
 					</a>
 				</li>
 				@endif
 
-				@if(ENV('FACEBOOK_USERNAME'))
+				@if(env('FACEBOOK_USERNAME'))
 				<li>
-					<a href="https://www.facebook.com/{{ ENV('FACEBOOK_USERNAME') }}" class="icon fa-facebook">
+					<a href="https://www.facebook.com/{{ env('FACEBOOK_USERNAME') }}" class="icon fa-facebook" title="{{ __('Facebook page') }}">
 						<span class="label">Facebook</span>
 					</a>
 				</li>
 				@endif
 
-				@if(ENV('INSTAGRAM_USERNAME'))
+				@if(env('INSTAGRAM_USERNAME'))
 				<li>
-					<a href="https://www.github.com/{{ ENV('INSTAGRAM_USERNAME') }}" class="icon fa-instagram">
+					<a href="https://www.github.com/{{ env('INSTAGRAM_USERNAME') }}" class="icon fa-instagram" title="{{ __('Instagram profile') }}">
 						<span class="label">Instagram</span>
 					</a>
 				</li>
 				@endif
 
-				@if(ENV('GITHUB_USERNAME'))
+				@if(env('GITHUB_USERNAME'))
 				<li>
-					<a href="https://www.github.com/{{ ENV('GITHUB_USERNAME') }}" class="icon fa-github">
-						<span class="label">GitHub</span>
+					<a href="https://www.github.com/{{ env('GITHUB_USERNAME') }}" class="icon fa-git" title="{{ __('Git repository') }}">
+						<span class="label">Git</span>
 					</a>
 				</li>
 				@endif
+
+				<li>
+					<a href="{{ route('api') }}" class="icon fa-random" title="{{ __('API service') }}">
+						<span class="label">{{ __('API service') }}</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -160,45 +166,43 @@
 				<section>
 					<h3>{{ __('Social') }}</h3>
 					<ul class="icons alt">
-						@if(ENV("TWITTER_USERNAME"))
+						@if(env('TWITTER_USERNAME'))
 						<li>
-							<a href="https://www.twitter.com/{{ env('TWITTER_USERNAME') }}" class="icon alt fa-twitter">
-								<span class="label">
-									{{ env('TWITTER_USERNAME') }}
-								</span>
+							<a href="https://www.twitter.com/{{ env('TWITTER_USERNAME') }}" class="icon fa-twitter" title="{{ __('Twitter profile') }}">
+								<span class="label">Twitter</span>
 							</a>
 						</li>
 						@endif
-						
-						@if(ENV('FACEBOOK_USERNAME'))
+
+						@if(env('FACEBOOK_USERNAME'))
 						<li>
-							<a href="https://www.facebook.com/{{ env('FACEBOOK_USERNAME') }}" class="icon alt fa-facebook">
-								<span class="label">
-									{{ ENV('FACEBOOK_USERNAME') }}
-								</span>
+							<a href="https://www.facebook.com/{{ env('FACEBOOK_USERNAME') }}" class="icon fa-facebook" title="{{ __('Facebook page') }}">
+								<span class="label">Facebook</span>
 							</a>
 						</li>
 						@endif
-						
-						@if(ENV('INSTAGRAM_USERNAME'))
+
+						@if(env('INSTAGRAM_USERNAME'))
 						<li>
-							<a href="#" class="icon alt fa-instagram">
-								<span class="label">
-									{{ ENV('INSTAGRAM_USERNAME') }}
-								</span>
+							<a href="https://www.github.com/{{ env('INSTAGRAM_USERNAME') }}" class="icon fa-instagram" title="{{ __('Instagram profile') }}">
+								<span class="label">Instagram</span>
 							</a>
 						</li>
 						@endif
-						
-						@if(ENV('GITHUB_USERNAME'))
+
+						@if(env('GITHUB_USERNAME'))
 						<li>
-							<a href="https://www.github.com/{{ env('GITHUB_USERNAME') }}" class="icon alt fa-github">
-								<span class="label">
-									{{ ENV('GITHUB_USERNAME') }}
-								</span>
+							<a href="https://www.github.com/{{ env('GITHUB_USERNAME') }}" class="icon fa-git" title="{{ __('Git repository') }}">
+								<span class="label">Git</span>
 							</a>
 						</li>
 						@endif
+
+						<li>
+							<a href="{{ route('api') }}" class="icon fa-random" title="{{ __('API service') }}">
+								<span class="label">{{ __('API service') }}</span>
+							</a>
+						</li>
 					</ul>
 				</section>
 				<section>
@@ -221,7 +225,7 @@
 		<!-- Copyright -->
 		<div id="copyright">
 			<ul>
-				<li>&copy; {{ config('app.name') }}</li>
+				<li><em class="fa fa-copyright"></em> {{ config('app.name') }}</li>
 				<li>{{ __('Design') }}:
 					<a href="https://html5up.net">HTML5 UP</a>
 				</li>
