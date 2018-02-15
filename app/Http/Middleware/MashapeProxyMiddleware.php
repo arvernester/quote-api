@@ -16,15 +16,16 @@ class MashapeProxyMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!app()->environment('local')) {
+        if (@app()->environment('local')) {
             $mashapeProxy = $request->header('X-Mashape-Proxy-Secret');
 
-            if (!empty(env('MASHAPE_PROXY')) and ($mashapeProxy == env('MASHAPE_PROXY'))) {
-                return $next($request);
+            $proxy = env('MASHAPE_PROXY');
+            if (empty($proxy) or $mashapeProxy != $proxy) {
+                $message = 'https://market.mashape.com/arvernester/kutipan';
+                abort(401, $message);
             }
         }
 
-        $message = __('Direct access to API is disabled. Please visit https://market.mashape.com/arvernester/kutipan to get more information about API.');
-        abort(401, $message);
+        return $next($request);
     }
 }
