@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
 
             return Schema::hasColumn($params[0], $value);
         });
+
+        Validator::extend('valid_callback', function ($attribute, $value) {
+            return (bool) preg_match('/^[a-zA-Z\_][a-zA-Z0-9\_]+$/', $value);
+        });
     }
 
     /**
