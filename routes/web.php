@@ -77,14 +77,23 @@ Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('random', 'QuoteController@random')->name('quote.random');
     Route::get('quote', 'QuoteController@index')->name('quote.index');
     Route::get('quote/create', 'QuoteController@create')->name('quote.create');
-    Route::get('quote/{quote}', 'QuoteController@show')->name('quote.show');
+    Route::get('quote/{quote}', 'QuoteController@show')
+        ->name('quote.show')
+        ->where(['quote' => '[0-9]+']);
     Route::post('quote', 'QuoteController@store')->name('quote.store');
 
     Route::get('category', 'CategoryController@index')->name('category.index');
 
-    Route::get('author/{author}', 'AuthorController@show')->name('author.show');
+    Route::get('author/{author}', 'AuthorController@show')
+        ->name('author.show')
+        ->where(['author' => '[0-9]+']);
+    Route::get('author/{slug}', 'AuthorController@showBySlug')
+        ->name('author.show.slug')
+        ->where(['slug' => '[A-Za-z0-9\-\_]+']);
 
     Route::get('category/{category}', 'CategoryController@show')->name('category.show');
 
-    Route::get('{slug}', 'QuoteController@showBySlug')->name('quote.show.slug');
+    Route::get('{slug}', 'QuoteController@showBySlug')
+        ->name('quote.show.slug')
+        ->where(['slug' => '[A-Za-z09\-]+']);
 });

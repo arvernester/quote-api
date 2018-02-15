@@ -7,23 +7,41 @@ use Illuminate\View\View;
 use Unirest\Request as Unirest;
 use App\Language;
 use App\AuthorProfile;
+use Illuminate\Http\RedirectResponse;
 
 class AuthorController extends Controller
 {
     /**
-     * Show author detail.
+     * Redirect to friendly url.
+     *
+     * @param string $lang
+     * @param Author $author
+     *
+     * @return RedirectResponse
+     */
+    public function show(string $lang = null, Author $author): RedirectResponse
+    {
+        return redirect(route_lang('author.show.slug', $author->slug));
+    }
+
+    /**
+     * Show author detail by given slug.
      *
      * @param Author $author
      *
      * @return view
      */
-    public function show($lang = null, Author $author): View
+    public function showBySlug(string $lang = null, string $slug): View
     {
         $language = Language::whereCodeAlternate($lang)->first();
 
-        $author->load(['profiles' => function ($query) use ($language) {
-            $query->whereLanguageId($language->id);
-        }]);
+        $author = Author::whereSlug($slug)
+            ->with(['profiles' => function ($profile) use ($language) {
+                return $profile->whereLanguageId($language->id);
+            }])
+            ->first();
+
+        abort_if(empty($author), 404, __('Author not found.'));
 
         if (empty($author->profiles->first())) {
             // get profile from wikipedia

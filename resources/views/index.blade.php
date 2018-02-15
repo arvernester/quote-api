@@ -16,7 +16,7 @@
     <header class="major">
         <span class="date">{{ __('Random Quote') }}</span>
         <h2>
-            <a href="{{ route_lang('author.show', $random->author) }}">{{ $random->author->name }}</a>
+            <a href="{{ route_lang('author.show.slug', $random->author->slug) }}">{{ $random->author->name }}</a>
         </h2>
         <p>{{ $random->text }}</p>
         <div class="fb-quote"></div>
@@ -74,7 +74,7 @@
                 {{ $quote->created_at->diffForHumans() }}
             </span>
             <h2>
-                <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
+                <a href="{{ route_lang('author.show.slug', $quote->author->slug) }}">{{ $quote->author->name }}</a>
             </h2>
         </header>
         <p>{{ $quote->text }}</p>

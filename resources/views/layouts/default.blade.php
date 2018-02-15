@@ -45,7 +45,7 @@
 			<div class="fb-quote"></div>
 			<p>
 				<strong>
-					<a href="{{ route_lang('author.show', $today->author) }}">{{ $today->author->name }}</a>
+					<a href="{{ route_lang('author.show.slug', $today->author->slug) }}">{{ $today->author->name }}</a>
 				</strong>
 			</p>
 			<ul class="actions">

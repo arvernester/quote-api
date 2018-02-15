@@ -15,6 +15,10 @@
     <header class="major">
         <h1>{{ __('Random Quotes') }}</h1>
     </header>
+
+    <div class="ads">
+        @include('layouts.partials.ad')
+    </div>
 </section>
 
 <!-- Posts -->
@@ -28,7 +32,7 @@
                 {{ $quote->created_at->diffForHumans() }}
             </span>
             <h2>
-                <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
+                <a href="{{ route_lang('author.show.slug', $quote->author->slug) }}">{{ $quote->author->name }}</a>
             </h2>
         </header>
         <p>{{ $quote->text }}</p>

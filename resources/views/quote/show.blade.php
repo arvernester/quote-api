@@ -19,7 +19,7 @@
             <a href="#">{{ $quote->category->name }}</a>
         </span>
         <h2>
-            <a href="{{ route_lang('author.show', $quote->author) }}">{{ $quote->author->name }}</a>
+            <a href="{{ route_lang('author.show.slug', $quote->author->slug) }}">{{ $quote->author->name }}</a>
         </h2>
         <p>{{ $quote->text }}</p>
         <div class="fb-quote"></div>
