@@ -19,7 +19,7 @@ class MashapeProxyMiddleware
         if (!app()->environment('local')) {
             $mashapeProxy = $request->header('X-Mashape-Proxy-Secret');
 
-            if ($mashapeProxy == env('MASHAPE_PROXY')) {
+            if (!empty(env('MASHAPE_PROXY')) and ($mashapeProxy == env('MASHAPE_PROXY'))) {
                 return $next($request);
             }
         }
