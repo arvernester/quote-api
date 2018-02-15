@@ -8,6 +8,7 @@ use App\Quote;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Author;
+use Illuminate\Support\Facades\Validator;
 
 class QuoteController extends Controller
 {
@@ -18,20 +19,25 @@ class QuoteController extends Controller
      */
     public function random(Request $request): JsonResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
+            'callback' => 'string|valid_callback',
             'lang' => 'string|max:2|exists:languages,code_alternate',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         $quote = Quote::inRandomOrder()
             ->with('author', 'category', 'language')
             ->when($request->lang, function ($query) use ($request) {
-                return $query->whereHas('language', function ($language) use ($request) {
-                    return $language->whereCodeAlternate($request->lang);
-                });
+                return $query->language($request->lang);
             })
             ->first();
 
-        return response()->json($quote);
+        return response()
+            ->json($quote)
+            ->withCallback($request->callback);
     }
 
     /**
@@ -43,22 +49,27 @@ class QuoteController extends Controller
      */
     public function latest(Request $request): JsonResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
+            'callback' => 'string|valid_callback',
             'limit' => 'integer|max:20',
             'lang' => 'string|max:2|exists:languages,code_alternate',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
             ->when($request->lang, function ($query) use ($request) {
-                return $query->whereHas('language', function ($language) use ($request) {
-                    return $language->whereCodeAlternate($request->lang);
-                });
+                return $query->language($request->lang);
             })
             ->take($request->limit ?? 20)
             ->get();
 
-        return response()->json($quotes);
+        return response()
+            ->json($quotes)
+            ->withCallback($request->callback);
     }
 
     /**
@@ -68,11 +79,21 @@ class QuoteController extends Controller
      *
      * @return JsonResponse
      */
-    public function show(Quote $quote): JsonResponse
+    public function show(Request $request, Quote $quote): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+                'callback' => 'string|valid_callback',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $quote->load('author', 'language', 'category');
 
-        return response()->json($quote);
+        return response()
+            ->json($quote)
+            ->withCallback($request->callback);
     }
 
     /**
@@ -84,22 +105,27 @@ class QuoteController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
+            'callback' => 'string|valid_callback',
             'limit' => 'integer|max:30',
             'lang' => 'string|max:2|exists:languages,code_alternate',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
             ->when($request->lang, function ($query) use ($request) {
-                return $query->whereHas('language', function ($language) use ($request) {
-                    return $language->whereCodeAlternate($request->lang);
-                });
+                return $query->language($request->lang);
             })
             ->paginate($request->limit ?? 30);
 
-        $quotes->appends($request->only('limit'));
+        $quotes->appends($request->only('limit', 'format', 'lang'));
 
-        return response()->json($quotes);
+        return response()
+            ->json($quotes)
+            ->withCallback($request->callback);
     }
 }

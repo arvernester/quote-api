@@ -52,25 +52,6 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
     });
 });
 
-Route::group(['namespace' => 'Api', 'middleware' => ['cors', 'locale'], 'prefix' => 'api'], function () {
-    Route::get('quote', 'QuoteController@index');
-    Route::get('quote/random', 'QuoteController@random');
-    Route::get('quote/of-the-day', 'QuoteController@quoteOfTheDay');
-    Route::get('quote/author', 'QuoteController@author');
-    Route::get('quote/category', 'QuoteController@category');
-    Route::get('quote/latest', 'QuoteController@latest');
-    Route::get('quote/{quote}', 'QuoteController@show');
-    Route::post('quote', 'QuoteController@store');
-
-    Route::get('category', 'CategoryController@index');
-    Route::get('category/random', 'CategoryController@random');
-    Route::get('category/{category}', 'CategoryController@show');
-
-    Route::get('language', 'LanguageController@index');
-
-    Route::get('banner/latest', 'BannerController@latest');
-});
-
 Route::prefix('{lang?}')->middleware('locale')->group(function () {
     Route::get('/', 'IndexController')->name('index');
 

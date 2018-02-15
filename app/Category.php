@@ -16,6 +16,10 @@ class Category extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'slug',
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *
