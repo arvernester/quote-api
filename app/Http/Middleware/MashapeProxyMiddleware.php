@@ -16,7 +16,7 @@ class MashapeProxyMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (app()->environment('local')) {
+        if (!app()->environment('local')) {
             $mashapheProxy = $request->header('X-Mashape-Proxy-Secret');
 
             $message = __('Direct access to API is disabled. Please visit https://market.mashape.com/arvernester/kutipan to get more information about API.');
