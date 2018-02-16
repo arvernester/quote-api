@@ -10,6 +10,13 @@
     <meta property="og:image" content="{{ route('quote.poster', $quote->slug) }}" />
     <meta property="og:image:height" content="400">
     <meta property="og:image:width" content="600">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ '@' . env('TWITTER_USERNAME') }}">
+    <meta name="twitter:creator" content="{{ '@' . env('TWITTER_USERNAME') }}">
+    <meta name="twitter:title" content="{{ __('Quote by :author', ['author' => $quote->author->name]) }}">
+    <meta name="twitter:description" content="{{ $quote->text }}">
+    <meta name="twitter:image" content="{{ route('quote.poster', $quote->slug) }}">
 @endpush
 
 @section('content')
