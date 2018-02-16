@@ -50,6 +50,10 @@ class ImportQuoteCommand extends Command
         if (!empty($import)) {
             if (!empty($import) and !isset($import[0])) {
                 DB::transaction(function () use ($import) {
+                    if (!ends_with($import['quote'], ['.', '...', '?', '!'])) {
+                        $import['quote'] .= '.';
+                    }
+
                     $this->store(
                         $import['author'],
                         $import['category'],
@@ -61,6 +65,10 @@ class ImportQuoteCommand extends Command
             } else {
                 $quotes = [];
                 foreach ($import as $i) {
+                    if (!ends_with($i['quote'], ['.', '...', '?', '!'])) {
+                        $i['quote'] .= '.';
+                    }
+
                     $quotes[] = $this->store(
                         $i['author'],
                         $i['category'],
