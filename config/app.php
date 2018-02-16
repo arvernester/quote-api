@@ -154,6 +154,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Watson\Breadcrumbs\ServiceProvider::class,
         Themsaid\LangmanGUI\LangmanServiceProvider::class,
+        Thujohn\Twitter\TwitterServiceProvider::class,
 
         /*
          * Self development package...
@@ -220,5 +221,6 @@ return [
 
         'Image' => Intervention\Image\Facades\Image::class,
         'Breadcrumbs' => Watson\Breadcrumbs\Facade::class,
+        'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
     ],
 ];

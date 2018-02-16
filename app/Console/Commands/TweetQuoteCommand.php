@@ -7,6 +7,7 @@ use App\Quote;
 use Illuminate\Support\Facades\DB;
 use App\Language;
 use App\QuoteTweet;
+use Twitter;
 
 class TweetQuoteCommand extends Command
 {
@@ -39,26 +40,17 @@ class TweetQuoteCommand extends Command
      */
     public function handle()
     {
-        $twitter = new \Twitter(
-            env('TWITTER_API_KEY'),
-            env('TWITTER_API_SECRET'),
-            env('TWITTER_TOKEN'),
-            env('TWITTER_TOKEN_SECRET')
-        );
-
-        DB::transaction(function () use (&$quote, $twitter) {
+        DB::transaction(function () use (&$quote) {
             $lang = $this->option('lang');
 
-            if ($lang and Language::whereCode($lang)->count() <= 0) {
+            if ($lang and Language::whereCodeAlternate($lang)->count() <= 0) {
                 $this->error(sprintf('Language "%s" is not exists.', $lang));
                 exit;
             }
 
             $quote = Quote::inRandomOrder()
                 ->when($lang, function ($query) use ($lang) {
-                    return $query->whereHas('language', function ($language) use ($lang) {
-                        return $language->whereCode($lang);
-                    });
+                    return $query->language($lang);
                 })
                 ->whereNotIn('id', function ($query) {
                     return $query->from('quote_tweets')->select('quote_id');
@@ -76,7 +68,13 @@ class TweetQuoteCommand extends Command
                         $hashtags[] = '#'.$tag;
                     }
                 }
-                $twitter->send(sprintf('%s  ~~ %s. %s', $quote->text, $quote->author->name, implode(' ', $hashtags) ?? '#Quote'));
+                $tweet = sprintf('%s  ~ %s. %s', $quote->text, $quote->author->name, implode(' ', $hashtags) ?? '#Quote');
+
+                if (strlen($tweet) <= 280) {
+                    Twitter::postTweet([
+                        'status' => $tweet,
+                    ]);
+                }
             }
         });
     }
