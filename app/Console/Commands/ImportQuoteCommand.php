@@ -52,7 +52,7 @@ class ImportQuoteCommand extends Command
                 DB::transaction(function () use ($import) {
                     $import['author'] = trim($import['author']);
                     $import['quote'] = trim($import['quote']);
-                    if (!ends_with($import['quote'], ['.', '...', '?', '!'])) {
+                    if (!ends_with($import['quote'], ['.', '...', '?', '!', '\'', '"'])) {
                         $import['quote'] .= '.';
                     }
 
@@ -69,7 +69,7 @@ class ImportQuoteCommand extends Command
                 foreach ($import as $i) {
                     $i['author'] = trim($i['author']);
                     $i['quote'] = trim($i['quote']);
-                    if (!ends_with($i['quote'], ['.', '...', '?', '!'])) {
+                    if (!ends_with($i['quote'], ['.', '...', '?', '!', '\'', '"'])) {
                         $i['quote'] .= '.';
                     }
 
