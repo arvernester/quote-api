@@ -2,10 +2,11 @@
 
 @push('meta')
     <meta name="title" content="{{ config('app.name') }}" />
-    <meta name="description" content="{{ __('Inspirational and motivational quotes for your life') }}">
+    <meta name="description" content="{{ __('Get daily and random inspirational and motivational quotes for your make your life better and happier') }}">
+    <meta name="keywords" content="quotes, free quotes, inspirational quotes, motivational quotes, quoets about life">
 
     <meta property="og:title" content="{{ config('app.name') }}" />
-    <meta property="og:description" content="{{ __('Inspirational and motivational quotes for your life') }}" />
+    <meta property="og:description" content="{{ __('Get daily and random inspirational and motivational quotes for your make your life better and happier') }}" />
     <meta property="og:type" content="article" />
     <meta property="og:image" content="{{ asset('img/header-'.(app()->getLocale() ?? 'en').'.png') }}" />
 @endpush
@@ -24,13 +25,13 @@
     <ul class="actions">
         @if (strlen($shareRandomQuote) <= 280)
         <li>
-            <a href="{{ route('share.twitter', $random) }}" class="button icon special fa-twitter">
+            <a rel="nofollow" href="{{ route('share.twitter', $random) }}" class="button icon special fa-twitter">
                 {{ __('Tweet') }}
             </a>
         </li>
         @else
         <li>
-            <a href="{{ route('share.facebook', $random) }}" class="button icon special fa-facebook">
+            <a rel="nofollow" href="{{ route('share.facebook', $random) }}" class="button icon special fa-facebook">
                 Facebook
             </a>
         </li>

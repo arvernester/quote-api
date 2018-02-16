@@ -51,13 +51,13 @@
 			<ul class="actions">
 				@if(strlen($shareTodayQuote) <= 280)
 				<li>
-					<a title="{{ __('Share to Twitter') }}" href="{{ route('share.twitter', $today) }}" class="button icon fa-twitter special">
+					<a rel="nofollow" title="{{ __('Share to Twitter') }}" href="{{ route('share.twitter', $today) }}" class="button icon fa-twitter special">
 						{{ __('Tweet') }}
 					</a>
 				</li>
 				@else
 				<li>
-					<a href="{{ route('share.facebook', $today) }}" class="button icon special fa-facebook">
+					<a rel="nofollow" href="{{ route('share.facebook', $today) }}" class="button icon special fa-facebook">
 						Facebook
 					</a>
 				</li>

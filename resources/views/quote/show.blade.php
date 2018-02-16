@@ -27,13 +27,13 @@
     <ul class="actions">
         @if (strlen($shareQuote) <= 280)
         <li>
-            <a href="{{ route('share.twitter', $quote) }}" class="button icon special fa-twitter">
+            <a rel="nofollow" href="{{ route('share.twitter', $quote) }}" class="button icon special fa-twitter">
                 {{ __('Tweet') }}
             </a>
         </li>
         @else
         <li>
-            <a href="{{ route('share.facebook', $quote) }}" class="button icon special fa-facebook">
+            <a rel="nofollow" href="{{ route('share.facebook', $quote) }}" class="button icon special fa-facebook">
                 Facebook
             </a>
         </li>
