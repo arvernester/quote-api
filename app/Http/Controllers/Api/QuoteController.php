@@ -22,6 +22,7 @@ class QuoteController extends Controller
         $validator = Validator::make($request->all(), [
             'callback' => 'string|valid_callback',
             'lang' => 'string|max:2|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
         ]);
 
         if ($validator->fails()) {
@@ -30,9 +31,8 @@ class QuoteController extends Controller
 
         $quote = Quote::inRandomOrder()
             ->with('author', 'category', 'language')
-            ->when($request->lang, function ($query) use ($request) {
-                return $query->language($request->lang);
-            })
+            ->language($request->lang)
+            ->category($request->category)
             ->first();
 
         return response()
@@ -53,6 +53,7 @@ class QuoteController extends Controller
             'callback' => 'string|valid_callback',
             'limit' => 'integer|max:20',
             'lang' => 'string|max:2|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
         ]);
 
         if ($validator->fails()) {
@@ -61,9 +62,8 @@ class QuoteController extends Controller
 
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
-            ->when($request->lang, function ($query) use ($request) {
-                return $query->language($request->lang);
-            })
+            ->language($request->lang)
+            ->category($request->category)
             ->take($request->limit ?? 20)
             ->get();
 
@@ -109,6 +109,7 @@ class QuoteController extends Controller
             'callback' => 'string|valid_callback',
             'limit' => 'integer|max:30',
             'lang' => 'string|max:2|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
         ]);
 
         if ($validator->fails()) {
@@ -117,12 +118,16 @@ class QuoteController extends Controller
 
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
-            ->when($request->lang, function ($query) use ($request) {
-                return $query->language($request->lang);
-            })
+            ->language($request->lang)
+            ->category($request->category)
             ->paginate($request->limit ?? 30);
 
-        $quotes->appends($request->only('limit', 'lang', 'callback'));
+        $quotes->appends($request->only(
+            'limit',
+            'lang',
+            'callback',
+            'category'
+        ));
 
         return response()
             ->json($quotes)

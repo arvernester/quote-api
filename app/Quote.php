@@ -148,6 +148,21 @@ class Quote extends Model
     }
 
     /**
+     * Filter quotes by category slug.
+     *
+     * @param [type]      $query
+     * @param string|null $category
+     */
+    public function scopeCategory($query, ?string $slug = null)
+    {
+        return $query->when($slug, function ($query) use ($slug) {
+            return $query->whereHas('category', function ($category) use ($slug) {
+                return $category->whereSlug($slug);
+            });
+        });
+    }
+
+    /**
      * Return where quote status is I (Inactive).
      *
      * @param object $query
