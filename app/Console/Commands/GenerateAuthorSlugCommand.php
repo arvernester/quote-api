@@ -37,7 +37,7 @@ class GenerateAuthorSlugCommand extends Command
     public function handle()
     {
         $bar = $this->output->createProgressBar(Author::count());
-        $authors = Author::orderBy('name')->chunk(1000, function ($authors) use ($bar) {
+        $authors = Author::orderBy('name')->where('slug', '')->chunk(1000, function ($authors) use ($bar) {
             foreach ($authors as $author) {
                 $author->slug = null;
                 $author->update(['name' => $author->name]);
