@@ -37,7 +37,7 @@
         </li>
         @endif
         <li>
-            <button href="#" class="button icon fa-copy button-copy" data-clipboard-text="{{ $random->text }} {{ ucwords(__('by')) }} {{ $random->author->name }}.">
+            <button class="button icon fa-copy button-copy" data-clipboard-text="{{ $random->text }} {{ ucwords(__('by')) }} {{ $random->author->name }}.">
                 {{ __('Copy') }}
             </button>
         </li>
