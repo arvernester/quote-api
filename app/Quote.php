@@ -36,6 +36,7 @@ class Quote extends Model
         'author_id',
         'category_id',
         'deleted_at',
+        'poster_path',
     ];
 
     protected $appends = [
