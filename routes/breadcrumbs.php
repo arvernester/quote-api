@@ -48,6 +48,11 @@ Breadcrumbs::for('admin.quote.show', function ($trail, $quote) {
     ]), url()->current());
 });
 
+Breadcrumbs::for('admin.quote.poster', function ($trail, $quote) {
+    $trail->parent('admin.quote.index');
+    $trail->add(__('Upload Background Poster'), url()->current());
+});
+
 Breadcrumbs::for('admin.author.index', function ($trail) {
     $trail->add(__('Author'), route('admin.author.index'));
 });

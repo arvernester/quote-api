@@ -70,12 +70,15 @@
                                     <a href="{{ route('admin.category.show', $quote->category) }}">{{ $quote->category->name }}</a>
                                 </td>
                                 <td>{{ $quote->updated_at->diffForHumans() }}</td>
-                                <td width="100">
+                                <td width="120">
                                     <a href="{{ route('admin.quote.show', $quote) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
                                     <a href="{{ route('admin.quote.edit', $quote) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.quote.poster', $quote) }}" class="btn btn-primary btn-table" data-toggle="popover" data-content="{{ __('Upload poster background') }}" data-placement="left" data-trigger="hover">
+                                        <em class="fa fa-upload fa-fw">&nbsp;</em>
                                     </a>
                                     <a href="{{ route('admin.quote.destroy', $quote) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>

@@ -5,12 +5,17 @@ namespace App\Quote;
 use GDText\Box;
 use GDText\Color;
 use App\Quote;
+use Illuminate\Support\Facades\Storage;
 
 class Poster
 {
     public function generate(Quote $quote)
     {
-        $image = imagecreatefromjpeg(public_path('img/quote-bg.jpg'));
+        if (!empty($quote->poster_path)) {
+            $image = imagecreatefromjpeg(Storage::path($quote->poster_path));
+        } else {
+            $image = imagecreatefromjpeg(public_path('img/quote-bg.jpg'));
+        }
 
         $box = new Box($image);
         $box->setFontFace(

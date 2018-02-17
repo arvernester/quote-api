@@ -4,7 +4,14 @@
 @include('layouts.partials.flash')
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <img src="{{ route('quote.poster', $quote->slug) }}" alt="{{ __('Image is missing.') }}" class="img-responsive">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
         <div class="panel panel-container">
             <div class="panel-body">
 

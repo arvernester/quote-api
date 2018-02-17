@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Numbers\Number;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class QuoteController extends Controller
 {
@@ -190,5 +193,55 @@ class QuoteController extends Controller
      */
     public function destroy($id)
     {
+    }
+
+    public function poster(Quote $quote): View
+    {
+        // check if file is exists
+        if (!Storage::exists($quote->poster_path)) {
+            $quote->fill(['poster_path' => null]);
+            $quote->save();
+        }
+
+        return view('admin.quote.poster', compact('quote'))
+            ->withTitle(__('Upload Poster Background'));
+    }
+
+    public function uploadPoster(Request $request, Quote $quote): RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'background' => 'required|image|mimes:jpeg,jpg',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors());
+        }
+
+        $sub = Carbon::now()->format('Y/m');
+        $directory = 'public/background/poster/quote/'.$sub;
+        $path = $request->file('background')->store($directory);
+
+        if ($path) {
+            // delete existing file
+            if (Storage::exists($quote->poster_path)) {
+                Storage::delete($quote->poster_path);
+            }
+
+            $quote->fill(['poster_path' => $path]);
+            $quote->save();
+
+            // resize image using intervention
+            $image = \Image::make(Storage::get($quote->poster_path));
+            $image->resize(600, 400, function ($ratio) {
+                $ratio->aspectRatio();
+            });
+            $image->save(Storage::path($quote->poster_path));
+        }
+
+        $route = $request->action == 'submit_view' ? route('admin.quote.show', $quote) : route('admin.quote.poster', $quote);
+
+        return redirect($route);
     }
 }

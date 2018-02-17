@@ -20,6 +20,7 @@ class Quote extends Model
         'slug',
         'text',
         'source',
+        'poster_path',
         'status',
     ];
 

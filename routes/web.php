@@ -42,6 +42,8 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
 
         Route::put('author/profile/updateable', 'AuthorProfileController@updateable')->name('author.profile.updateable');
 
+        Route::get('quote/poster/{quote}', 'QuoteController@poster')->name('quote.poster');
+        Route::post('quote/poster/{quote}', 'QuoteController@uploadPoster')->name('quote.poster.store');
         Route::get('quote/submitted', 'QuoteController@submitted')->name('quote.submitted');
         Route::resource('quote', 'QuoteController');
 
