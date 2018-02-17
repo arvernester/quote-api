@@ -46,6 +46,11 @@
                             @foreach ($categories as $category)
                             <tr class="{{ $category->quotes_count <= 0 ? 'text-muted' : '' }}">
                                 <td>
+                                    @if ($category->poster_path)
+                                        <em class="fa fa-image fa-fw">&nbsp;</em>
+                                    @else
+                                        <em class="fa fa-image fa-fw text-muted">&nbsp;</em>
+                                    @endif
                                     <a href="#" class="editable" data-name="name" data-type="text" data-pk="{{ $category->id }}" data-url="{{ route('admin.category.updateable') }}">{{ $category->name }}</a>
                                 </td>
                                 <td class="text-right">
