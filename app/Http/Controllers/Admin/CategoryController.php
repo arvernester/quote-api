@@ -10,6 +10,8 @@ use App\Quote;
 use App\Http\Controllers\Controller;
 use Numbers\Number;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -152,5 +154,60 @@ class CategoryController extends Controller
         return redirect()
             ->route('admin.category.index')
             ->withSuccess(__('Quote inside source category has been migrated to destination category.'));
+    }
+
+    /**
+     * Upload poster background via category.
+     *
+     * @param Category $category
+     *
+     * @return View
+     */
+    public function poster(Category $category): View
+    {
+        // check if poster file is exists
+        if (!Storage::exists($category->poster_path)) {
+            $category->fill(['poster_path' => null])->save();
+        }
+
+        return view('admin.category.poster', compact('category'))
+            ->with(__('Poster Background'));
+    }
+
+    public function uploadPoster(Request $request, Category $category): RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'background' => 'required|image|mimes:jpg,jpeg',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors());
+        }
+
+        $directory = 'public/background/category';
+        $path = $request->file('background')->store($directory);
+
+        if ($path) {
+            if ($category->poster_path and Storage::exists($category->poster_path)) {
+                Storage::delete($category->poster_path);
+            }
+
+            $category->fill(['poster_path' => $path]);
+            $category->save();
+
+            // resize image
+            $image = \Image::make(Storage::path($category->poster_path));
+            $image->resize(600, 400, function ($ratio) {
+                $ratio->aspectRatio();
+            });
+            $image->save(Storage::path($category->poster_path));
+        }
+
+        $route = $request->action == 'submit_view' ? route('admin.category.show', $category) : route('admin.category.poster', $category);
+
+        return redirect($route)
+            ->withSuccess(__('Poster background has been uploaded.'));
     }
 }

@@ -13,6 +13,8 @@ class Poster
     {
         if (!empty($quote->poster_path)) {
             $image = imagecreatefromjpeg(Storage::path($quote->poster_path));
+        } elseif ($quote->category->poster_path) {
+            $image = imagecreatefromjpeg(Storage::path($quote->category->poster_path));
         } else {
             $image = imagecreatefromjpeg(public_path('img/quote-bg.jpg'));
         }

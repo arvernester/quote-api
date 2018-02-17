@@ -55,7 +55,7 @@
                                 </td>
                                 <td>{{ $category->created_at->format(config('app.date_format')) }}</td>
                                 <td>{{ $category->updated_at->diffForHumans() }}</td>
-                                <td>
+                                <td width="150">
                                     <a href="{{ route('admin.category.show', $category) }}" class="btn btn-primary btn-table">
                                         <i class="fa fa-eye fa-fw"></i>
                                     </a>
@@ -64,6 +64,9 @@
                                     </a>
                                     <a href="{{ route('admin.category.merge', ['source' => $category->id]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
                                         <i class="fa fa-compress fa-fw"></i>
+                                    </a>
+                                    <a href="{{ route('admin.category.poster', ['source' => $category]) }}" class="btn btn-warning btn-table" title="Move or merge category {{ $category->name }}">
+                                        <em class="fa fa-upload fa-fw">&nbsp;</em>
                                     </a>
                                     <a href="{{ route('admin.category.destroy', $category) }}" class="btn btn-danger btn-table">
                                         <i class="fa fa-trash fa-fw"></i>

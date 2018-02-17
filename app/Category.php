@@ -14,10 +14,12 @@ class Category extends Model
     protected $fillable = [
         'slug',
         'name',
+        'poster_path',
     ];
 
     protected $hidden = [
         'slug',
+        'poster_path',
     ];
 
     /**

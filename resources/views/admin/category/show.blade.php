@@ -2,7 +2,16 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4 col-sm-12">
+        <div class="panel panel-body">
+            @if ($category->poster_path)
+                <img src="{{ Storage::url($category->poster_path) }}" alt="{{ __('Image is missing.') }}" class="img-responsive">
+            @else
+                <p>{{ __('No poster background uploaded.') }}</p>                
+            @endif
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
         <div class="panel panel-container">
             <div class="panel-body">
                 <div class="form-group">
