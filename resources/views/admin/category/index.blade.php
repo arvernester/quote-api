@@ -54,7 +54,7 @@
                                     <a href="#" class="editable" data-name="name" data-type="text" data-pk="{{ $category->id }}" data-url="{{ route('admin.category.updateable') }}">{{ $category->name }}</a>
                                 </td>
                                 <td class="text-right">
-                                    <a href="{{ route('admin.quote.index', ['category' => $category->id]) }}">
+                                    <a href="{{ route('admin.quote.index', ['category' => $category->slug]) }}">
                                         {{ Numbers\Number::n($category->quotes_count)->format() }}
                                     </a>
                                 </td>

@@ -30,22 +30,17 @@ class QuoteController extends Controller
     public function index(Request $request): View
     {
         $this->validate($request, [
-            'lang' => 'string|exists:languages,code',
+            'lang' => 'string|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
         ]);
 
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author', 'category', 'language')
-            ->when($request->category, function ($query) use ($request) {
-                return $query->whereCategoryId($request->category);
-            })
             ->when($request->user, function ($query) use ($request) {
                 return $query->whereUserId($request->user);
             })
-            ->when($request->lang, function ($query) use ($request) {
-                return $query->whereHas('language', function ($language) use ($request) {
-                    return $language->whereCode($request->lang);
-                });
-            })
+            ->category($request->category)
+            ->language($request->lang)
             ->when($request->keyword, function ($query) use ($request) {
                 return $query->where('text', 'LIKE', '%'.$request->keyword.'%')
                     ->orWherehas('author', function ($author) use ($request) {
