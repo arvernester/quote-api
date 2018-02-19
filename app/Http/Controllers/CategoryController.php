@@ -15,6 +15,7 @@ class CategoryController extends Controller
 
         $categories = Cache::remember('category.index', $week, function () {
             return Category::orderBy('name')
+                ->whereHas('quotes')
                 ->withCount('quotes')
                 ->get();
         });

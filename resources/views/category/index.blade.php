@@ -12,14 +12,14 @@
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Total Quote</th>
+                    <th>{{ __('Name') }}</th>
+                    <th>{{ __('Total Quote') }}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                 <tr>
-                    <td>{{ $category->name }}</td>
+                    <td><a href="{{ route_lang('quote.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></td>
                     <td class="text-right">
                         {{ Numbers\Number::n($category->quotes_count)->format() }}
                     </td>
