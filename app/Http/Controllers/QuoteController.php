@@ -20,14 +20,23 @@ use Carbon\Carbon;
 
 class QuoteController extends Controller
 {
-    public function index($lang, Request $request): View
+    /**
+     * Show all quotes separated by pagination.
+     */
+    public function index(string $lang, Request $request): View
     {
-        $quotes = Quote::orderBy('created_at')
+        $this->validate($request, [
+            'language' => 'string|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
+        ]);
+
+        $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author')
             ->language($request->lang)
+            ->category($request->category)
             ->paginate(10);
 
-        $quotes->appends($request->only('lang'));
+        $quotes->appends($request->only('lang', 'category'));
 
         return view('quote.index', compact('quotes'))
             ->withTitle(
@@ -38,7 +47,7 @@ class QuoteController extends Controller
     /**
      * Show single quote.
      *
-     * @param [type] $lang
+     * @param string $lang
      * @param Quote  $quote
      *
      * @return RedirectResponse
