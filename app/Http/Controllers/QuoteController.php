@@ -22,6 +22,11 @@ class QuoteController extends Controller
 {
     /**
      * Show all quotes separated by pagination.
+     *
+     * @param string  $lang
+     * @param Request $request
+     *
+     * @return View
      */
     public function index(string $lang, Request $request): View
     {
@@ -52,12 +57,20 @@ class QuoteController extends Controller
      *
      * @return RedirectResponse
      */
-    public function show($lang, Quote $quote): RedirectResponse
+    public function show(string $lang, Quote $quote): RedirectResponse
     {
         return redirect(route_lang('quote.show.slug', $quote->slug));
     }
 
-    public function showBySlug($lang, string $slug): View
+    /**
+     * Get quote by slug attribute.
+     *
+     * @param string $lang
+     * @param string $slug
+     *
+     * @return View
+     */
+    public function showBySlug(string $lang, string $slug): View
     {
         $quote = Quote::whereSlug($slug)
             ->with('author', 'category', 'language')
@@ -148,14 +161,22 @@ class QuoteController extends Controller
     /**
      * Response random quotes.
      *
+     * @param string  $lang
      * @param Request $request
      *
      * @return View
      */
-    public function random($lang, Request $request): View
+    public function random(string $lang, Request $request): View
     {
+        $this->validate($request, [
+            'lang' => 'string|exists:languages,code_alternate',
+            'category' => 'string|exists:categories,slug',
+        ]);
+
         $quotes = Quote::inRandomOrder()
+            ->with('author')
             ->language($request->lang)
+            ->category($request->category)
             ->take(10)
             ->get();
 
