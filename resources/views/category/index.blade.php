@@ -19,7 +19,7 @@
             <tbody>
                 @foreach ($categories as $category)
                 <tr>
-                    <td><a href="{{ route_lang('quote.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></td>
+                    <td><a href="{{ route_lang('quote.index', ['category' => $category->slug]) }}" title="{{ __('Filter quotes by category :name', ['name' => $category->name]) }}">{{ $category->name }}</a></td>
                     <td class="text-right">
                         {{ Numbers\Number::n($category->quotes_count)->format() }}
                     </td>
