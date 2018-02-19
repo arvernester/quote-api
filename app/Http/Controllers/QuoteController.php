@@ -12,11 +12,11 @@ use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
-use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Facades\Poster;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
+use App\Notifications\Quote\SubmitNotification as QuoteSubmitNotification;
 
 class QuoteController extends Controller
 {
@@ -145,11 +145,7 @@ class QuoteController extends Controller
             ]);
 
             $users = User::all();
-            Notification::send($users, new GeneralNotification(
-                __('New quote has been submitted.'),
-                route('admin.quote.show', $quote, false), // relative path
-                'fa-quote-right'
-            ));
+            Notification::send($users, new QuoteSubmitNotification($quote));
         });
 
         return response()->json([
