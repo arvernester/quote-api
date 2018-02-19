@@ -50,6 +50,7 @@ class IndexController extends Controller
             ->when($request->locale, function ($query) use ($request) {
                 return $query->language($request->locale);
             })
+            ->published()
             ->with('author')
             ->paginate(10);
 

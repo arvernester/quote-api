@@ -39,6 +39,7 @@ class QuoteController extends Controller
             ->with('author')
             ->language($request->lang)
             ->category($request->category)
+            ->published()
             ->paginate(10);
 
         $quotes->appends($request->only('lang', 'category'));
@@ -173,6 +174,7 @@ class QuoteController extends Controller
             ->with('author')
             ->language($request->lang)
             ->category($request->category)
+            ->published()
             ->take(10)
             ->get();
 

@@ -171,4 +171,14 @@ class Quote extends Model
     {
         return $query->whereStatus('I');
     }
+
+    /**
+     * Filter quote by status.
+     *
+     * @param object $query
+     */
+    public function scopePublished($query)
+    {
+        return $query->whereStatus('A');
+    }
 }
