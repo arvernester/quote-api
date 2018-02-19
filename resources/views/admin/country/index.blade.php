@@ -9,7 +9,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{{ __('Code') }}</th>
+                                <th>{{ __('ISO 2') }}</th>
+                                <th>{{ __('ISO 3') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Native Name') }}</th>
                                 <th>{{ __('Total Language') }}</th>
@@ -20,7 +21,8 @@
                         <tbody>
                             @foreach ($countries as $country)
                             <tr>
-                                <td>{{ $country->code }}</td>
+                                <td width="80">{{ strtolower($country->code_alternate) }}</td>
+                                <td width="80">{{ strtolower($country->code) }}</td>
                                 <td>
                                     <img src="{{ $country->flag_path }}" alt="{{ $country->name }}" class="img-reponsive flag" width="29"> 
                                     {{ $country->name }}
@@ -31,7 +33,7 @@
                                         {{ Numbers\Number::n($country->languages_count)->format() }}
                                     </a>
                                 </td>
-                                <td>{{ $country->updated_at->diffForHumans() }}</td>
+                                <td width="150">{{ $country->updated_at->diffForHumans() }}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -9,7 +9,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{{ __('Code') }}</th>
+                                <th>{{ __('ISO 2') }}</th>
+                                <th>{{ __('ISO 3') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Native Name') }}</th>
                                 <th>{{ __('Country') }}</th>
@@ -20,9 +21,8 @@
                         <tbody>
                             @foreach ($languages as $language)
                             <tr>
-                                <td>
-                                    <a href="{{ route('admin.quote.index', ['lang' => $language->code]) }}">{{ $language->code }}</a>
-                                </td>
+                                <td><a href="{{ route('admin.quote.index', ['lang' => $language->code_alternate]) }}">{{ $language->code_alternate }}</a></td>
+                                <td>{{ $language->code }} </td>
                                 <td>{{ $language->name }}</td>
                                 <td>{{ $language->native_name }}</td>
                                 <td>{{ $language->country->name }}</td>
