@@ -54,6 +54,10 @@ Route::middleware('locale', 'auth')->prefix('admin')->namespace('Admin')->group(
 
         Route::resource('user', 'UserController');
 
+        // account management
+        Route::get('profile', 'Account\ProfileController@edit')->name('account.profile.edit');
+        Route::put('profile', 'Account\ProfileController@update')->name('account.profile.update');
+
         Route::post('notification/read', 'NotificationController@read');
     });
 });

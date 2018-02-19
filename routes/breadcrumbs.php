@@ -71,6 +71,11 @@ Breadcrumbs::for('admin.user.index', function ($trail) {
     $trail->add(__('User'), route('admin.user.index'));
 });
 
+Breadcrumbs::for('admin.account.profile.edit', function ($trail) {
+    $trail->add(__('My Profile'), route('admin.account.profile.edit'));
+    $trail->add(__('Edit'), url()->current());
+});
+
 Breadcrumbs::for('admin.country.index', function ($trail) {
     $trail->add(__('Country'), route('admin.country.index'));
 });

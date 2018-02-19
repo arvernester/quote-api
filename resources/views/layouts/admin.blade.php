@@ -46,7 +46,7 @@
 
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">
-                    <a href="#">{{ __('Profile') }}</a>
+                    <a href="{{ route('admin.account.profile.edit') }}">{{ __('My Profile') }}</a>
                 </div>
                 <div class="profile-usertitle-status">
                     <span class="indicator label-success"></span>{{ auth()->user()->name }}
