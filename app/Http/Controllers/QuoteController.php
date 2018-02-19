@@ -31,18 +31,18 @@ class QuoteController extends Controller
     public function index(string $lang, Request $request): View
     {
         $this->validate($request, [
-            'language' => 'string|exists:languages,code_alternate',
+            'locale' => 'string|exists:languages,code_alternate',
             'category' => 'string|exists:categories,slug',
         ]);
 
         $quotes = Quote::orderBy('created_at', 'DESC')
             ->with('author')
-            ->language($request->lang)
+            ->language($request->locale)
             ->category($request->category)
             ->published()
             ->paginate(10);
 
-        $quotes->appends($request->only('lang', 'category'));
+        $quotes->appends($request->only('locale', 'category'));
 
         return view('quote.index', compact('quotes'))
             ->withTitle(
@@ -136,6 +136,7 @@ class QuoteController extends Controller
             // set default language to english
             $language = Language::whereCodeAlternate('en')
                 ->first();
+
             $quote = Quote::create([
                 'user_id' => Auth::id() ?? null,
                 'author_id' => $author->id,
@@ -166,13 +167,13 @@ class QuoteController extends Controller
     public function random(string $lang, Request $request): View
     {
         $this->validate($request, [
-            'lang' => 'string|exists:languages,code_alternate',
+            'locale' => 'string|exists:languages,code_alternate',
             'category' => 'string|exists:categories,slug',
         ]);
 
         $quotes = Quote::inRandomOrder()
             ->with('author')
-            ->language($request->lang)
+            ->language($request->locale)
             ->category($request->category)
             ->published()
             ->take(10)
