@@ -11,12 +11,24 @@ use App\Language;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request): View
+    /**
+     * Default landing page for quote web.
+     *
+     * @param Request $request
+     *
+     * @return View
+     */
+    public function __invoke(Request $request, string $lang = null): View
     {
         $tommorow = Carbon::now()->addDay(1);
 
         $today = Cache::remember('quote.day', $tommorow, function () {
+            $lang = config('app.fallback_locale');
+
             return Quote::inRandomOrder()
+                ->whereHas('language', function ($language) use ($lang) {
+                    return $language->whereCodeAlternate($lang);
+                })
                 ->whereRaw('LENGTH(text) >= 250')
                 ->with('author')
                 ->take(1)
