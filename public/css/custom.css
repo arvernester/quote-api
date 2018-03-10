@@ -5,3 +5,7 @@ p.body-quote {
 p.body-author {
     font-size: 1.3em;
 }
+
+div.meta a {
+    border-bottom: none;
+}

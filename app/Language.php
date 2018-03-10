@@ -47,7 +47,8 @@ class Language extends Model
      */
     public function quotes(): HasMany
     {
-        return $this->hasMany(Quote::class);
+        return $this->hasMany(Quote::class)
+            ->published();
     }
 
     /**

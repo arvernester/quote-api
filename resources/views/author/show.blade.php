@@ -27,7 +27,7 @@
         @if (! empty($url))
             <ul class="actions">
                 <li>
-                    <a href="{{ $url }}" class="button icon fa-wikipedia">{{ __('Full Profile') }}</a>
+                    <a href="{{ $url }}" class="button icon fa-wikipedia" target="_blank">{{ __('Full Profile') }}</a>
                 </li>
             </ul>
         @endif
@@ -39,14 +39,26 @@
 </article>
 
 <article class="post">
-    <h3>{{ __('Quote by :author', ['author' => $author->name]) }}</h3>
-    
-    @foreach ($author->quotes as $quote)
-    <div class="fb-quote" data-href="{{ route_lang('quote.show', $quote) }}"></div>
-        <div class="box">
-            {{ $quote->text }}
-        </div>
+    <h2>{{ __('Quote by Languages') }}</h2>
+
+    @foreach ($languages as $language)
+        <h3>{{ $language->name }} ({{ $language->native_name }})</h3>
+        
+        @foreach ($language->quotes as $quote)
+            <div class="fb-quote" data-href="{{ route_lang('quote.show', $quote) }}"></div>
+            <div class="box">
+                <p>{{ $quote->text }}</p>
+
+                <div class="meta">
+                    <a href="{{ route_lang('quote.show.slug', $quote->slug) }}" class="button special small">{{ __('See') }}</a>
+                    <a href="{{ route('share.facebook', $quote) }}"><em class="fa fa-facebook fa-fw"></em></a>
+                    <a href="{{ route('share.twitter', $quote) }}"><em class="fa fa-twitter fa-fw"></em></a>
+                </div>
+            </div>
+        @endforeach
     @endforeach
+    
+    
 </article>
 @endsection
 

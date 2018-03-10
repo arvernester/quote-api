@@ -65,11 +65,19 @@ class AuthorController extends Controller
             $url = $author->profiles->first()->url;
         }
 
+        // show quotes from author grouped by lang
+        $languages = Language::with(['quotes' => function ($quote) use ($author) {
+            return $quote->whereAuthorId($author->id);
+        }])
+            ->whereHas('quotes')
+            ->get();
+
         return view('author.show', compact(
             'author',
             'description',
-            'url'
+            'url',
+            'languages'
         ))
-            ->withTitle($author->name);
+            ->withTitle(__('Quote by :author', ['author' => $author->name]));
     }
 }
