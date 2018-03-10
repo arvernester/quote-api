@@ -8,6 +8,7 @@ use App\Category;
 use App\Quote;
 use App\Language;
 use App\Author;
+use Illuminate\Support\Facades\Log;
 
 class RandomQuote implements QuoteContract
 {
@@ -23,14 +24,24 @@ class RandomQuote implements QuoteContract
         ]);
 
         if ($response->code == 200) {
-            return [
-                'author' => $response->body->author,
-                'category' => ucwords($response->body->category),
-                'quote' => $response->body->quote,
-                'language' => 'en',
-                'source' => $url,
-            ];
+            if (!empty($response->body)) {
+                return [
+                    'author' => $response->body->author,
+                    'category' => ucwords($response->body->category),
+                    'quote' => $response->body->quote,
+                    'language' => 'en',
+                    'source' => $url,
+                ];
+            }
+
+            Log::warning(sprintf('Empty quote from Random Quote (%s).', $url));
+
+            return null;
         }
+
+        Log::error(sprintf('Failed to get response from %s.', $url), [
+            'code' => $response->code,
+        ]);
 
         return null;
     }

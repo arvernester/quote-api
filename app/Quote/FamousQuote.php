@@ -25,13 +25,19 @@ class FamousQuote implements Quote
         ]);
 
         if ($response->code == 200) {
-            return [
-                'author' => $response->body->author,
-                'quote' => $response->body->quote,
-                'category' => ucwords($response->body->category),
-                'language' => 'en',
-                'source' => $url,
-            ];
+            if (!empty($response->body)) {
+                return [
+                    'author' => $response->body->author,
+                    'quote' => $response->body->quote,
+                    'category' => ucwords($response->body->category),
+                    'language' => 'en',
+                    'source' => $url,
+                ];
+            }
+
+            Log::warning(sprintf('Empty quote from Famous Quote (%s).', $url));
+
+            return  null;
         }
 
         Log::error(sprintf('Failed to get response from %s.', $url), [

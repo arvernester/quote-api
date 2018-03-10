@@ -20,18 +20,24 @@ class FavqsQuote implements Quote
         if ($request->code == 200) {
             $quote = $request->body->quote;
 
-            $category = 'Uncategorized';
-            if (!empty($quote->tags)) {
-                $category = ucwords(collect($quote->tags)->first());
+            if (!empty($quote)) {
+                $category = 'Uncategorized';
+                if (!empty($quote->tags)) {
+                    $category = ucwords(collect($quote->tags)->first());
+                }
+
+                return [
+                    'author' => $quote->author,
+                    'quote' => $quote->body,
+                    'category' => $category,
+                    'language' => 'en',
+                    'source' => $quote->url,
+                ];
             }
 
-            return [
-                'author' => $quote->author,
-                'quote' => $quote->body,
-                'category' => $category,
-                'language' => 'en',
-                'source' => $quote->url,
-            ];
+            Log::warning(sprintf('Empty quote from Favqs (%s).', $url));
+
+            return null;
         }
 
         Log::error(sprintf('Failed to get response from %s.', $url), [

@@ -51,6 +51,8 @@ class ForbesQuote implements Quote
             }
 
             Log::warning(sprintf('Empty quote from Forbes (%s).', $url));
+
+            return null;
         }
 
         Log::error(sprintf('Failed to get response from %s.', $url), [

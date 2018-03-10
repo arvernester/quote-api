@@ -17,13 +17,19 @@ class ForismaticQuote implements QuoteContract
         $response = Request::get($url = 'http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang='.$lang);
 
         if ($response->code == 200) {
-            return [
-                'language' => $lang,
-                'author' => trim($response->body->quoteAuthor),
-                'quote' => trim($response->body->quoteText),
-                'source' => $response->body->quoteLink,
-                'category' => 'Uncategorized',
-            ];
+            if (!empty($response->body)) {
+                return [
+                    'language' => $lang,
+                    'author' => trim($response->body->quoteAuthor),
+                    'quote' => trim($response->body->quoteText),
+                    'source' => $response->body->quoteLink,
+                    'category' => 'Uncategorized',
+                ];
+            }
+
+            Log::warning(sprintf('Empty quote from Forismatic (%s).', $url));
+
+            return null;
         }
 
         Log::error(sprintf('Failed to get response from %s.', $url), [

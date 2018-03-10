@@ -24,12 +24,6 @@ class TalaikisQuote implements QuoteContract
         if ($response->code == 200) {
             $quotes = [];
             foreach ($response->body as $body) {
-                Log::debug(json_encode($body));
-
-                if (!ends_with($body->quote, ['.', '...', '?', '!'])) {
-                    $body->quote .= '.';
-                }
-
                 $quotes[] = [
                     'author' => $body->author,
                     'quote' => $body->quote,

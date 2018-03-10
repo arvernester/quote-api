@@ -27,22 +27,26 @@ class SumitgohilQuote implements QuoteContract
         if ($response->code == 200) {
             $body = $response->body[0];
 
-            // decode and remove tabs from string
-            $decodedQuote = preg_replace('/\t+/', '', trim(
-                mb_convert_encoding(
-                    $body->quote,
-                    'UTF-8',
-                    'HTML-ENTITIES'
-                )
-            ));
+            if (!empty($body)) {
+                // decode and remove tabs from string
+                $decodedQuote = preg_replace('/\t+/', '', trim(
+                    mb_convert_encoding(
+                        $body->quote,
+                        'UTF-8',
+                        'HTML-ENTITIES'
+                    )
+                ));
 
-            return [
-                'author' => $body->author_name,
-                'quote' => $decodedQuote,
-                'category' => $body->category_name,
-                'language' => 'en',
-                'source' => $url,
-            ];
+                return [
+                    'author' => $body->author_name,
+                    'quote' => $decodedQuote,
+                    'category' => $body->category_name,
+                    'language' => 'en',
+                    'source' => 'https://market.mashape.com/sumitgohil/random-quotes',
+                ];
+            }
+
+            Log::warning(sprintf('Empty quote from Sumitgohil (%s).', $url));
         }
 
         Log::error(sprintf('Failed to get response from %s.'), [

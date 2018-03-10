@@ -15,19 +15,25 @@ class ProgrammingQuote implements QuoteContract
      */
     public function import(): ? array
     {
-        $response = Request::get('http://quotes.stormconsultancy.co.uk/random.json');
+        $response = Request::get($url = 'http://quotes.stormconsultancy.co.uk/random.json');
 
         if ($response->code == 200) {
-            return [
-                'author' => $response->body->author,
-                'quote' => $response->body->quote,
-                'category' => 'Programming',
-                'language' => 'en',
-                'source' => $response->body->permalink,
-            ];
+            if (!empty($response->body)) {
+                return [
+                    'author' => $response->body->author,
+                    'quote' => $response->body->quote,
+                    'category' => 'Programming',
+                    'language' => 'en',
+                    'source' => $response->body->permalink,
+                ];
+            }
+
+            Log::warning(sprintf('Empty quote from Programming (%s).', $url));
+
+            return null;
         }
 
-        Log::error('Failed to get response from http://quotes.stormconsultancy.co.uk/random.json.', [
+        Log::error(sprintf('Failed to get response from %s.', $url), [
             'code' => $response->code,
         ]);
 
