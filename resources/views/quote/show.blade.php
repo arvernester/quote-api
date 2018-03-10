@@ -23,12 +23,16 @@
 <article class="post featured">
     <header class="major">
         <span class="date">
-            <a href="#">{{ $quote->category->name }}</a>
+            <a href="{{ route_lang('quote.index', ['category' => $quote->category->slug]) }}">{{ $quote->category->name }}</a>
         </span>
-        <h2>
-            <a href="{{ route_lang('author.show.slug', $quote->author->slug) }}">{{ $quote->author->name }}</a>
-        </h2>
-        <p>{{ $quote->text }}</p>
+        <p class="body-quote">"{{ $quote->text }}"</p>
+        <p class="body-author">
+            <a href="{{ route_lang('author.show', $quote->author->slug) }}">{{ $quote->author->name }}</a>
+            @if (! empty($quote->source))
+                <sup class="quote-source">(<a href="{{ $quote->source }}" title="{{ __('Go to source link :url', ['url' => $quote->source]) }}" target="_blank">{{ __('Source') }}</a>)</sup>
+            @endif
+        </p>       
+
         <div class="fb-quote"></div>
     </header>
     <ul class="actions">
@@ -61,7 +65,7 @@
         <span class="date">
             {{ __('Translated Quote') }}
         </span>
-        <p class="translated"></p>
+        <p class="translated body-quote"></p>
         <p class="translate-powered">
             {{ __('Powered by') }} <a href="https://translate.yandex.com/">Yandex Translate</a>.
             {{ __('Thank you') }} <a href="https://www.yandex.com">Yandex</a>!
@@ -160,7 +164,7 @@
                 success: function(data) {
                     $('#button-translate').text(defaultButtonLabel)
                     $('header#translated-quote').show()
-                    $('p.translated').text(data.translated_text)
+                    $('p.translated').text("\"" + data.translated_text + "\"")
                 },
                 error: function() {
                     $('#button-translate').text(defaultButtonLabel)

@@ -23,6 +23,7 @@
 
 	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/main.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
 	<noscript>
 		<link rel="stylesheet" href="{{ asset('css/noscript.css') }}" />
 	</noscript>
@@ -47,6 +48,9 @@
 				<strong>
 					<a href="{{ route_lang('author.show.slug', $today->author->slug) }}">{{ $today->author->name }}</a>
 				</strong>
+				@if (! empty($quote->source))
+                <sup class="quote-source">(<a href="{{ $quote->source }}" title="{{ __('Go to source link :url', ['url' => $quote->source]) }}" target="_blank">{{ __('Source') }}</a>)</sup>
+            @endif
 			</p>
 			<ul class="actions">
 				@if(strlen($shareTodayQuote) <= 280)
