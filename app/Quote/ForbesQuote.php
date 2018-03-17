@@ -16,13 +16,16 @@ class ForbesQuote implements Quote
             File::makeDirectory($dir, 0755, true);
         }
 
-        $path = $dir.'forbes.txt';
+        $path = $dir.'forbes.json';
 
-        if (File::exists($path)) {
+        if (File::exists($path) and !File::get($path)) {
             $forbes = json_decode(File::get($path));
             $query = $forbes->query;
         } else {
             $query = 1;
+            File::put($path, json_encode([
+                'query' => $query,
+            ]));
         }
 
         $request = Request::get($url = 'https://www.forbes.com/forbesapi/thought/uri.json?enrich=false&query='.$query);
@@ -38,14 +41,19 @@ class ForbesQuote implements Quote
             if (!empty($quote)) {
                 $category = 'Uncategorized';
                 if (!empty($quote->thoughtThemes)) {
-                    $category = ucwords(collect($quote->thoughtThemes)->first()->name);
+                    $first = optional(
+                        collect($quote->thoughtThemes)->first()
+                    )->name;
+                    if (!empty($first)) {
+                        $category = ucwords($first);
+                    }
                 }
 
                 return [
                     'language' => 'en',
                     'author' => $quote->thoughtAuthor->name,
                     'quote' => $quote->quote,
-                    'category' => $category,
+                    'category' => $category ?? 'Uncategorized',
                     'source' => $quote->shortUri,
                 ];
             }
