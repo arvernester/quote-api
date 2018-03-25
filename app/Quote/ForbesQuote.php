@@ -18,7 +18,7 @@ class ForbesQuote implements Quote
 
         $path = $dir.'forbes.json';
 
-        if (File::exists($path) and !File::get($path)) {
+        if (File::exists($path) and !empty(File::get($path))) {
             $forbes = json_decode(File::get($path));
             $query = $forbes->query;
         } else {
